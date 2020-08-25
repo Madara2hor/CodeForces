@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopUsersViewController" customModule="Code_Forces" customModuleProvider="target">
+            <connections>
+                <outlet property="activeOnlyFilter" destination="VRf-1v-OVP" id="uRD-G4-7T6"/>
+                <outlet property="ratingSort" destination="Qkv-XA-GTQ" id="UzS-vp-x2N"/>
+                <outlet property="reloadData" destination="PTL-HH-1vN" id="MO8-iR-sgp"/>
+                <outlet property="searchBar" destination="dCP-BR-k8b" id="Arr-kV-lj8"/>
+                <outlet property="topUsersTable" destination="rkf-OI-Q0s" id="lmQ-Y3-MKo"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ocL-EH-1l2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rkf-OI-Q0s">
+                    <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LKC-8u-zla"/>
+                        <outlet property="delegate" destination="-1" id="h1H-sX-yb4"/>
+                    </connections>
+                </tableView>
+                <searchBar contentMode="redraw" placeholder="Введите имя пользователя" translatesAutoresizingMaskIntoConstraints="NO" id="dCP-BR-k8b">
+                    <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="KGb-XM-5Jt"/>
+                    </connections>
+                </searchBar>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-HH-1vN" userLabel="Update">
+                    <rect key="frame" x="319" y="759" width="75" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="GZU-E5-RAL"/>
+                        <constraint firstAttribute="height" constant="75" id="QZv-nZ-fDw"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="arrow.2.circlepath" catalog="system"/>
+                    <connections>
+                        <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="dQv-cF-dgQ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRf-1v-OVP" userLabel="Active">
+                    <rect key="frame" x="339" y="696" width="55" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="UNi-p6-zEd"/>
+                        <constraint firstAttribute="height" constant="55" id="d4G-uE-OSL"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="tortoise" catalog="system"/>
+                    <connections>
+                        <action selector="activeFilterDidTapped:" destination="-1" eventType="touchUpInside" id="Uz7-Rs-Nwd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkv-XA-GTQ" userLabel="Sort">
+                    <rect key="frame" x="339" y="633" width="55" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="CMd-uN-1VO"/>
+                        <constraint firstAttribute="width" constant="55" id="LJi-eH-Rbh"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="arrow.down" catalog="system"/>
+                    <connections>
+                        <action selector="ratingSortDidTapped:" destination="-1" eventType="touchUpInside" id="eel-xg-Qgy"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VRf-1v-OVP" secondAttribute="trailing" constant="20" id="2DZ-Vl-gIA"/>
+                <constraint firstItem="dCP-BR-k8b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4lf-JS-sKf"/>
+                <constraint firstItem="dCP-BR-k8b" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6eQ-sa-e1h"/>
+                <constraint firstItem="PTL-HH-1vN" firstAttribute="top" secondItem="VRf-1v-OVP" secondAttribute="bottom" constant="8" id="7Db-fd-LpU"/>
+                <constraint firstItem="rkf-OI-Q0s" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7fk-PO-3s4"/>
+                <constraint firstAttribute="bottom" secondItem="rkf-OI-Q0s" secondAttribute="bottom" id="JRs-IJ-Dhs"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="PTL-HH-1vN" secondAttribute="bottom" constant="28" id="QRU-fg-m3N"/>
+                <constraint firstItem="VRf-1v-OVP" firstAttribute="top" secondItem="Qkv-XA-GTQ" secondAttribute="bottom" constant="8" id="VCo-0h-FCB"/>
+                <constraint firstItem="dCP-BR-k8b" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="X5b-pq-9KA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qkv-XA-GTQ" secondAttribute="trailing" constant="20" id="h8A-PT-5T8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PTL-HH-1vN" secondAttribute="trailing" constant="20" id="ijI-iS-bMe"/>
+                <constraint firstItem="rkf-OI-Q0s" firstAttribute="top" secondItem="dCP-BR-k8b" secondAttribute="bottom" id="jVY-9f-lu7"/>
+                <constraint firstItem="rkf-OI-Q0s" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="lva-x8-D2k"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="137.68115942028987" y="102.45535714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
+        <image name="arrow.down" catalog="system" width="120" height="128"/>
+        <image name="tortoise" catalog="system" width="128" height="68"/>
+    </resources>
+</document>
