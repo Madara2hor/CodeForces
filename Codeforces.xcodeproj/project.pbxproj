@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0203487824FCA17F008DE39E /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4176A24F7BFCD00F1A33B /* MockNetworkService.swift */; };
+		0203487924FCA17F008DE39E /* MockContestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4176824F7BF9A00F1A33B /* MockContestsView.swift */; };
+		0203487A24FCA17F008DE39E /* ContestsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203487224F8F794008DE39E /* ContestsPresenterTests.swift */; };
+		0203487B24FCA17F008DE39E /* MockSearchUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177324F8D6DA00F1A33B /* MockSearchUserView.swift */; };
+		0203487D24FCA17F008DE39E /* MockTopUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177524F8D6FB00F1A33B /* MockTopUsersView.swift */; };
+		0203487E24FCA17F008DE39E /* TopUsersPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177024F8CCBA00F1A33B /* TopUsersPresenterTests.swift */; };
+		0203488324FCAD3B008DE39E /* SearchUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */; };
+		0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */; };
 		02D09E1424D9333D00DEF1A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E1324D9333D00DEF1A9 /* AppDelegate.swift */; };
 		02D09E1624D9333D00DEF1A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E1524D9333D00DEF1A9 /* SceneDelegate.swift */; };
 		02D09E1824D9333D00DEF1A9 /* TopUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E1724D9333D00DEF1A9 /* TopUsersViewController.swift */; };
@@ -43,21 +51,32 @@
 		02D09E9324E0F8E900DEF1A9 /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E9124E0F8E900DEF1A9 /* ContestDetailViewController.swift */; };
 		02D09E9424E0F8E900DEF1A9 /* ContestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9224E0F8E900DEF1A9 /* ContestDetailViewController.xib */; };
 		02D09E9724E1175200DEF1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9624E1175200DEF1A9 /* Assets.xcassets */; };
-		02F92CFA24E290B80095A82E /* CodeforcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F92CF924E290B80095A82E /* CodeforcesTests.swift */; };
+		02F05D9024FE10EE00F08B26 /* TabBarItemsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8F24FE10EE00F08B26 /* TabBarItemsTests.swift */; };
 		02F92D0124F50A890095A82E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02F92D0024F50A890095A82E /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		02D09E2724D9334200DEF1A9 /* PBXContainerItemProxy */ = {
+		0203488F24FCFC8A008DE39E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 02D09E0824D9333D00DEF1A9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 02D09E0F24D9333D00DEF1A9;
-			remoteInfo = Twitter;
+			remoteInfo = Codeforces;
+		};
+		02D4176324F7AD9700F1A33B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 02D09E0824D9333D00DEF1A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 02D09E0F24D9333D00DEF1A9;
+			remoteInfo = Codeforces;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0203487224F8F794008DE39E /* ContestsPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestsPresenterTests.swift; sourceTree = "<group>"; };
+		0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserPresenterTests.swift; sourceTree = "<group>"; };
+		0203488A24FCFC8A008DE39E /* CodeforcesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeforcesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0203488E24FCFC8A008DE39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02D09E1024D9333D00DEF1A9 /* Code Forces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Code Forces.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02D09E1324D9333D00DEF1A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02D09E1524D9333D00DEF1A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +84,6 @@
 		02D09E1A24D9333D00DEF1A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		02D09E1F24D9334200DEF1A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02D09E2124D9334200DEF1A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		02D09E2624D9334200DEF1A9 /* CodeforcesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeforcesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02D09E3524D933CE00DEF1A9 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		02D09E3724D9343700DEF1A9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		02D09E3B24D937B500DEF1A9 /* ContestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestsViewController.swift; sourceTree = "<group>"; };
@@ -97,12 +115,26 @@
 		02D09E9124E0F8E900DEF1A9 /* ContestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestDetailViewController.swift; sourceTree = "<group>"; };
 		02D09E9224E0F8E900DEF1A9 /* ContestDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContestDetailViewController.xib; sourceTree = "<group>"; };
 		02D09E9624E1175200DEF1A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Codeforces/Assets.xcassets; sourceTree = "<group>"; };
-		02F92CF624E28E8C0095A82E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		02F92CF924E290B80095A82E /* CodeforcesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeforcesTests.swift; sourceTree = "<group>"; };
+		02D4175B24F7AD9000F1A33B /* CodeforcesUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeforcesUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02D4175F24F7AD9000F1A33B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02D4176824F7BF9A00F1A33B /* MockContestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContestsView.swift; sourceTree = "<group>"; };
+		02D4176A24F7BFCD00F1A33B /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		02D4177024F8CCBA00F1A33B /* TopUsersPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersPresenterTests.swift; sourceTree = "<group>"; };
+		02D4177324F8D6DA00F1A33B /* MockSearchUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchUserView.swift; sourceTree = "<group>"; };
+		02D4177524F8D6FB00F1A33B /* MockTopUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopUsersView.swift; sourceTree = "<group>"; };
+		02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTests.swift; sourceTree = "<group>"; };
+		02F05D8F24FE10EE00F08B26 /* TabBarItemsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemsTests.swift; sourceTree = "<group>"; };
 		02F92D0024F50A890095A82E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0203488724FCFC8A008DE39E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02D09E0D24D9333D00DEF1A9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -110,7 +142,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02D09E2324D9334200DEF1A9 /* Frameworks */ = {
+		02D4175824F7AD9000F1A33B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -120,13 +152,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0203488424FCFBA5008DE39E /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				02D4176C24F8CBD400F1A33B /* MockNetworkLayer */,
+				02D4176724F7BF7100F1A33B /* ContestsModuleTests */,
+				02D4176F24F8CC2B00F1A33B /* SearchUserModuleTests */,
+				02D4177224F8CCC200F1A33B /* TopUsersModuleTests */,
+			);
+			path = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		0203488B24FCFC8A008DE39E /* CodeforcesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0203488E24FCFC8A008DE39E /* Info.plist */,
+				02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */,
+				02F05D8F24FE10EE00F08B26 /* TabBarItemsTests.swift */,
+			);
+			path = CodeforcesUITests;
+			sourceTree = "<group>";
+		};
 		02D09E0724D9333D00DEF1A9 = {
 			isa = PBXGroup;
 			children = (
 				02D09E1224D9333D00DEF1A9 /* Codeforces */,
 				02D09E9624E1175200DEF1A9 /* Assets.xcassets */,
 				02F92D0024F50A890095A82E /* .gitignore */,
-				02D09E2924D9334200DEF1A9 /* CodeforcesTests */,
+				02D4175C24F7AD9000F1A33B /* CodeforcesUnitTests */,
+				0203488B24FCFC8A008DE39E /* CodeforcesUITests */,
 				02D09E1124D9333D00DEF1A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -135,7 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				02D09E1024D9333D00DEF1A9 /* Code Forces.app */,
-				02D09E2624D9334200DEF1A9 /* CodeforcesTests.xctest */,
+				02D4175B24F7AD9000F1A33B /* CodeforcesUnitTests.xctest */,
+				0203488A24FCFC8A008DE39E /* CodeforcesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,15 +214,6 @@
 				02D09E2124D9334200DEF1A9 /* Info.plist */,
 			);
 			path = Codeforces;
-			sourceTree = "<group>";
-		};
-		02D09E2924D9334200DEF1A9 /* CodeforcesTests */ = {
-			isa = PBXGroup;
-			children = (
-				02F92CF924E290B80095A82E /* CodeforcesTests.swift */,
-				02F92CF624E28E8C0095A82E /* Info.plist */,
-			);
-			path = CodeforcesTests;
 			sourceTree = "<group>";
 		};
 		02D09E3D24D937F400DEF1A9 /* TopUsersModule */ = {
@@ -344,9 +390,71 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		02D4175C24F7AD9000F1A33B /* CodeforcesUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				0203488424FCFBA5008DE39E /* Unit Tests */,
+				02D4175F24F7AD9000F1A33B /* Info.plist */,
+			);
+			path = CodeforcesUnitTests;
+			sourceTree = "<group>";
+		};
+		02D4176724F7BF7100F1A33B /* ContestsModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				02D4176824F7BF9A00F1A33B /* MockContestsView.swift */,
+				0203487224F8F794008DE39E /* ContestsPresenterTests.swift */,
+			);
+			path = ContestsModuleTests;
+			sourceTree = "<group>";
+		};
+		02D4176C24F8CBD400F1A33B /* MockNetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				02D4176A24F7BFCD00F1A33B /* MockNetworkService.swift */,
+			);
+			path = MockNetworkLayer;
+			sourceTree = "<group>";
+		};
+		02D4176F24F8CC2B00F1A33B /* SearchUserModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				02D4177324F8D6DA00F1A33B /* MockSearchUserView.swift */,
+				0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */,
+			);
+			path = SearchUserModuleTests;
+			sourceTree = "<group>";
+		};
+		02D4177224F8CCC200F1A33B /* TopUsersModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				02D4177524F8D6FB00F1A33B /* MockTopUsersView.swift */,
+				02D4177024F8CCBA00F1A33B /* TopUsersPresenterTests.swift */,
+			);
+			path = TopUsersModuleTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0203488924FCFC8A008DE39E /* CodeforcesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0203489124FCFC8A008DE39E /* Build configuration list for PBXNativeTarget "CodeforcesUITests" */;
+			buildPhases = (
+				0203488624FCFC8A008DE39E /* Sources */,
+				0203488724FCFC8A008DE39E /* Frameworks */,
+				0203488824FCFC8A008DE39E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0203489024FCFC8A008DE39E /* PBXTargetDependency */,
+			);
+			name = CodeforcesUITests;
+			productName = CodeforcesUITests;
+			productReference = 0203488A24FCFC8A008DE39E /* CodeforcesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		02D09E0F24D9333D00DEF1A9 /* Codeforces */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02D09E2F24D9334200DEF1A9 /* Build configuration list for PBXNativeTarget "Codeforces" */;
@@ -364,22 +472,22 @@
 			productReference = 02D09E1024D9333D00DEF1A9 /* Code Forces.app */;
 			productType = "com.apple.product-type.application";
 		};
-		02D09E2524D9334200DEF1A9 /* CodeforcesTests */ = {
+		02D4175A24F7AD9000F1A33B /* CodeforcesUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02D09E3224D9334200DEF1A9 /* Build configuration list for PBXNativeTarget "CodeforcesTests" */;
+			buildConfigurationList = 02D4176024F7AD9000F1A33B /* Build configuration list for PBXNativeTarget "CodeforcesUnitTests" */;
 			buildPhases = (
-				02D09E2224D9334200DEF1A9 /* Sources */,
-				02D09E2324D9334200DEF1A9 /* Frameworks */,
-				02D09E2424D9334200DEF1A9 /* Resources */,
+				02D4175724F7AD9000F1A33B /* Sources */,
+				02D4175824F7AD9000F1A33B /* Frameworks */,
+				02D4175924F7AD9000F1A33B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				02D09E2824D9334200DEF1A9 /* PBXTargetDependency */,
+				02D4176424F7AD9700F1A33B /* PBXTargetDependency */,
 			);
-			name = CodeforcesTests;
-			productName = TwitterTests;
-			productReference = 02D09E2624D9334200DEF1A9 /* CodeforcesTests.xctest */;
+			name = CodeforcesUnitTests;
+			productName = CodeforcesTests;
+			productReference = 02D4175B24F7AD9000F1A33B /* CodeforcesUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -392,12 +500,15 @@
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = Madara2hor;
 				TargetAttributes = {
+					0203488924FCFC8A008DE39E = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 02D09E0F24D9333D00DEF1A9;
+					};
 					02D09E0F24D9333D00DEF1A9 = {
 						CreatedOnToolsVersion = 11.6;
 					};
-					02D09E2524D9334200DEF1A9 = {
+					02D4175A24F7AD9000F1A33B = {
 						CreatedOnToolsVersion = 11.6;
-						LastSwiftMigration = 1160;
 						TestTargetID = 02D09E0F24D9333D00DEF1A9;
 					};
 				};
@@ -416,12 +527,20 @@
 			projectRoot = "";
 			targets = (
 				02D09E0F24D9333D00DEF1A9 /* Codeforces */,
-				02D09E2524D9334200DEF1A9 /* CodeforcesTests */,
+				02D4175A24F7AD9000F1A33B /* CodeforcesUnitTests */,
+				0203488924FCFC8A008DE39E /* CodeforcesUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0203488824FCFC8A008DE39E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02D09E0E24D9333D00DEF1A9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,7 +559,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02D09E2424D9334200DEF1A9 /* Resources */ = {
+		02D4175924F7AD9000F1A33B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -450,6 +569,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0203488624FCFC8A008DE39E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */,
+				02F05D9024FE10EE00F08B26 /* TabBarItemsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		02D09E0C24D9333D00DEF1A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,21 +611,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02D09E2224D9334200DEF1A9 /* Sources */ = {
+		02D4175724F7AD9000F1A33B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02F92CFA24E290B80095A82E /* CodeforcesTests.swift in Sources */,
+				0203487824FCA17F008DE39E /* MockNetworkService.swift in Sources */,
+				0203487924FCA17F008DE39E /* MockContestsView.swift in Sources */,
+				0203488324FCAD3B008DE39E /* SearchUserPresenterTests.swift in Sources */,
+				0203487A24FCA17F008DE39E /* ContestsPresenterTests.swift in Sources */,
+				0203487B24FCA17F008DE39E /* MockSearchUserView.swift in Sources */,
+				0203487D24FCA17F008DE39E /* MockTopUsersView.swift in Sources */,
+				0203487E24FCA17F008DE39E /* TopUsersPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		02D09E2824D9334200DEF1A9 /* PBXTargetDependency */ = {
+		0203489024FCFC8A008DE39E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 02D09E0F24D9333D00DEF1A9 /* Codeforces */;
-			targetProxy = 02D09E2724D9334200DEF1A9 /* PBXContainerItemProxy */;
+			targetProxy = 0203488F24FCFC8A008DE39E /* PBXContainerItemProxy */;
+		};
+		02D4176424F7AD9700F1A33B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 02D09E0F24D9333D00DEF1A9 /* Codeforces */;
+			targetProxy = 02D4176324F7AD9700F1A33B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -521,6 +660,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0203489224FCFC8A008DE39E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E4JE63ZJST;
+				INFOPLIST_FILE = CodeforcesUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = KP.CodeforcesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Codeforces;
+			};
+			name = Debug;
+		};
+		0203489324FCFC8A008DE39E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E4JE63ZJST;
+				INFOPLIST_FILE = CodeforcesUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = KP.CodeforcesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Codeforces;
+			};
+			name = Release;
+		};
 		02D09E2D24D9334200DEF1A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -573,7 +750,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -629,7 +806,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -645,6 +822,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4JE63ZJST;
 				INFOPLIST_FILE = Codeforces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -665,6 +843,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = E4JE63ZJST;
 				INFOPLIST_FILE = Codeforces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -679,63 +858,44 @@
 			};
 			name = Release;
 		};
-		02D09E3324D9334200DEF1A9 /* Debug */ = {
+		02D4176124F7AD9000F1A33B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = E4JE63ZJST;
-				INFOPLIST_FILE = CodeforcesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
+				INFOPLIST_FILE = CodeforcesUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = my.CodeforcesTests;
+				PRODUCT_BUNDLE_IDENTIFIER = KP.CodeforcesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SHARED_PRECOMPS_DIR = "";
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Code Forces.app/Code Forces";
 			};
 			name = Debug;
 		};
-		02D09E3424D9334200DEF1A9 /* Release */ = {
+		02D4176224F7AD9000F1A33B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = E4JE63ZJST;
-				INFOPLIST_FILE = CodeforcesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
+				INFOPLIST_FILE = CodeforcesUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = my.CodeforcesTests;
+				PRODUCT_BUNDLE_IDENTIFIER = KP.CodeforcesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SHARED_PRECOMPS_DIR = "";
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Code Forces.app/Code Forces";
@@ -745,6 +905,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0203489124FCFC8A008DE39E /* Build configuration list for PBXNativeTarget "CodeforcesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0203489224FCFC8A008DE39E /* Debug */,
+				0203489324FCFC8A008DE39E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		02D09E0B24D9333D00DEF1A9 /* Build configuration list for PBXProject "Codeforces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -763,11 +932,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02D09E3224D9334200DEF1A9 /* Build configuration list for PBXNativeTarget "CodeforcesTests" */ = {
+		02D4176024F7AD9000F1A33B /* Build configuration list for PBXNativeTarget "CodeforcesUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02D09E3324D9334200DEF1A9 /* Debug */,
-				02D09E3424D9334200DEF1A9 /* Release */,
+				02D4176124F7AD9000F1A33B /* Debug */,
+				02D4176224F7AD9000F1A33B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

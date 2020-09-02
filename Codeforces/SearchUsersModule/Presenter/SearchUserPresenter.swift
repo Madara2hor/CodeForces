@@ -34,7 +34,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     }
     
     func getUser() {
-        networkService.getUser(user: searchedUser ?? "", completion: { [weak self] result in
+        networkService.getUser(username: searchedUser ?? "", completion: { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {

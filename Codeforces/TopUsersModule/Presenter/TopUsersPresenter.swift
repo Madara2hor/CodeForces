@@ -18,7 +18,7 @@ protocol TopUsersViewPresenterProtocol: FilterTopUsersProtocol {
     var topUsers: [User]? { get set }
     var activeOnly: Bool! { get set }
     
-    init(view: TopUsersViewProtocol, networkService: NetworkService, router: RouterProtocol)
+    init(view: TopUsersViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
     func showUserDetail(user: User?, selectedIndex: Int?)
     func getTopUsers()
@@ -33,13 +33,13 @@ protocol FilterTopUsersProtocol: class {
 class TopUsersPresenter: TopUsersViewPresenterProtocol {    
     weak var view: TopUsersViewProtocol?
     var router: RouterProtocol?
-    var networkService: NetworkService!
+    var networkService: NetworkServiceProtocol!
     
     var topUsers: [User]?
     var filtredTopUsers: [User]?
     var activeOnly: Bool!
     
-    required init(view: TopUsersViewProtocol, networkService: NetworkService, router: RouterProtocol) {
+    required init(view: TopUsersViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
         self.view = view
         self.router = router
         self.networkService = networkService

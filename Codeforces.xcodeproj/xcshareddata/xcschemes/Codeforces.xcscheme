@@ -26,8 +26,38 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "02D09E0F24D9333D00DEF1A9"
+            BuildableName = "Code Forces.app"
+            BlueprintName = "Codeforces"
+            ReferencedContainer = "container:Codeforces.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "02D4175A24F7AD9000F1A33B"
+               BuildableName = "CodeforcesUnitTests.xctest"
+               BlueprintName = "CodeforcesUnitTests"
+               ReferencedContainer = "container:Codeforces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0203488924FCFC8A008DE39E"
+               BuildableName = "CodeforcesUITests.xctest"
+               BlueprintName = "CodeforcesUITests"
+               ReferencedContainer = "container:Codeforces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

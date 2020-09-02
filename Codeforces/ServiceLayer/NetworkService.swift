@@ -9,11 +9,8 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    var apiURL: String { get }
-    var apiKey: String { get }
-    var apiSecret: String { get }
     func getContests(gym: Bool, completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void)
-    func getUser(user: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
+    func getUser(username: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
     func getTopUsers(activeOnly: Bool, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
 }
 
@@ -33,8 +30,8 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func getUser(user: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
-        let parameters = ["handles": "\(user)"]
+    func getUser(username: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
+        let parameters = ["handles": "\(username)"]
         let urlString = getHashedUrlString(endpoint: apiEndpoint.userInfo.rawValue, parameters: parameters)
         
         print(urlString)
