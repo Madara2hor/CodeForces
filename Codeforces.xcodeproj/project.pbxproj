@@ -15,7 +15,6 @@
 		0203487E24FCA17F008DE39E /* TopUsersPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D4177024F8CCBA00F1A33B /* TopUsersPresenterTests.swift */; };
 		0203488324FCAD3B008DE39E /* SearchUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */; };
 		0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */; };
-		0245990B24FF6C9500F1099F /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0245990A24FF6C9500F1099F /* InternetConnection.swift */; };
 		02D09E1424D9333D00DEF1A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E1324D9333D00DEF1A9 /* AppDelegate.swift */; };
 		02D09E1624D9333D00DEF1A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E1524D9333D00DEF1A9 /* SceneDelegate.swift */; };
 		02D09E1824D9333D00DEF1A9 /* TopUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E1724D9333D00DEF1A9 /* TopUsersViewController.swift */; };
@@ -597,7 +596,6 @@
 				02D09E1424D9333D00DEF1A9 /* AppDelegate.swift in Sources */,
 				02D09E9324E0F8E900DEF1A9 /* ContestDetailViewController.swift in Sources */,
 				02D09E7424DA89F400DEF1A9 /* Contest.swift in Sources */,
-				0245990B24FF6C9500F1099F /* InternetConnection.swift in Sources */,
 				02D09E3824D9343700DEF1A9 /* Router.swift in Sources */,
 				02D09E6E24DA757A00DEF1A9 /* UIImageView.swift in Sources */,
 				02D09E7F24DBAC4200DEF1A9 /* Date.swift in Sources */,
