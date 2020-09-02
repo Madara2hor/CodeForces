@@ -10,6 +10,22 @@ import XCTest
 @testable import Code_Forces
 
 class MockContestsView: ContestsViewProtocol {
+    func setLoadingView() {
+        
+    }
+    
+    func removeLoadingView() {
+        
+    }
+    
+    func removeEmptySubview() {
+        
+    }
+    
+    func connectionUnsatisfied() {
+        
+    }
+    
     func success() {
         
     }

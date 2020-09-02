@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Network
 
 protocol NetworkServiceProtocol {
     func getContests(gym: Bool, completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void)

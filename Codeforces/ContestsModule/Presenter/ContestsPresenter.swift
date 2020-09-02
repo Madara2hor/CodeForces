@@ -9,6 +9,10 @@
 import Foundation
 
 protocol ContestsViewProtocol: class {
+    func setLoadingView()
+    func removeLoadingView()
+    func removeEmptySubview()
+    
     func success()
     func failure(error: String?)
 }
@@ -41,10 +45,16 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func getContests() {
+        DispatchQueue.main.async {
+            self.view?.removeEmptySubview()
+            self.view?.setLoadingView()
+        }
+        
         networkService.getContests(gym: gym) { [weak self] result in
             guard let self = self else { return }
-            
             DispatchQueue.main.async {
+                self.view?.removeLoadingView()
+                
                 switch result {
                 case .success(let requsetResult):
                     switch requsetResult?.status {

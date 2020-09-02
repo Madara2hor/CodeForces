@@ -9,6 +9,10 @@
 import Foundation
 
 protocol SearchUserViewProtocol: class {
+    func setLoadingView()
+    func removeLoadingView()
+    func removeEmptySubview()
+    
     func success()
     func failure(error: String?)
 }
@@ -34,15 +38,23 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     }
     
     func getUser() {
+        DispatchQueue.main.async {
+            self.view?.removeEmptySubview()
+            self.view?.setLoadingView()
+        }
+        
         networkService.getUser(username: searchedUser ?? "", completion: { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
+                self.view?.removeLoadingView()
+                
                 switch result {
                     case .success(let requsetResult):
                         switch requsetResult?.status {
                         case .success:
                             self.user = requsetResult?.result?[0]
+                            
                             self.view?.success()
                         case .failure:
                             self.user = nil

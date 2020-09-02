@@ -32,12 +32,9 @@ class TopUsersViewController: UIViewController {
         
         topUsersTable.register(UINib(nibName: "UserRatingCellView", bundle: nil), forCellReuseIdentifier: "UserRatingCell")
         topUsersTable.tableFooterView = UIView()
-        view.setLoadingSubview()
     }
 
     @IBAction func ratingSortDidTapped(_ sender: UIButton) {
-        self.view.setLoadingSubview()
-        
         if sender.tag == 0 {
             sender.setImage(UIImage(systemName: "arrow.up"), for: .normal)
             sender.tag = 1
@@ -49,8 +46,6 @@ class TopUsersViewController: UIViewController {
     }
     
     @IBAction func activeFilterDidTapped(_ sender: UIButton) {
-        self.view.setLoadingSubview()
-        
         if sender.tag == 0 {
             sender.setImage(UIImage(systemName: "hare"), for: .normal)
             sender.tag = 1
@@ -67,31 +62,38 @@ class TopUsersViewController: UIViewController {
     }
     
     @IBAction func reloadDataDidTapped(_ sender: UIButton) {
-        self.view.setLoadingSubview()
-        self.view.removeEmptySubview()
         presenter.getTopUsers()
     }
 }
 
 extension TopUsersViewController: TopUsersViewProtocol {
-    func success() {
+    func setLoadingView() {
+        self.view.setLoadingSubview()
+    }
+    
+    func removeLoadingView() {
         self.view.removeLoadingSubview()
+    }
+    
+    func removeEmptySubview() {
+        if topUsersTable != nil {
+            topUsersTable.restore()
+        }
+    }
+    
+    func success() {
         searchBar.text = ""
-        topUsersTable.restore()
         topUsersTable.reloadData()
         topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     func failure(error: String?) {
-        self.view.removeLoadingSubview()
-        
         if presenter?.topUsers?.count == 0 {
             self.topUsersTable.setEmptyTableView(title: "Упс...", message: "Произошла ошибка загрузки данных")
         }
     }
     
     func topUsersSorted() {
-        self.view.removeLoadingSubview()
         topUsersTable.reloadData()
         topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }

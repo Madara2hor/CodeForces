@@ -57,9 +57,7 @@ class SearchUserViewController: UIViewController {
     }
     
     @IBAction func reloadDataDidTapped(_ sender: UIButton) {
-        self.view.removeEmptySubview()
         if presenter?.searchedUser != nil {
-            self.view.setLoadingSubview()
             presenter?.getUser()
         }
     }
@@ -83,11 +81,19 @@ class SearchUserViewController: UIViewController {
 }
 
 extension SearchUserViewController: SearchUserViewProtocol {
+    func setLoadingView() {
+        view.setLoadingSubview()
+    }
+    
+    func removeLoadingView() {
+        view.removeLoadingSubview()
+    }
+    
+    func removeEmptySubview() {
+        view.removeEmptySubview()
+    }
     
     func success() {
-        view.removeLoadingSubview()
-        view.removeEmptySubview()
-        
         if let url = presenter.user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
             self.profileImage.load(url: urlImage)
             self.profileImage.isHidden = false
@@ -108,8 +114,8 @@ extension SearchUserViewController: SearchUserViewProtocol {
     }
     
     func failure(error: String?) {
-        view.removeLoadingSubview()
         guard let error = error else { return }
+        
         hideProfileItems()
         if error != "handles: Field should not be empty" {
             self.view.setEmptySubview(title: "Эх...", message: "Пользователь не найден")

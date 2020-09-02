@@ -10,6 +10,18 @@ import XCTest
 @testable import Code_Forces
 
 class MockSearchUserView: SearchUserViewProtocol {
+    func setLoadingView() {
+        
+    }
+    
+    func removeLoadingView() {
+        
+    }
+    
+    func removeEmptySubview() {
+        
+    }
+    
     func success() {
         
     }

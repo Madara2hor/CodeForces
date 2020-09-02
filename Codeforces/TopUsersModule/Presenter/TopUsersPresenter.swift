@@ -9,8 +9,13 @@
 import Foundation
 
 protocol TopUsersViewProtocol: class {
+    func setLoadingView()
+    func removeLoadingView()
+    func removeEmptySubview()
+    
     func success()
     func failure(error: String?)
+    
     func topUsersSorted()
 }
 
@@ -49,10 +54,17 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     }
     
     func getTopUsers() {
+        DispatchQueue.main.async {
+            self.view?.removeEmptySubview()
+            self.view?.setLoadingView()
+        }
+        
         networkService.getTopUsers(activeOnly: activeOnly) { [weak self] (result) in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
+                self.view?.removeLoadingView()
+                
                 switch result {
                 case .success(let requestResult):
                     switch requestResult?.status {
@@ -78,9 +90,11 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     }
     
     func sortTopUsers() {
+        view?.setLoadingView()
         filtredTopUsers?.reverse()
         
         DispatchQueue.main.async {
+            self.view?.removeLoadingView()
             self.view?.topUsersSorted()
         }
     }

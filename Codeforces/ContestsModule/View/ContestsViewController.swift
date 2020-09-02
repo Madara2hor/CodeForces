@@ -27,12 +27,9 @@ class ContestsViewController: UIViewController {
         
         contestTable.register(UINib(nibName: "ContestCellView", bundle: nil), forCellReuseIdentifier: "ContestCell")
         contestTable.tableFooterView = UIView()
-        view.setLoadingSubview()
     }
     
     @IBAction func gymFilterDidTapped(_ sender: UIButton) {
-        self.view.setLoadingSubview()
-        
         if sender.tag == 0 {
             sender.setImage(UIImage(named: "outline_gym"), for: .normal)
             sender.tag = 1
@@ -49,8 +46,6 @@ class ContestsViewController: UIViewController {
     }
     
     @IBAction func reloadDataDidTapped(_ sender: UIButton) {
-        self.view.setLoadingSubview()
-        self.view.removeEmptySubview()
         presenter?.getContests()
     }
     
@@ -84,19 +79,27 @@ extension ContestsViewController: UITableViewDelegate {
 
 extension ContestsViewController: ContestsViewProtocol {
     func success() {
-        view.removeLoadingSubview()
-        self.contestTable.restore()
         contestTable.reloadData()
         contestTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     func failure(error: String?) {
-        view.removeLoadingSubview()
-        
         if presenter?.contests?.count == 0 {
             self.contestTable.setEmptyTableView(title: "Упс...", message: "Произошла ошибка загрузки данных")
         }
     }
     
+    func removeEmptySubview() {
+        if contestTable != nil {
+            self.contestTable.restore()
+        }
+    }
     
+    func setLoadingView() {
+        view.setLoadingSubview()
+    }
+    
+    func removeLoadingView() {
+        view.removeLoadingSubview()
+    }
 }
