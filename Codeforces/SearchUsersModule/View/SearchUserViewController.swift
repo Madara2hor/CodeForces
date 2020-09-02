@@ -131,7 +131,7 @@ extension SearchUserViewController: UISearchBarDelegate {
         searchBar.text = cleanText
         if cleanText == "" {
             presenter.searchedUser = nil
-            self.view.removeEmptySubview()
+            removeEmptySubview()
             hideProfileItems()
         } else {
             presenter.searchedUser = cleanText.lowercased()
@@ -140,7 +140,6 @@ extension SearchUserViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if presenter.searchedUser != nil {
-            view.setLoadingSubview()
             presenter.getUser()
         }
         view.endEditing(true)

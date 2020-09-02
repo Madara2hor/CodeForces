@@ -69,16 +69,32 @@ class SearchUserTests: XCTestCase {
         
     }
     
-    func testClearSearchFiledButton() {
-        testFailureSearchUser()
-        
-        app.buttons["clear"].tap()
-    }
-    
-    func testReloadDataButton() {
-        testSuccessSearchUser()
-        
-        app.buttons["arrow.2.circlepath"].tap()
-    }
+//    func testClearSearchFiledButton() {
+//        testFailureSearchUser()
+//
+//        let clearButtonQuery = app.buttons["clear"]
+//        
+//        expectation(for: NSPredicate(format: "exists == 1"),
+//                    evaluatedWith: clearButtonQuery,
+//                    handler: nil)
+//        waitForExpectations(timeout: 15, handler: nil)
+//        XCTAssertTrue(clearButtonQuery.exists)
+//
+//        clearButtonQuery.tap()
+//    }
+//
+//    func testReloadDataButton() {
+//        testSuccessSearchUser()
+//
+//        let reloadButtonQuery = app.buttons["arrow.2.circlepath"]
+//
+//        expectation(for: NSPredicate(format: "exists == 1"),
+//                    evaluatedWith: reloadButtonQuery,
+//                    handler: nil)
+//        waitForExpectations(timeout: 15, handler: nil)
+//        XCTAssertTrue(reloadButtonQuery.exists)
+//
+//        reloadButtonQuery.tap()
+//    }
 
 }
