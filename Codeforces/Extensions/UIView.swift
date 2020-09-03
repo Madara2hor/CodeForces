@@ -72,6 +72,34 @@ extension UIView {
         self.addSubview(loadingView)
     }
     
+    func showViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat , view: UIView) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: duration,
+                           delay: delay,
+                           options: .curveEaseInOut,
+                           animations: {
+                            anchor.constant += anchorConstant + view.frame.width
+                            view.makeTransparentBlue()
+                            
+                            self.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+    
+    func hideViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat, view: UIView) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: duration,
+                           delay: delay,
+                           options: .curveEaseInOut,
+                           animations: {
+                            anchor.constant -= anchorConstant + view.frame.width
+                            view.backgroundColor = nil
+                            
+                            self.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+    
     func setEmptySubview(title: String, message: String) {
         let emptyView = UIView(frame: CGRect(x: 0,
                                              y: self.center.y / 1.5,

@@ -13,6 +13,12 @@ class ContestsViewController: UIViewController {
     @IBOutlet weak var contestTable: UITableView!
     @IBOutlet weak var reloadData: UIButton!
     @IBOutlet weak var gymFilter: UIButton!
+    @IBOutlet weak var menu: UIButton!
+    
+    @IBOutlet weak var reloadRightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var gymRightAnchor: NSLayoutConstraint!
+    
+    var isMenuShow = false
     
     var presenter: ContestsViewPresenterProtocol?
     
@@ -25,8 +31,17 @@ class ContestsViewController: UIViewController {
         gymFilter.makeCircle()
         gymFilter.makeTransparentBlue()
         
+        menu.makeCircle()
+        menu.makeTransparentBlue()
+        
         contestTable.register(UINib(nibName: "ContestCellView", bundle: nil), forCellReuseIdentifier: "ContestCell")
         contestTable.tableFooterView = UIView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        hideMenuItems()
     }
     
     @IBAction func gymFilterDidTapped(_ sender: UIButton) {
@@ -49,6 +64,51 @@ class ContestsViewController: UIViewController {
         presenter?.getContests()
     }
     
+    @IBAction func menuDidTapped(_ sender: Any) {
+        if self.menu.tag == 0 {
+            self.showMenuItems()
+        } else {
+            self.hideMenuItems()
+        }
+    }
+    
+    func showMenuItems() {
+        if isMenuShow { return }
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 0,
+                                        anchor: reloadRightAnchor,
+                                        anchorConstant: 20,
+                                        view: reloadData)
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 0.5,
+                                        anchor: gymRightAnchor,
+                                        anchorConstant: 20,
+                                        view: gymFilter)
+
+        self.menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        self.menu.tag = 1
+        
+        isMenuShow = true
+    }
+    
+    func hideMenuItems() {
+        if !isMenuShow { return }
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 0.5,
+                                        anchor: reloadRightAnchor,
+                                        anchorConstant: 20,
+                                        view: reloadData)
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 0,
+                                        anchor: gymRightAnchor,
+                                        anchorConstant: 20,
+                                        view: gymFilter)
+
+        self.menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        self.menu.tag = 0
+        
+        isMenuShow = false
+    }
 }
 
 extension ContestsViewController: UITableViewDataSource {

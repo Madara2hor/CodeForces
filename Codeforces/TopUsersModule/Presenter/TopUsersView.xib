@@ -10,9 +10,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopUsersViewController" customModule="Code_Forces" customModuleProvider="target">
             <connections>
                 <outlet property="activeOnlyFilter" destination="VRf-1v-OVP" id="uRD-G4-7T6"/>
+                <outlet property="activeRightAnchor" destination="2DZ-Vl-gIA" id="Kyn-cc-S5d"/>
+                <outlet property="menu" destination="1NX-KG-fJG" id="gRd-6e-0Bl"/>
                 <outlet property="ratingSort" destination="Qkv-XA-GTQ" id="UzS-vp-x2N"/>
                 <outlet property="reloadData" destination="PTL-HH-1vN" id="MO8-iR-sgp"/>
+                <outlet property="reloadRightAnchor" destination="ijI-iS-bMe" id="cpZ-IV-GoX"/>
                 <outlet property="searchBar" destination="dCP-BR-k8b" id="Arr-kV-lj8"/>
+                <outlet property="sortRightAnchor" destination="h8A-PT-5T8" id="QSe-j2-2M2"/>
                 <outlet property="topUsersTable" destination="rkf-OI-Q0s" id="lmQ-Y3-MKo"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ocL-EH-1l2"/>
             </connections>
@@ -38,10 +42,11 @@
                     </connections>
                 </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-HH-1vN" userLabel="Update">
-                    <rect key="frame" x="319" y="759" width="75" height="75"/>
+                    <rect key="frame" x="414" y="697" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="75" id="GZU-E5-RAL"/>
-                        <constraint firstAttribute="height" constant="75" id="QZv-nZ-fDw"/>
+                        <constraint firstAttribute="width" constant="55" id="GZU-E5-RAL"/>
+                        <constraint firstAttribute="height" constant="55" id="QZv-nZ-fDw"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="arrow.2.circlepath" catalog="system"/>
@@ -50,7 +55,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRf-1v-OVP" userLabel="Active">
-                    <rect key="frame" x="339" y="696" width="55" height="55"/>
+                    <rect key="frame" x="414" y="634" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="55" id="UNi-p6-zEd"/>
                         <constraint firstAttribute="height" constant="55" id="d4G-uE-OSL"/>
@@ -61,8 +67,22 @@
                         <action selector="activeFilterDidTapped:" destination="-1" eventType="touchUpInside" id="Uz7-Rs-Nwd"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NX-KG-fJG" userLabel="Menu">
+                    <rect key="frame" x="319" y="760" width="75" height="75"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="AJ4-SY-kiC"/>
+                        <constraint firstAttribute="height" constant="75" id="ye6-gb-egW"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="chevron.left" catalog="system"/>
+                    <connections>
+                        <action selector="menuDidTapped:" destination="-1" eventType="touchUpInside" id="Ez6-Hn-0rY"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkv-XA-GTQ" userLabel="Sort">
-                    <rect key="frame" x="339" y="633" width="55" height="55"/>
+                    <rect key="frame" x="414" y="571" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="CMd-uN-1VO"/>
                         <constraint firstAttribute="width" constant="55" id="LJi-eH-Rbh"/>
@@ -76,17 +96,19 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VRf-1v-OVP" secondAttribute="trailing" constant="20" id="2DZ-Vl-gIA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1NX-KG-fJG" secondAttribute="trailing" constant="20" id="18d-n8-xSY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VRf-1v-OVP" secondAttribute="trailing" constant="-55" id="2DZ-Vl-gIA"/>
                 <constraint firstItem="dCP-BR-k8b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4lf-JS-sKf"/>
                 <constraint firstItem="dCP-BR-k8b" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6eQ-sa-e1h"/>
                 <constraint firstItem="PTL-HH-1vN" firstAttribute="top" secondItem="VRf-1v-OVP" secondAttribute="bottom" constant="8" id="7Db-fd-LpU"/>
                 <constraint firstItem="rkf-OI-Q0s" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7fk-PO-3s4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="1NX-KG-fJG" secondAttribute="bottom" constant="27" id="Hn7-fP-hNA"/>
                 <constraint firstAttribute="bottom" secondItem="rkf-OI-Q0s" secondAttribute="bottom" id="JRs-IJ-Dhs"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="PTL-HH-1vN" secondAttribute="bottom" constant="28" id="QRU-fg-m3N"/>
                 <constraint firstItem="VRf-1v-OVP" firstAttribute="top" secondItem="Qkv-XA-GTQ" secondAttribute="bottom" constant="8" id="VCo-0h-FCB"/>
+                <constraint firstItem="1NX-KG-fJG" firstAttribute="top" secondItem="PTL-HH-1vN" secondAttribute="bottom" constant="8" id="WjP-lW-Hof"/>
                 <constraint firstItem="dCP-BR-k8b" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="X5b-pq-9KA"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qkv-XA-GTQ" secondAttribute="trailing" constant="20" id="h8A-PT-5T8"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PTL-HH-1vN" secondAttribute="trailing" constant="20" id="ijI-iS-bMe"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Qkv-XA-GTQ" secondAttribute="trailing" constant="-55" id="h8A-PT-5T8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PTL-HH-1vN" secondAttribute="trailing" constant="-55" id="ijI-iS-bMe"/>
                 <constraint firstItem="rkf-OI-Q0s" firstAttribute="top" secondItem="dCP-BR-k8b" secondAttribute="bottom" id="jVY-9f-lu7"/>
                 <constraint firstItem="rkf-OI-Q0s" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="lva-x8-D2k"/>
             </constraints>
@@ -97,6 +119,7 @@
     <resources>
         <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="tortoise" catalog="system" width="128" height="68"/>
     </resources>
 </document>

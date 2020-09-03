@@ -11,7 +11,10 @@
             <connections>
                 <outlet property="contestTable" destination="5S5-R4-ila" id="oyf-wD-te9"/>
                 <outlet property="gymFilter" destination="HDV-5t-XAn" id="DXc-DG-RLI"/>
+                <outlet property="gymRightAnchor" destination="zK4-05-f9Y" id="qzx-aD-daS"/>
+                <outlet property="menu" destination="ak2-qa-PhA" id="hev-xx-5a0"/>
                 <outlet property="reloadData" destination="fRw-iP-Xkw" id="De3-Di-gJ8"/>
+                <outlet property="reloadRightAnchor" destination="xS6-BL-Rk2" id="Dc9-jf-pJX"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Asb-9b-vLf"/>
             </connections>
         </placeholder>
@@ -30,10 +33,11 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-iP-Xkw" userLabel="Reload">
-                    <rect key="frame" x="319" y="760" width="75" height="75"/>
+                    <rect key="frame" x="414" y="697" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="75" id="QiQ-9I-8hU"/>
-                        <constraint firstAttribute="height" constant="75" id="V3M-jg-up3"/>
+                        <constraint firstAttribute="width" constant="55" id="QiQ-9I-8hU"/>
+                        <constraint firstAttribute="height" constant="55" id="V3M-jg-up3"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="arrow.2.circlepath" catalog="system"/>
@@ -41,8 +45,22 @@
                         <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="FVm-UO-sts"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak2-qa-PhA" userLabel="Menu">
+                    <rect key="frame" x="319" y="760" width="75" height="75"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="75" id="pF5-2a-9lg"/>
+                        <constraint firstAttribute="width" constant="75" id="rhT-9F-FnS"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="chevron.left" catalog="system"/>
+                    <connections>
+                        <action selector="menuDidTapped:" destination="-1" eventType="touchUpInside" id="i6t-4r-kG1"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-5t-XAn" userLabel="Filter">
-                    <rect key="frame" x="339" y="697" width="55" height="55"/>
+                    <rect key="frame" x="414" y="634" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="T8N-9i-xqB"/>
                         <constraint firstAttribute="width" constant="55" id="jPz-TQ-d3R"/>
@@ -56,14 +74,16 @@
                 </button>
             </subviews>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ak2-qa-PhA" secondAttribute="bottom" constant="27" id="7Vk-Mk-cKt"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Cbz-qm-2eg"/>
                 <constraint firstAttribute="bottom" secondItem="5S5-R4-ila" secondAttribute="bottom" id="PMs-Pd-YNs"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ikp-Lp-JTr"/>
                 <constraint firstItem="fRw-iP-Xkw" firstAttribute="top" secondItem="HDV-5t-XAn" secondAttribute="bottom" constant="8" id="qEU-TX-u7t"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ak2-qa-PhA" secondAttribute="trailing" constant="20" id="w9q-tP-1UD"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="wqw-FQ-PH5"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fRw-iP-Xkw" secondAttribute="trailing" constant="20" id="xS6-BL-Rk2"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fRw-iP-Xkw" secondAttribute="bottom" constant="27" id="ytb-zT-mVw"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HDV-5t-XAn" secondAttribute="trailing" constant="20" id="zK4-05-f9Y"/>
+                <constraint firstItem="ak2-qa-PhA" firstAttribute="top" secondItem="fRw-iP-Xkw" secondAttribute="bottom" constant="8" id="xH0-x0-ngT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fRw-iP-Xkw" secondAttribute="trailing" constant="-55" id="xS6-BL-Rk2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HDV-5t-XAn" secondAttribute="trailing" constant="-55" id="zK4-05-f9Y"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="144.64285714285714"/>
@@ -71,6 +91,7 @@
     </objects>
     <resources>
         <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="outline_rating" width="24" height="24"/>
     </resources>
 </document>

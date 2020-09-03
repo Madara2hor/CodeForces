@@ -30,6 +30,12 @@ class SearchUserViewController: UIViewController {
     
     @IBOutlet weak var clearPage: UIButton!
     @IBOutlet weak var reloadData: UIButton!
+    @IBOutlet weak var menu: UIButton!
+    
+    @IBOutlet weak var clearRightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var reloadRightAnchor: NSLayoutConstraint!
+    
+    var isMenuShow = false
     
     var presenter: SearchUserViewPresenterProtocol!
 
@@ -42,7 +48,16 @@ class SearchUserViewController: UIViewController {
         reloadData.makeCircle()
         reloadData.makeTransparentBlue()
         
+        menu.makeCircle()
+        menu.makeTransparentBlue()
+        
         hideProfileItems()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        hideMenuItems()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -60,6 +75,52 @@ class SearchUserViewController: UIViewController {
         if presenter?.searchedUser != nil {
             presenter?.getUser()
         }
+    }
+    
+    @IBAction func menuDidTpped(_ sender: Any) {
+        if self.menu.tag == 0 {
+            self.showMenuItems()
+        } else {
+            self.hideMenuItems()
+        }
+    }
+    
+    func showMenuItems() {
+        if isMenuShow { return }
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 0,
+                                        anchor: reloadRightAnchor,
+                                        anchorConstant: 20,
+                                        view: reloadData)
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 0.5,
+                                        anchor: clearRightAnchor,
+                                        anchorConstant: 20,
+                                        view: clearPage)
+
+        self.menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        self.menu.tag = 1
+        
+        isMenuShow = true
+    }
+    
+    func hideMenuItems() {
+        if !isMenuShow { return }
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 0.5,
+                                        anchor: reloadRightAnchor,
+                                        anchorConstant: 20,
+                                        view: reloadData)
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 0,
+                                        anchor: clearRightAnchor,
+                                        anchorConstant: 20,
+                                        view: clearPage)
+
+        self.menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        self.menu.tag = 0
+        
+        isMenuShow = false
     }
     
     func hideProfileItems() {

@@ -15,6 +15,13 @@ class TopUsersViewController: UIViewController {
     @IBOutlet weak var ratingSort: UIButton!
     @IBOutlet weak var activeOnlyFilter: UIButton!
     @IBOutlet weak var reloadData: UIButton!
+    @IBOutlet weak var menu: UIButton!
+    
+    @IBOutlet weak var reloadRightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var activeRightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var sortRightAnchor: NSLayoutConstraint!
+    
+    var isMenuShow = false
     
     var presenter: TopUsersViewPresenterProtocol!
 
@@ -30,10 +37,19 @@ class TopUsersViewController: UIViewController {
         reloadData.makeCircle()
         reloadData.makeTransparentBlue()
         
+        menu.makeCircle()
+        menu.makeTransparentBlue()
+        
         topUsersTable.register(UINib(nibName: "UserRatingCellView", bundle: nil), forCellReuseIdentifier: "UserRatingCell")
         topUsersTable.tableFooterView = UIView()
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        hideMenuItems()
+    }
+    
     @IBAction func ratingSortDidTapped(_ sender: UIButton) {
         if sender.tag == 0 {
             sender.setImage(UIImage(systemName: "arrow.up"), for: .normal)
@@ -64,6 +80,63 @@ class TopUsersViewController: UIViewController {
     @IBAction func reloadDataDidTapped(_ sender: UIButton) {
         presenter.getTopUsers()
     }
+    
+    @IBAction func menuDidTapped(_ sender: Any) {
+        if self.menu.tag == 0 {
+            self.showMenuItems()
+        } else {
+            self.hideMenuItems()
+        }
+    }
+    
+    func showMenuItems() {
+        if isMenuShow { return }
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 0,
+                                        anchor: reloadRightAnchor,
+                                        anchorConstant: 20,
+                                        view: reloadData)
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 0.5,
+                                        anchor: activeRightAnchor,
+                                        anchorConstant: 20,
+                                        view: activeOnlyFilter)
+        self.view.showViewWithAnimation(duration: 0.5,
+                                        delay: 1,
+                                        anchor: sortRightAnchor,
+                                        anchorConstant: 20,
+                                        view: ratingSort)
+
+        self.menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        self.menu.tag = 1
+        
+        isMenuShow = true
+    }
+    
+    func hideMenuItems() {
+        if !isMenuShow { return }
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 1,
+                                        anchor: reloadRightAnchor,
+                                        anchorConstant: 20,
+                                        view: reloadData)
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 0.5,
+                                        anchor: activeRightAnchor,
+                                        anchorConstant: 20,
+                                        view: activeOnlyFilter)
+        self.view.hideViewWithAnimation(duration: 0.5,
+                                        delay: 0,
+                                        anchor: sortRightAnchor,
+                                        anchorConstant: 20,
+                                        view: ratingSort)
+        
+        self.menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        self.menu.tag = 0
+        
+        isMenuShow = false
+    }
+    
 }
 
 extension TopUsersViewController: TopUsersViewProtocol {
