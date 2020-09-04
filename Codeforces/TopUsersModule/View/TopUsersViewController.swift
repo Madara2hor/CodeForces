@@ -28,20 +28,18 @@ class TopUsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ratingSort.makeCircle()
-        ratingSort.makeTransparentBlue()
-        
-        activeOnlyFilter.makeCircle()
-        activeOnlyFilter.makeTransparentBlue()
-        
-        reloadData.makeCircle()
-        reloadData.makeTransparentBlue()
-        
-        menu.makeCircle()
-        menu.makeTransparentBlue()
+        setupMenuItemStyle(item: ratingSort)
+        setupMenuItemStyle(item: activeOnlyFilter)
+        setupMenuItemStyle(item: reloadData)
+        setupMenuItemStyle(item: menu)
         
         topUsersTable.register(UINib(nibName: "UserRatingCellView", bundle: nil), forCellReuseIdentifier: "UserRatingCell")
         topUsersTable.tableFooterView = UIView()
+    }
+    
+    func setupMenuItemStyle(item: UIView) {
+        item.makeCircle()
+        item.makeTransparentBlue()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -140,19 +138,6 @@ class TopUsersViewController: UIViewController {
 }
 
 extension TopUsersViewController: TopUsersViewProtocol {
-    func setLoadingView() {
-        self.view.setLoadingSubview()
-    }
-    
-    func removeLoadingView() {
-        self.view.removeLoadingSubview()
-    }
-    
-    func removeEmptySubview() {
-        if topUsersTable != nil {
-            topUsersTable.restore()
-        }
-    }
     
     func success() {
         searchBar.text = ""
@@ -170,6 +155,20 @@ extension TopUsersViewController: TopUsersViewProtocol {
         topUsersTable.reloadData()
         topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
+    
+    func setLoadingView() {
+        self.view.setLoadingSubview()
+    }
+    
+    func removeLoadingView() {
+        self.view.removeLoadingSubview()
+    }
+    
+    func removeEmptySubview() {
+        if topUsersTable != nil {
+            self.topUsersTable.restore()
+        }
+    }
 }
 
 extension TopUsersViewController: UISearchBarDelegate {
@@ -184,19 +183,18 @@ extension TopUsersViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
-
 }
 
 extension TopUsersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.filtredTopUsers?.count ?? 0
+        return presenter.filtredTopUsers?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = topUsersTable.dequeueReusableCell(withIdentifier: "UserRatingCell", for: indexPath) as! UserRatingCell
         
-        cell.setRatingData(user: presenter?.filtredTopUsers?[indexPath.row])
+        cell.setRatingData(user: presenter.filtredTopUsers?[indexPath.row])
         return cell
     }
     

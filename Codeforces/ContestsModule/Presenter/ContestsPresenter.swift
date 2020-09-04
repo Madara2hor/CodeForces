@@ -17,7 +17,7 @@ protocol ContestsViewProtocol: class {
     func failure(error: String?)
 }
 
-protocol ContestsViewPresenterProtocol: class {
+protocol ContestsViewPresenterProtocol: FilterContestsProtocol {
     var contests: [Contest]? { get set }
     var gym: Bool! { get set }
     
@@ -27,12 +27,19 @@ protocol ContestsViewPresenterProtocol: class {
     func showContestDetail(contest: Contest?, selectedIndex: Int?)
 }
 
+protocol FilterContestsProtocol: class {
+    var filtredContests: [Contest]? { get set }
+    
+    func sortContests()
+}
+
 class ContestsPresenter: ContestsViewPresenterProtocol {
     weak var view: ContestsViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     
     var contests: [Contest]?
+    var filtredContests: [Contest]?
     var gym: Bool!
     
     required init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
@@ -60,12 +67,15 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                     switch requsetResult?.status {
                         case .success:
                             self.contests = requsetResult?.result
+                            self.filtredContests = requsetResult?.result
                             if self.gym {
                                 self.contests?.reverse()
+                                self.filtredContests?.reverse()
                             }
                             self.view?.success()
                         case .failure:
                             self.contests = nil
+                            self.filtredContests = nil
                             self.view?.failure(error: requsetResult?.comment)
                         case .none:
                             break
@@ -76,6 +86,8 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
             }
         }
     }
+    
+    func sortContests() { }
     
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
         router?.showContestDetail(contest: contest, selectedIndex: selectedIndex)

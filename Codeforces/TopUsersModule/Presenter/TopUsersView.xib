@@ -41,20 +41,20 @@
                         <outlet property="delegate" destination="-1" id="KGb-XM-5Jt"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-HH-1vN" userLabel="Update">
-                    <rect key="frame" x="414" y="697" width="55" height="55"/>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkv-XA-GTQ" userLabel="Sort">
+                    <rect key="frame" x="414" y="571" width="55" height="55"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="55" id="GZU-E5-RAL"/>
-                        <constraint firstAttribute="height" constant="55" id="QZv-nZ-fDw"/>
+                        <constraint firstAttribute="height" constant="55" id="CMd-uN-1VO"/>
+                        <constraint firstAttribute="width" constant="55" id="LJi-eH-Rbh"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="arrow.2.circlepath" catalog="system"/>
+                    <state key="normal" image="arrow.down" catalog="system"/>
                     <connections>
-                        <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="dQv-cF-dgQ"/>
+                        <action selector="ratingSortDidTapped:" destination="-1" eventType="touchUpInside" id="eel-xg-Qgy"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRf-1v-OVP" userLabel="Active">
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRf-1v-OVP" userLabel="Active">
                     <rect key="frame" x="414" y="634" width="55" height="55"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -65,6 +65,19 @@
                     <state key="normal" image="tortoise" catalog="system"/>
                     <connections>
                         <action selector="activeFilterDidTapped:" destination="-1" eventType="touchUpInside" id="Uz7-Rs-Nwd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTL-HH-1vN" userLabel="Update">
+                    <rect key="frame" x="414" y="697" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="GZU-E5-RAL"/>
+                        <constraint firstAttribute="height" constant="55" id="QZv-nZ-fDw"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="arrow.2.circlepath" catalog="system"/>
+                    <connections>
+                        <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="dQv-cF-dgQ"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NX-KG-fJG" userLabel="Menu">
@@ -78,19 +91,6 @@
                     <state key="normal" image="chevron.left" catalog="system"/>
                     <connections>
                         <action selector="menuDidTapped:" destination="-1" eventType="touchUpInside" id="Ez6-Hn-0rY"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkv-XA-GTQ" userLabel="Sort">
-                    <rect key="frame" x="414" y="571" width="55" height="55"/>
-                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="55" id="CMd-uN-1VO"/>
-                        <constraint firstAttribute="width" constant="55" id="LJi-eH-Rbh"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="arrow.down" catalog="system"/>
-                    <connections>
-                        <action selector="ratingSortDidTapped:" destination="-1" eventType="touchUpInside" id="eel-xg-Qgy"/>
                     </connections>
                 </button>
             </subviews>

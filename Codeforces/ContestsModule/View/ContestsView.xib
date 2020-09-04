@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,6 +15,7 @@
                 <outlet property="menu" destination="ak2-qa-PhA" id="hev-xx-5a0"/>
                 <outlet property="reloadData" destination="fRw-iP-Xkw" id="De3-Di-gJ8"/>
                 <outlet property="reloadRightAnchor" destination="xS6-BL-Rk2" id="Dc9-jf-pJX"/>
+                <outlet property="searchBar" destination="lur-m6-qbq" id="7Eu-Kh-coV"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Asb-9b-vLf"/>
             </connections>
         </placeholder>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5S5-R4-ila">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <color key="separatorColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
@@ -32,7 +33,14 @@
                         <outlet property="delegate" destination="-1" id="VpP-CF-Lqb"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-iP-Xkw" userLabel="Reload">
+                <searchBar contentMode="redraw" placeholder="Введите название соревнования" translatesAutoresizingMaskIntoConstraints="NO" id="lur-m6-qbq">
+                    <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="PWn-Pi-zF9"/>
+                    </connections>
+                </searchBar>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-iP-Xkw" userLabel="Reload">
                     <rect key="frame" x="414" y="697" width="55" height="55"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -43,6 +51,20 @@
                     <state key="normal" image="arrow.2.circlepath" catalog="system"/>
                     <connections>
                         <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="FVm-UO-sts"/>
+                    </connections>
+                </button>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-5t-XAn" userLabel="Filter">
+                    <rect key="frame" x="414" y="634" width="55" height="55"/>
+                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="T8N-9i-xqB"/>
+                        <constraint firstAttribute="width" constant="55" id="jPz-TQ-d3R"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="outline_rating"/>
+                    <connections>
+                        <action selector="gymFilterDidTapped:" destination="-1" eventType="touchUpInside" id="NvB-GO-KqI"/>
+                        <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="8J7-lQ-baX"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak2-qa-PhA" userLabel="Menu">
@@ -58,26 +80,16 @@
                         <action selector="menuDidTapped:" destination="-1" eventType="touchUpInside" id="i6t-4r-kG1"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-5t-XAn" userLabel="Filter">
-                    <rect key="frame" x="414" y="634" width="55" height="55"/>
-                    <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="55" id="T8N-9i-xqB"/>
-                        <constraint firstAttribute="width" constant="55" id="jPz-TQ-d3R"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="outline_rating"/>
-                    <connections>
-                        <action selector="gymFilterDidTapped:" destination="-1" eventType="touchUpInside" id="NvB-GO-KqI"/>
-                        <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="8J7-lQ-baX"/>
-                    </connections>
-                </button>
             </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ak2-qa-PhA" secondAttribute="bottom" constant="27" id="7Vk-Mk-cKt"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Cbz-qm-2eg"/>
+                <constraint firstItem="5S5-R4-ila" firstAttribute="top" secondItem="lur-m6-qbq" secondAttribute="bottom" id="GLg-Zj-hX2"/>
                 <constraint firstAttribute="bottom" secondItem="5S5-R4-ila" secondAttribute="bottom" id="PMs-Pd-YNs"/>
-                <constraint firstItem="5S5-R4-ila" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ikp-Lp-JTr"/>
+                <constraint firstItem="lur-m6-qbq" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="RJR-1M-loq"/>
+                <constraint firstItem="lur-m6-qbq" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TBj-PE-q86"/>
+                <constraint firstItem="lur-m6-qbq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="o4X-AN-gyb"/>
                 <constraint firstItem="fRw-iP-Xkw" firstAttribute="top" secondItem="HDV-5t-XAn" secondAttribute="bottom" constant="8" id="qEU-TX-u7t"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ak2-qa-PhA" secondAttribute="trailing" constant="20" id="w9q-tP-1UD"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="wqw-FQ-PH5"/>

@@ -31,47 +31,6 @@ extension UIView {
         self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
     }
     
-    func setLoadingSubview() {
-        let spinnerViewFrame: CGFloat = 100
-        let loadingView = UIView(frame: CGRect(x: 0,
-                                               y: 0,
-                                               width: self.bounds.size.width,
-                                               height: self.bounds.size.height))
-        
-        let spinnerView = UIView()
-        let spinner = UIActivityIndicatorView()
-        
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinnerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        spinner.style = .large
-        spinner.startAnimating()
-        spinner.color = .white
-        
-        spinnerView.addSubview(spinner)
-        loadingView.addSubview(spinnerView)
-        
-        let spinnerViewConstraints: [NSLayoutConstraint] = [
-            spinnerView.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
-            spinnerView.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor),
-            spinnerView.heightAnchor.constraint(equalToConstant: spinnerViewFrame),
-            spinnerView.widthAnchor.constraint(equalToConstant: spinnerViewFrame),
-            spinner.centerYAnchor.constraint(equalTo: spinnerView.centerYAnchor),
-            spinner.centerXAnchor.constraint(equalTo: spinnerView.centerXAnchor)
-            ]
-        
-        active(constraints: spinnerViewConstraints)
-        
-        spinnerView.layoutIfNeeded()
-        spinnerView.makeRounded()
-        spinnerView.makeTransparentBlue()
-        
-        loadingView.accessibilityIdentifier = "loadingView"
-        
-        
-        self.addSubview(loadingView)
-    }
-    
     func showViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat , view: UIView) {
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration,
@@ -79,7 +38,7 @@ extension UIView {
                            options: .curveEaseInOut,
                            animations: {
                             anchor.constant += anchorConstant + view.frame.width
-                            view.makeTransparentBlue()
+                            view.alpha += 1
                             
                             self.layoutIfNeeded()
             }, completion: nil)
@@ -93,21 +52,53 @@ extension UIView {
                            options: .curveEaseInOut,
                            animations: {
                             anchor.constant -= anchorConstant + view.frame.width
-                            view.backgroundColor = nil
+                            view.alpha -= 1
                             
                             self.layoutIfNeeded()
             }, completion: nil)
         }
     }
     
-    func setEmptySubview(title: String, message: String) {
-        let emptyView = UIView(frame: CGRect(x: 0,
-                                             y: self.center.y / 1.5,
-                                             width: self.bounds.size.width,
-                                             height: self.bounds.size.height / 3))
+    func setLoadingSubview() {
+        let spinnerViewFrame: CGFloat = 100
+        
+        let spinnerView = UIView()
+        let spinner = UIActivityIndicatorView()
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        spinner.style = .large
+        spinner.startAnimating()
+        spinner.color = .white
+        
+        spinnerView.addSubview(spinner)
+        self.addSubview(spinnerView)
+        
+        let spinnerViewConstraints: [NSLayoutConstraint] = [
+            spinnerView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            spinnerView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            spinnerView.heightAnchor.constraint(equalToConstant: spinnerViewFrame),
+            spinnerView.widthAnchor.constraint(equalToConstant: spinnerViewFrame),
+            spinner.centerYAnchor.constraint(equalTo: spinnerView.centerYAnchor),
+            spinner.centerXAnchor.constraint(equalTo: spinnerView.centerXAnchor)
+            ]
+        
+        active(constraints: spinnerViewConstraints)
+        
+        spinnerView.layoutIfNeeded()
+        spinnerView.makeRounded()
+        spinnerView.makeTransparentBlue()
+        
+        spinnerView.accessibilityIdentifier = "loadingView"
+    }
+    
+    func setMessageSubview(title: String, message: String) {
+        let emptyView = UIView()
         let titleLabel = UILabel()
         let messageLabel = UILabel()
         
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -118,29 +109,34 @@ extension UIView {
         
         emptyView.addSubview(titleLabel)
         emptyView.addSubview(messageLabel)
+        self.addSubview(emptyView)
         
         let constraints: [NSLayoutConstraint] = [
-            messageLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor),
-            messageLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
-            messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20),
-            messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20),
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            titleLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20),
-            titleLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20)
+            emptyView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            emptyView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            emptyView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            emptyView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: emptyView.topAnchor, constant: 8),
+            titleLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 8),
+            titleLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -8),
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 8),
+            messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -8)
             ]
         
         active(constraints: constraints)
+        
+        emptyView.layoutIfNeeded()
         
         titleLabel.text = title
         titleLabel.textAlignment = .center
         
         messageLabel.text = message
-        messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
+        messageLabel.numberOfLines = 0
         
         emptyView.accessibilityIdentifier = "emptyView"
         
-        self.addSubview(emptyView)
     }
     
     func active(constraints: [NSLayoutConstraint]) {

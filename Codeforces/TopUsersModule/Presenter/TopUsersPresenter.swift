@@ -59,7 +59,7 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
             self.view?.setLoadingView()
         }
         
-        networkService.getTopUsers(activeOnly: activeOnly) { [weak self] (result) in
+        networkService.getTopUsers(activeOnly: activeOnly) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -74,6 +74,7 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
                             self.view?.success()
                         case .failure:
                             self.topUsers = nil
+                            self.filtredTopUsers = nil
                             self.view?.failure(error: requestResult?.comment)
                         case .none:
                             break
@@ -90,11 +91,9 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     }
     
     func sortTopUsers() {
-        view?.setLoadingView()
         filtredTopUsers?.reverse()
         
         DispatchQueue.main.async {
-            self.view?.removeLoadingView()
             self.view?.topUsersSorted()
         }
     }

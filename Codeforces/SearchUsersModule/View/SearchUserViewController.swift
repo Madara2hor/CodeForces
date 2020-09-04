@@ -42,16 +42,16 @@ class SearchUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        clearPage.makeCircle()
-        clearPage.makeTransparentBlue()
-        
-        reloadData.makeCircle()
-        reloadData.makeTransparentBlue()
-        
-        menu.makeCircle()
-        menu.makeTransparentBlue()
+        setupMenuItemStyle(item: clearPage)
+        setupMenuItemStyle(item: reloadData)
+        setupMenuItemStyle(item: menu)
         
         hideProfileItems()
+    }
+    
+    func setupMenuItemStyle(item: UIView) {
+        item.makeCircle()
+        item.makeTransparentBlue()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -179,7 +179,7 @@ extension SearchUserViewController: SearchUserViewProtocol {
         
         hideProfileItems()
         if error != "handles: Field should not be empty" {
-            self.view.setEmptySubview(title: "Эх...", message: "Пользователь не найден")
+            self.view.setMessageSubview(title: "Эх...", message: "Пользователь не найден")
         }
     }
     
