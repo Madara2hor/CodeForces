@@ -162,7 +162,7 @@ extension ContestsViewController: ContestsViewProtocol {
     func failure(error: String?) {
         if presenter?.contests?.count == 0 {
             self.contestTable.setEmptyTableView(title: "Упс...", message: "Произошла ошибка загрузки данных")
-        }
+        } 
     }
     
     func setLoadingView() {

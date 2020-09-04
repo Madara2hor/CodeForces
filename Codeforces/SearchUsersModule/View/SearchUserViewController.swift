@@ -180,6 +180,8 @@ extension SearchUserViewController: SearchUserViewProtocol {
         hideProfileItems()
         if error != "handles: Field should not be empty" {
             self.view.setMessageSubview(title: "Эх...", message: "Пользователь не найден")
+        } else {
+            self.view.setMessageSubview(title: "Вау!", message: "Произошла непредвиденная ошибка")
         }
     }
     

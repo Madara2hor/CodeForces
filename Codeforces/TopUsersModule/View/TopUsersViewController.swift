@@ -49,13 +49,6 @@ class TopUsersViewController: UIViewController {
     }
     
     @IBAction func ratingSortDidTapped(_ sender: UIButton) {
-        if sender.tag == 0 {
-            sender.setImage(UIImage(systemName: "arrow.up"), for: .normal)
-            sender.tag = 1
-        } else {
-            sender.setImage(UIImage(systemName: "arrow.down"), for: .normal)
-            sender.tag = 0
-        }
         presenter.sortTopUsers()
     }
     
@@ -142,7 +135,9 @@ extension TopUsersViewController: TopUsersViewProtocol {
     func success() {
         searchBar.text = ""
         topUsersTable.reloadData()
-        topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if topUsersTable.cellForRow(at: IndexPath(row: 0, section: 0)) != nil {
+            topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     func failure(error: String?) {
@@ -152,6 +147,14 @@ extension TopUsersViewController: TopUsersViewProtocol {
     }
     
     func topUsersSorted() {
+        if ratingSort.tag == 0 {
+            ratingSort.setImage(UIImage(systemName: "arrow.up"), for: .normal)
+            ratingSort.tag = 1
+        } else {
+            ratingSort.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+            ratingSort.tag = 0
+        }
+        
         topUsersTable.reloadData()
         topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }

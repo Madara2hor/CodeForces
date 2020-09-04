@@ -91,8 +91,9 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     }
     
     func sortTopUsers() {
-        filtredTopUsers?.reverse()
+        guard let filtredUsers = self.filtredTopUsers, !filtredUsers.isEmpty else { return }
         
+        self.filtredTopUsers?.reverse()
         DispatchQueue.main.async {
             self.view?.topUsersSorted()
         }
