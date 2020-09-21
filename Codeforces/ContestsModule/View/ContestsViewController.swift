@@ -81,7 +81,7 @@ class ContestsViewController: UIViewController {
                                         anchorConstant: 20,
                                         view: reloadData)
         self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0.5,
+                                        delay: 0.3,
                                         anchor: gymRightAnchor,
                                         anchorConstant: 20,
                                         view: gymFilter)
@@ -95,7 +95,7 @@ class ContestsViewController: UIViewController {
     func hideMenuItems() {
         if !isMenuShow { return }
         self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0.5,
+                                        delay: 0.3,
                                         anchor: reloadRightAnchor,
                                         anchorConstant: 20,
                                         view: reloadData)
@@ -160,9 +160,7 @@ extension ContestsViewController: ContestsViewProtocol {
     }
     
     func failure(error: String?) {
-        if presenter?.contests?.count == 0 {
-            self.contestTable.setEmptyTableView(title: "Упс...", message: "Произошла ошибка загрузки данных")
-        } 
+        self.contestTable.setEmptyTableView(title: "Упс...", message: error ?? "")
     }
     
     func setLoadingView() {
@@ -173,7 +171,7 @@ extension ContestsViewController: ContestsViewProtocol {
         self.view.removeLoadingSubview()
     }
     
-    func removeEmptySubview() {
+    func removeMessageSubview() {
         if contestTable != nil {
             self.contestTable.restore()
         }

@@ -18,7 +18,7 @@ class MockTopUsersView: TopUsersViewProtocol {
         
     }
     
-    func removeEmptySubview() {
+    func removeMessageSubview() {
         
     }
     

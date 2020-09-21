@@ -18,7 +18,7 @@ class MockContestsView: ContestsViewProtocol {
         
     }
     
-    func removeEmptySubview() {
+    func removeMessageSubview() {
         
     }
     

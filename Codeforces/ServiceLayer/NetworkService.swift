@@ -23,17 +23,19 @@ class NetworkService: NetworkServiceProtocol {
     
     func getContests(gym: Bool, completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void) {
         let parameters = ["gym": "\(gym)"]
-        let urlString = getHashedUrlString(endpoint: apiEndpoint.contestList.rawValue, parameters: parameters)
+        let urlString = getUrlString(endpoint: apiEndpoint.contestList.rawValue, parameters: parameters)
         
         print(urlString)
+        
         fetchData(type: RequestResult<Contest>.self, urlString: urlString) { result in
             completion(result)
         }
+        
     }
     
     func getUser(username: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
         let parameters = ["handles": "\(username)"]
-        let urlString = getHashedUrlString(endpoint: apiEndpoint.userInfo.rawValue, parameters: parameters)
+        let urlString = getUrlString(endpoint: apiEndpoint.userInfo.rawValue, parameters: parameters)
         
         print(urlString)
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in

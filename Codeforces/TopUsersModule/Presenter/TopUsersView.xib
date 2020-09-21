@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -62,7 +62,7 @@
                         <constraint firstAttribute="height" constant="55" id="d4G-uE-OSL"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="tortoise" catalog="system"/>
+                    <state key="normal" image="hare" catalog="system"/>
                     <connections>
                         <action selector="activeFilterDidTapped:" destination="-1" eventType="touchUpInside" id="Uz7-Rs-Nwd"/>
                     </connections>
@@ -120,6 +120,6 @@
         <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="tortoise" catalog="system" width="128" height="68"/>
+        <image name="hare" catalog="system" width="128" height="92"/>
     </resources>
 </document>

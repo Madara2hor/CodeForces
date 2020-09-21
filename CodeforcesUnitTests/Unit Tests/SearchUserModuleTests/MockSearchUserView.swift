@@ -18,7 +18,7 @@ class MockSearchUserView: SearchUserViewProtocol {
         
     }
     
-    func removeEmptySubview() {
+    func removeMessageSubview() {
         
     }
     

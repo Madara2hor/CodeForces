@@ -26,10 +26,7 @@ class SearchUserTests: XCTestCase {
 
     func testSuccessSearchUser() {
         
-        let searchUserTabBarItem = app.tabBars.children(matching: .button).element(boundBy: 1)
-        XCTAssertTrue(searchUserTabBarItem.exists)
-        
-        searchUserTabBarItem.tap()
+        goToSearchUserTab()
         
         let searchField = app.searchFields["Введите имя пользователя"]
         
@@ -54,10 +51,7 @@ class SearchUserTests: XCTestCase {
     
     func testFailureSearchUser() {
         
-        let searchUserTabBarItem = app.tabBars.children(matching: .button).element(boundBy: 1)
-        XCTAssertTrue(searchUserTabBarItem.exists)
-        
-        searchUserTabBarItem.tap()
+        goToSearchUserTab()
         
         let searchField = app.searchFields["Введите имя пользователя"]
         
@@ -65,36 +59,31 @@ class SearchUserTests: XCTestCase {
         searchField.tap()
         searchField.typeText(notExistingUser)
         
-        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards",".buttons[\"search\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap() 
+        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards",".buttons[\"search\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let labelQuery = app/*@START_MENU_TOKEN@*/.staticTexts["Пользователь не найден"]/*[[".otherElements[\"messageView\"].staticTexts[\"Пользователь не найден\"]",".staticTexts[\"Пользователь не найден\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        
+        expectation(for: NSPredicate(format: "exists == 1"),
+                    evaluatedWith: labelQuery,
+                    handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        XCTAssertTrue(labelQuery.exists)
+    }
+    
+    func testSearchUserMenuOpenClose() {
+        goToSearchUserTab()
+       
+        let menu = app.buttons["menu"]
+        XCTAssertTrue(menu.exists)
+        menu.tap()
         
     }
     
-//    func testClearSearchFiledButton() {
-//        testFailureSearchUser()
-//
-//        let clearButtonQuery = app.buttons["clear"]
-//        
-//        expectation(for: NSPredicate(format: "exists == 1"),
-//                    evaluatedWith: clearButtonQuery,
-//                    handler: nil)
-//        waitForExpectations(timeout: 15, handler: nil)
-//        XCTAssertTrue(clearButtonQuery.exists)
-//
-//        clearButtonQuery.tap()
-//    }
-//
-//    func testReloadDataButton() {
-//        testSuccessSearchUser()
-//
-//        let reloadButtonQuery = app.buttons["arrow.2.circlepath"]
-//
-//        expectation(for: NSPredicate(format: "exists == 1"),
-//                    evaluatedWith: reloadButtonQuery,
-//                    handler: nil)
-//        waitForExpectations(timeout: 15, handler: nil)
-//        XCTAssertTrue(reloadButtonQuery.exists)
-//
-//        reloadButtonQuery.tap()
-//    }
+    func goToSearchUserTab() {
+        let secondTabBarItem = app.tabBars.children(matching: .button).element(boundBy: 1)
+        XCTAssertTrue(secondTabBarItem.exists)
+        secondTabBarItem.tap()
+    }
 
 }

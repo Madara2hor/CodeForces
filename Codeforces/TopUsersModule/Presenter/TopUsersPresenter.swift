@@ -11,7 +11,7 @@ import Foundation
 protocol TopUsersViewProtocol: class {
     func setLoadingView()
     func removeLoadingView()
-    func removeEmptySubview()
+    func removeMessageSubview()
     
     func success()
     func failure(error: String?)
@@ -48,14 +48,14 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         self.view = view
         self.router = router
         self.networkService = networkService
-        self.activeOnly = false
+        self.activeOnly = true
         
         getTopUsers()
     }
     
     func getTopUsers() {
         DispatchQueue.main.async {
-            self.view?.removeEmptySubview()
+            self.view?.removeMessageSubview()
             self.view?.setLoadingView()
         }
         
@@ -69,18 +69,26 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
                 case .success(let requestResult):
                     switch requestResult?.status {
                         case .success:
-                            self.topUsers = requestResult?.result
-                            self.filtredTopUsers = requestResult?.result
+                            guard let resultTopUsers = requestResult?.result, !resultTopUsers.isEmpty else {
+                                self.view?.failure(error: "Топ-пользователей нет...")
+                                return
+                            }
+                            
+                            self.topUsers = resultTopUsers
+                            self.filtredTopUsers = resultTopUsers
+                            
                             self.view?.success()
                         case .failure:
-                            self.topUsers = nil
-                            self.filtredTopUsers = nil
-                            self.view?.failure(error: requestResult?.comment)
+                            if self.topUsers == nil {
+                                self.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+                            }
                         case .none:
                             break
                     }
-                case .failure(let error):
-                    self.view?.failure(error: error.localizedDescription)
+                case .failure:
+                    if self.topUsers == nil {
+                        self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+                    }
                 }
             }
         }
@@ -98,4 +106,5 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
             self.view?.topUsersSorted()
         }
     }
+    
 }

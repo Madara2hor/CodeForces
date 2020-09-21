@@ -28,7 +28,16 @@ extension UIView {
     }
     
     func makeTransparentBlack() {
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+    }
+    
+    func setShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        self.layer.shadowOpacity = 1
+        self.layer.shadowRadius = 3.0
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:self.layer.cornerRadius).cgPath
     }
     
     func showViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat , view: UIView) {
@@ -60,6 +69,7 @@ extension UIView {
     }
     
     func setLoadingSubview() {
+        self.isUserInteractionEnabled = false
         let spinnerViewFrame: CGFloat = 100
         
         let spinnerView = UIView()
@@ -92,13 +102,13 @@ extension UIView {
         
         spinnerView.accessibilityIdentifier = "loadingView"
     }
-    
+        
     func setMessageSubview(title: String, message: String) {
-        let emptyView = UIView()
+        let messageView = UIView()
         let titleLabel = UILabel()
         let messageLabel = UILabel()
         
-        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        messageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -107,26 +117,30 @@ extension UIView {
         messageLabel.textColor = UIColor.systemGray
         messageLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.regular)
         
-        emptyView.addSubview(titleLabel)
-        emptyView.addSubview(messageLabel)
-        self.addSubview(emptyView)
+        messageView.addSubview(titleLabel)
+        messageView.addSubview(messageLabel)
+        
+        self.addSubview(messageView)
         
         let constraints: [NSLayoutConstraint] = [
-            emptyView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            emptyView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            emptyView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            emptyView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
-            titleLabel.topAnchor.constraint(equalTo: emptyView.topAnchor, constant: 8),
-            titleLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 8),
-            titleLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -8),
+            messageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            messageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            messageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
+            messageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
+            
+            titleLabel.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 8),
+            titleLabel.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 8),
+            titleLabel.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: -8),
+            
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 8),
-            messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -8)
+            messageLabel.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 8),
+            messageLabel.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: -8),
+            messageLabel.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: -8)
             ]
         
         active(constraints: constraints)
         
-        emptyView.layoutIfNeeded()
+        messageView.layoutIfNeeded()
         
         titleLabel.text = title
         titleLabel.textAlignment = .center
@@ -135,8 +149,7 @@ extension UIView {
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         
-        emptyView.accessibilityIdentifier = "emptyView"
-        
+        messageView.accessibilityIdentifier = "messageView"
     }
     
     func active(constraints: [NSLayoutConstraint]) {
@@ -146,21 +159,23 @@ extension UIView {
     }
     
     func removeLoadingSubview() {
-        for view in self.subviews {
-            if view.accessibilityIdentifier == "loadingView" {
-                view.removeFromSuperview()
-                break
-            }
-        }
+        guard let loadingView = getViewWithIdentifier(identifier: "loadingView") else { return }
+        loadingView.removeFromSuperview()
+        self.isUserInteractionEnabled = true
     }
     
-    func removeEmptySubview() {
+    func removeMessageSubview() {
+        guard let messageView = getViewWithIdentifier(identifier: "messageView") else { return }
+        messageView.removeFromSuperview()
+    }
+    
+    func getViewWithIdentifier(identifier: String) -> UIView? {
         for view in self.subviews {
-            if view.accessibilityIdentifier == "emptyView" {
-                view.removeFromSuperview()
-                break
+            if view.accessibilityIdentifier == identifier {
+                return view
             }
         }
+        return nil
     }
     
 }

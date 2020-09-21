@@ -11,7 +11,7 @@ import Foundation
 protocol SearchUserViewProtocol: class {
     func setLoadingView()
     func removeLoadingView()
-    func removeEmptySubview()
+    func removeMessageSubview()
     
     func success()
     func failure(error: String?)
@@ -39,7 +39,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     
     func getUser() {
         DispatchQueue.main.async {
-            self.view?.removeEmptySubview()
+            self.view?.removeMessageSubview()
             self.view?.setLoadingView()
         }
         
@@ -53,17 +53,21 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
                     case .success(let requsetResult):
                         switch requsetResult?.status {
                         case .success:
-                            self.user = requsetResult?.result?[0]
+                            guard let resultUser = requsetResult?.result?[0] else {
+                                self.view?.failure(error: "Ошибка получения пользователя")
+                                return
+                            }
+                            self.user = resultUser
                             
                             self.view?.success()
                         case .failure:
                             self.user = nil
-                            self.view?.failure(error: requsetResult?.comment)
+                            self.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
                         case .none:
                             break
                     }
-                    case .failure(let error):
-                        self.view?.failure(error: error.localizedDescription)
+                case .failure:
+                        self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
                 }
             }
                 

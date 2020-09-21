@@ -1,17 +1,18 @@
 //
-//  ViewController.swift
-//  Twitter
+//  TopViewContoller.swift
+//  Codeforces
 //
-//  Created by Madara2hor on 04.08.2020.
+//  Created by Madara2hor on 11.09.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
 //
 
 import UIKit
 
-class TopUsersViewController: UIViewController {
-    
+class TopUsersViewContoller: UIViewController {
+
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var topUsersTable: UITableView!
+    @IBOutlet weak var topUsersCollection: UICollectionView!
+    
     @IBOutlet weak var ratingSort: UIButton!
     @IBOutlet weak var activeOnlyFilter: UIButton!
     @IBOutlet weak var reloadData: UIButton!
@@ -22,9 +23,10 @@ class TopUsersViewController: UIViewController {
     @IBOutlet weak var sortRightAnchor: NSLayoutConstraint!
     
     var isMenuShow = false
-    
+    private let itemsPerRow: CGFloat = 3
+    private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     var presenter: TopUsersViewPresenterProtocol!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,8 +35,7 @@ class TopUsersViewController: UIViewController {
         setupMenuItemStyle(item: reloadData)
         setupMenuItemStyle(item: menu)
         
-        topUsersTable.register(UINib(nibName: "UserRatingCellView", bundle: nil), forCellReuseIdentifier: "UserRatingCell")
-        topUsersTable.tableFooterView = UIView()
+        topUsersCollection.register(UserCell.nib(), forCellWithReuseIdentifier: "\(UserCell.identifier)")
     }
     
     func setupMenuItemStyle(item: UIView) {
@@ -127,21 +128,86 @@ class TopUsersViewController: UIViewController {
         
         isMenuShow = false
     }
-    
+
 }
 
-extension TopUsersViewController: TopUsersViewProtocol {
+extension TopUsersViewContoller: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let lowerSearchText = searchText.lowercased()
+        presenter.filtredTopUsers = searchText.isEmpty ? presenter.topUsers : presenter.topUsers?.filter { user -> Bool in
+            return user.handle.lowercased().contains(lowerSearchText)
+        }
+        topUsersCollection.reloadData()
+    }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+}
+
+extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+      let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+      let availableWidth = view.frame.width - paddingSpace
+      let widthPerItem = availableWidth / itemsPerRow
+      
+      return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+    
+    //3
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+      return sectionInsets
+    }
+    
+    // 4
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+      return sectionInsets.left
+    }
+}
+
+extension TopUsersViewContoller: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.filtredTopUsers?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell = UICollectionViewCell()
+        
+        if let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.identifier)", for: indexPath) as? UserCell {
+            
+            userCell.configure(user: presenter.filtredTopUsers?[indexPath.row])
+            
+            cell = userCell
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let user = presenter.filtredTopUsers?[indexPath.row]
+        
+        presenter.showUserDetail(user: user, selectedIndex: self.tabBarController?.selectedIndex)
+    }
+}
+
+extension TopUsersViewContoller: TopUsersViewProtocol {
     func success() {
         searchBar.text = ""
-        topUsersTable.reloadData()
-        if topUsersTable.cellForRow(at: IndexPath(row: 0, section: 0)) != nil {
-            topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        topUsersCollection.reloadData()
+        if topUsersCollection.cellForItem(at: IndexPath(row: 0, section: 0)) != nil {
+            topUsersCollection.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
     
     func failure(error: String?) {
-        self.topUsersTable.setEmptyTableView(title: "Упс...", message: error ?? "")
+        self.topUsersCollection.setEmptyTableView(title: "Упс...", message: error ?? "")
     }
     
     func topUsersSorted() {
@@ -153,8 +219,8 @@ extension TopUsersViewController: TopUsersViewProtocol {
             ratingSort.tag = 0
         }
         
-        topUsersTable.reloadData()
-        topUsersTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        topUsersCollection.reloadData()
+        topUsersCollection.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     func setLoadingView() {
@@ -166,47 +232,9 @@ extension TopUsersViewController: TopUsersViewProtocol {
     }
     
     func removeMessageSubview() {
-        if topUsersTable != nil {
-            self.topUsersTable.restore()
+        if topUsersCollection != nil {
+            self.topUsersCollection.restore()
         }
-    }
-}
-
-extension TopUsersViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let lowerSearchText = searchText.lowercased()
-        presenter.filtredTopUsers = searchText.isEmpty ? presenter.topUsers : presenter.topUsers?.filter { user -> Bool in
-            return user.handle.lowercased().contains(lowerSearchText)
-        }
-        topUsersTable.reloadData()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        view.endEditing(true)
-    }
-}
-
-extension TopUsersViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.filtredTopUsers?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = topUsersTable.dequeueReusableCell(withIdentifier: "UserRatingCell", for: indexPath) as! UserRatingCell
-        
-        cell.setRatingData(user: presenter.filtredTopUsers?[indexPath.row])
-        return cell
-    }
-    
-}
-
-extension TopUsersViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = presenter.filtredTopUsers?[indexPath.row]
-        
-        presenter.showUserDetail(user: user, selectedIndex: self.tabBarController?.selectedIndex)
     }
     
 }

@@ -11,7 +11,7 @@ import Foundation
 protocol ContestsViewProtocol: class {
     func setLoadingView()
     func removeLoadingView()
-    func removeEmptySubview()
+    func removeMessageSubview()
     
     func success()
     func failure(error: String?)
@@ -53,7 +53,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     
     func getContests() {
         DispatchQueue.main.async {
-            self.view?.removeEmptySubview()
+            self.view?.removeMessageSubview()
             self.view?.setLoadingView()
         }
         
@@ -66,22 +66,31 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                 case .success(let requsetResult):
                     switch requsetResult?.status {
                         case .success:
-                            self.contests = requsetResult?.result
-                            self.filtredContests = requsetResult?.result
+                            guard let resultData = requsetResult?.result, !resultData.isEmpty else {
+                                self.view?.failure(error: "Соревнований нет...")
+                                return
+                            }
+                            
+                            self.contests = resultData
+                            self.filtredContests = resultData
+                            
                             if self.gym {
                                 self.contests?.reverse()
                                 self.filtredContests?.reverse()
                             }
+                            
                             self.view?.success()
                         case .failure:
-                            self.contests = nil
-                            self.filtredContests = nil
-                            self.view?.failure(error: requsetResult?.comment)
+                            if self.contests == nil {
+                                self.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+                            }
                         case .none:
                             break
                     }
-                case .failure(let error):
-                    self.view?.failure(error: error.localizedDescription)
+                case .failure:
+                    if self.contests == nil {
+                        self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+                    }
                 }
             }
         }

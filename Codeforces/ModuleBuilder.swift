@@ -54,7 +54,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createTopUsersModule(router: RouterProtocol) -> UINavigationController {
-        let view = TopUsersViewController()
+        let view = TopUsersViewContoller()
         view.tabBarItem = UITabBarItem(title: nil,
                                        image: UIImage(named: "outline_top.png"),
                                        tag: 2)

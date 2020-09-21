@@ -47,11 +47,30 @@ class SearchUserViewController: UIViewController {
         setupMenuItemStyle(item: menu)
         
         hideProfileItems()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showFullScreenImage))
+        profileImage.addGestureRecognizer(tap)
     }
     
     func setupMenuItemStyle(item: UIView) {
         item.makeCircle()
         item.makeTransparentBlue()
+    }
+    
+    func hideProfileItems() {
+        profileImage.isHidden = true
+        handle.text = ""
+        online.text = ""
+        firstName.text = ""
+        lastName.text = ""
+        country.text = ""
+        city.text = ""
+        organization.text = ""
+        contribution.text = ""
+        rank.text = ""
+        rating.text = ""
+        email.text = ""
+        vkId.text = ""
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -67,7 +86,7 @@ class SearchUserViewController: UIViewController {
     @IBAction func clearPageDidTapped(_ sender: UIButton) {
         searchBar.text = ""
         presenter?.searchedUser = nil
-        self.view.removeEmptySubview()
+        self.view.removeMessageSubview()
         hideProfileItems()
     }
     
@@ -93,7 +112,7 @@ class SearchUserViewController: UIViewController {
                                         anchorConstant: 20,
                                         view: reloadData)
         self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0.5,
+                                        delay: 0.3,
                                         anchor: clearRightAnchor,
                                         anchorConstant: 20,
                                         view: clearPage)
@@ -107,7 +126,7 @@ class SearchUserViewController: UIViewController {
     func hideMenuItems() {
         if !isMenuShow { return }
         self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0.5,
+                                        delay: 0.3,
                                         anchor: reloadRightAnchor,
                                         anchorConstant: 20,
                                         view: reloadData)
@@ -123,25 +142,61 @@ class SearchUserViewController: UIViewController {
         isMenuShow = false
     }
     
-    func hideProfileItems() {
-        profileImage.isHidden = true
-        handle.text = ""
-        online.text = ""
-        firstName.text = ""
-        lastName.text = ""
-        country.text = ""
-        city.text = ""
-        organization.text = ""
-        contribution.text = ""
-        rank.text = ""
-        rating.text = ""
-        email.text = ""
-        vkId.text = ""
+    @objc func showFullScreenImage(_ sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.backgroundColor = UIColor.black
+        newImageView.alpha = 0
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+
+                        newImageView.alpha += 1
+                        newImageView.frame = UIScreen.main.bounds
+                        newImageView.layoutIfNeeded()
+        }, completion: nil)
+
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        
+        self.view.addSubview(newImageView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            self.navigationController?.isNavigationBarHidden = true
+            self.tabBarController?.tabBar.isHidden = true
+        })
+        
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        let fullScreenImage = sender.view as! UIImageView
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        
+                        fullScreenImage.frame = self.profileImage.frame
+                        fullScreenImage.alpha -= 1
+                        fullScreenImage.layoutIfNeeded()
+        }, completion: nil)
+
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            fullScreenImage.removeFromSuperview()
+        })
     }
 
 }
 
 extension SearchUserViewController: SearchUserViewProtocol {
+    
     func setLoadingView() {
         view.setLoadingSubview()
     }
@@ -150,8 +205,8 @@ extension SearchUserViewController: SearchUserViewProtocol {
         view.removeLoadingSubview()
     }
     
-    func removeEmptySubview() {
-        view.removeEmptySubview()
+    func removeMessageSubview() {
+        view.removeMessageSubview()
     }
     
     func success() {
@@ -194,7 +249,7 @@ extension SearchUserViewController: UISearchBarDelegate {
         searchBar.text = cleanText
         if cleanText == "" {
             presenter.searchedUser = nil
-            removeEmptySubview()
+            removeMessageSubview()
             hideProfileItems()
         } else {
             presenter.searchedUser = cleanText.lowercased()

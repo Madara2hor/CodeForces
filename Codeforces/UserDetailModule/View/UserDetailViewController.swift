@@ -30,6 +30,60 @@ class UserDetailViewController: UIViewController {
         super.viewDidLoad()
         
         presenter.setUser()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showFullScreenImage))
+        profileImage.addGestureRecognizer(tap)
+    }
+    
+    @objc func showFullScreenImage(_ sender: UITapGestureRecognizer) {
+        let imageView = sender.view as! UIImageView
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.backgroundColor = UIColor.black
+        newImageView.alpha = 0
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+
+                        newImageView.alpha += 1
+                        newImageView.frame = UIScreen.main.bounds
+                        newImageView.layoutIfNeeded()
+        }, completion: nil)
+
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        
+        self.view.addSubview(newImageView)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            self.navigationController?.isNavigationBarHidden = true
+            self.tabBarController?.tabBar.isHidden = true
+        })
+        
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        let fullScreenImage = sender.view as! UIImageView
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: {
+                        
+                        fullScreenImage.frame = self.profileImage.frame
+                        fullScreenImage.alpha -= 1
+                        fullScreenImage.layoutIfNeeded()
+        }, completion: nil)
+
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            fullScreenImage.removeFromSuperview()
+        })
     }
 
 }
