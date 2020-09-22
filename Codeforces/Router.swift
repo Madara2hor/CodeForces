@@ -51,7 +51,7 @@ class Router: RouterProtocol {
             guard let navigationController = viewController else { return }
             guard let detailViewController = moduleBuilder?.createUserDetailModule(user: user, router: self) else { return }
             
-            navigationController.pushViewController(detailViewController, animated: true)
+            navigationController.present(detailViewController, animated: true)
         }
     }
     
@@ -63,7 +63,7 @@ class Router: RouterProtocol {
             guard let navigationController = viewController else { return }
             guard let detailViewController = moduleBuilder?.createContestDetailModule(contest: contest, router: self) else { return }
             
-            navigationController.pushViewController(detailViewController, animated: true)
+            navigationController.present(detailViewController, animated: true)
         }
     }
     

@@ -25,13 +25,25 @@ class ContestDetailViewController: UIViewController {
     @IBOutlet weak var season: UILabel!
     @IBOutlet weak var contestDescription: UILabel!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    
     var presenter: ContestDetailViewPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.roundCorners([.topLeft, .topRight], radius: 20)
+        contentView.roundCorners([.topLeft, .topRight], radius: 20)
         presenter?.setContest()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
+        self.view.addGestureRecognizer(tap)
     }
+    
+    @objc func hideUserDetail(_ sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true)
+    }
+    
 }
 
 extension ContestDetailViewController: ContestDetailViewProtocol {

@@ -23,8 +23,8 @@ class TopUsersViewContoller: UIViewController {
     @IBOutlet weak var sortRightAnchor: NSLayoutConstraint!
     
     var isMenuShow = false
-    private let itemsPerRow: CGFloat = 3
-    private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    private let itemsPerRow: CGFloat = 4
+    private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     var presenter: TopUsersViewPresenterProtocol!
     
     override func viewDidLoad() {
@@ -157,14 +157,14 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
       return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-    //3
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
       return sectionInsets
     }
     
-    // 4
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -173,11 +173,13 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
 }
 
 extension TopUsersViewContoller: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return presenter.filtredTopUsers?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = UICollectionViewCell()
         
         if let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.identifier)", for: indexPath) as? UserCell {
@@ -190,7 +192,8 @@ extension TopUsersViewContoller: UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         let user = presenter.filtredTopUsers?[indexPath.row]
         
         presenter.showUserDetail(user: user, selectedIndex: self.tabBarController?.selectedIndex)
