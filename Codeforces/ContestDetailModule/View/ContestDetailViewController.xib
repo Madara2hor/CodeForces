@@ -37,7 +37,7 @@
                     <rect key="frame" x="0.0" y="394.5" width="414" height="501.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0m-dF-0ow" userLabel="Content view">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="433.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="445.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bO6-Uf-zn8">
                                     <rect key="frame" x="20" y="20" width="374" height="29"/>
@@ -183,7 +183,7 @@
                                 <constraint firstItem="ooQ-af-NFY" firstAttribute="leading" secondItem="k0m-dF-0ow" secondAttribute="leading" constant="20" id="FyO-Ly-Mk6"/>
                                 <constraint firstItem="4MK-8s-oQG" firstAttribute="leading" secondItem="k0m-dF-0ow" secondAttribute="leading" constant="20" id="Kpw-Ci-eUB"/>
                                 <constraint firstItem="bO6-Uf-zn8" firstAttribute="top" secondItem="k0m-dF-0ow" secondAttribute="top" constant="20" id="LkY-XF-SeA"/>
-                                <constraint firstAttribute="bottom" secondItem="QnF-8H-9c3" secondAttribute="bottom" constant="8" id="NFD-z9-9nW"/>
+                                <constraint firstAttribute="bottom" secondItem="QnF-8H-9c3" secondAttribute="bottom" constant="20" id="NFD-z9-9nW"/>
                                 <constraint firstItem="Eat-NC-6XW" firstAttribute="top" secondItem="Zv5-uy-hZf" secondAttribute="bottom" constant="8" id="NG3-Dh-sZl"/>
                                 <constraint firstItem="bO6-Uf-zn8" firstAttribute="leading" secondItem="k0m-dF-0ow" secondAttribute="leading" constant="20" id="Ocd-2n-Krx"/>
                                 <constraint firstItem="ooQ-af-NFY" firstAttribute="top" secondItem="4Ht-1C-aPs" secondAttribute="bottom" constant="8" id="QNp-65-7rN"/>
