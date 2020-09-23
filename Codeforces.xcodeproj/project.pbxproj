@@ -16,6 +16,7 @@
 		0203488324FCAD3B008DE39E /* SearchUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */; };
 		02045AA7251897E4003FD1A7 /* ContestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA6251897E4003FD1A7 /* ContestTests.swift */; };
 		02045AA92518A418003FD1A7 /* TopUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA82518A418003FD1A7 /* TopUsersTests.swift */; };
+		02454520251B278400D81096 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0245990A24FF6C9500F1099F /* InternetConnection.swift */; };
 		0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */; };
 		02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */; };
 		02B849A9250B1F5900D766C7 /* TopUsersViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B849A7250B1F5900D766C7 /* TopUsersViewContoller.swift */; };
@@ -172,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				0203488E24FCFC8A008DE39E /* Info.plist */,
-				02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */,
 				02045AA6251897E4003FD1A7 /* ContestTests.swift */,
+				02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */,
 				02045AA82518A418003FD1A7 /* TopUsersTests.swift */,
 			);
 			path = CodeforcesUITests;
@@ -599,6 +600,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02454520251B278400D81096 /* InternetConnection.swift in Sources */,
 				02D09E7D24DAA3E100DEF1A9 /* String.swift in Sources */,
 				02D09E7624DA8F0A00DEF1A9 /* NetworkService.swift in Sources */,
 				02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */,

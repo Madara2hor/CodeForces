@@ -17,7 +17,7 @@ protocol ContestsViewProtocol: class {
     func failure(error: String?)
 }
 
-protocol ContestsViewPresenterProtocol: FilterContestsProtocol {
+protocol ContestsViewPresenterProtocol: FilterContestsProtocol, ConnectionMonitorProtocol {
     var contests: [Contest]? { get set }
     var gym: Bool! { get set }
     
@@ -34,6 +34,7 @@ protocol FilterContestsProtocol: class {
 }
 
 class ContestsPresenter: ContestsViewPresenterProtocol {
+    
     weak var view: ContestsViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
@@ -47,8 +48,6 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         self.router = router
         self.networkService = networkService
         self.gym = false
-        
-        getContests()
     }
     
     func getContests() {
@@ -101,4 +100,21 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
         router?.showContestDetail(contest: contest, selectedIndex: selectedIndex)
     }
+    
+    func connectionSatisfied() {
+        DispatchQueue.main.async {
+            if self.contests == nil {
+                self.getContests()
+            }
+        }
+    }
+    
+    func connectionUnsatisfied() {
+        DispatchQueue.main.async {
+            if self.contests == nil {
+                self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+            }
+        }
+    }
+    
 }

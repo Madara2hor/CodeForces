@@ -32,6 +32,8 @@ class ModuleBuilder: ModuleBuilderProtocol {
         let presenter = ContestsPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         
+        setPresenterToConnectionMonitor(presenter: presenter)
+        
         let navigationController = createNavigationController(view: view, title: "Соревнования")
         
         return navigationController
@@ -64,6 +66,8 @@ class ModuleBuilder: ModuleBuilderProtocol {
         let presenter = TopUsersPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         
+        setPresenterToConnectionMonitor(presenter: presenter)
+        
         let navigationController = createNavigationController(view: view, title: "Топ пользователей")
         
         return navigationController
@@ -94,5 +98,14 @@ class ModuleBuilder: ModuleBuilderProtocol {
         navigationController.navigationBar.barTintColor = UIColor.systemBackground
         
         return navigationController
+    }
+    
+    func setPresenterToConnectionMonitor(presenter: ConnectionMonitorProtocol) {
+        if InternetConnection.sharedIC.presenters != nil {
+            InternetConnection.sharedIC.presenters?.append(presenter)
+        } else {
+            InternetConnection.sharedIC.presenters = [presenter]
+        }
+        
     }
 }

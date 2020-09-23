@@ -19,7 +19,7 @@ protocol TopUsersViewProtocol: class {
     func topUsersSorted()
 }
 
-protocol TopUsersViewPresenterProtocol: FilterTopUsersProtocol {
+protocol TopUsersViewPresenterProtocol: FilterTopUsersProtocol, ConnectionMonitorProtocol {
     var topUsers: [User]? { get set }
     var activeOnly: Bool! { get set }
     
@@ -35,7 +35,8 @@ protocol FilterTopUsersProtocol: class {
     func sortTopUsers()
 }
 
-class TopUsersPresenter: TopUsersViewPresenterProtocol {    
+class TopUsersPresenter: TopUsersViewPresenterProtocol {
+    
     weak var view: TopUsersViewProtocol?
     var router: RouterProtocol?
     var networkService: NetworkServiceProtocol!
@@ -104,6 +105,22 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         self.filtredTopUsers?.reverse()
         DispatchQueue.main.async {
             self.view?.topUsersSorted()
+        }
+    }
+    
+    func connectionSatisfied() {
+        DispatchQueue.main.async {
+            if self.topUsers == nil {
+                self.getTopUsers()
+            }
+        }
+    }
+    
+    func connectionUnsatisfied() {
+        DispatchQueue.main.async {
+            if self.topUsers == nil {
+                self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+            }
         }
     }
     
