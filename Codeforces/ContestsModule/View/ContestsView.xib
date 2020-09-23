@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,10 +26,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5S5-R4-ila">
-                    <rect key="frame" x="0.0" y="100" width="414" height="796"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <color key="separatorColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5S5-R4-ila">
+                    <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="separatorColor" systemColor="opaqueSeparatorColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="fKt-OK-HP5"/>
                         <outlet property="delegate" destination="-1" id="VpP-CF-Lqb"/>
@@ -84,14 +86,15 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ak2-qa-PhA" secondAttribute="bottom" constant="27" id="7Vk-Mk-cKt"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Cbz-qm-2eg"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="top" secondItem="lur-m6-qbq" secondAttribute="bottom" id="GLg-Zj-hX2"/>
-                <constraint firstAttribute="bottom" secondItem="5S5-R4-ila" secondAttribute="bottom" id="PMs-Pd-YNs"/>
                 <constraint firstItem="lur-m6-qbq" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="RJR-1M-loq"/>
                 <constraint firstItem="lur-m6-qbq" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TBj-PE-q86"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5S5-R4-ila" secondAttribute="bottom" id="mOv-Pb-9Ye"/>
                 <constraint firstItem="lur-m6-qbq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="o4X-AN-gyb"/>
                 <constraint firstItem="fRw-iP-Xkw" firstAttribute="top" secondItem="HDV-5t-XAn" secondAttribute="bottom" constant="8" id="qEU-TX-u7t"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ak2-qa-PhA" secondAttribute="trailing" constant="20" id="w9q-tP-1UD"/>
@@ -100,7 +103,6 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fRw-iP-Xkw" secondAttribute="trailing" constant="-55" id="xS6-BL-Rk2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HDV-5t-XAn" secondAttribute="trailing" constant="-55" id="zK4-05-f9Y"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="144.64285714285714"/>
         </view>
     </objects>
@@ -108,5 +110,11 @@
         <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="outline_rating" width="24" height="24"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

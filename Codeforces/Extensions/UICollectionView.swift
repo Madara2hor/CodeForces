@@ -1,15 +1,15 @@
 //
-//  UITableView.swift
+//  UICollectionView.swift
 //  Codeforces
 //
-//  Created by Madara2hor on 07.08.2020.
+//  Created by Madara2hor on 23.09.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public extension UITableView {
+public extension UICollectionView {
     
     func setMessageBackgroundView(title: String, message: String) {
         let emptyView = UIView(frame: CGRect(x: self.center.x,
@@ -51,12 +51,10 @@ public extension UITableView {
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         
-        self.separatorStyle = .none
         self.backgroundView = emptyView
     }
     
     func restore() {
-        self.separatorStyle = .singleLine
         self.backgroundView = nil
     }
     

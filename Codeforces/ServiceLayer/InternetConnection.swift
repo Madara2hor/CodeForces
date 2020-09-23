@@ -14,48 +14,48 @@ protocol ConnectionMonitorProtocol: class {
     func connectionUnsatisfied()
 }
 
-class InternetConnection {
+protocol InternetConnectionMonitorProtocol: class {
+    func startMonitor()
+    func stopMonitor()
+}
+
+class InternetConnection: InternetConnectionMonitorProtocol {
 
     static let sharedIC = InternetConnection()
-
-    private let queue = DispatchQueue.global(qos: .background)
-    let monitor = NWPathMonitor()
+    private let monitor = NWPathMonitor()
     
     var presenters: [ConnectionMonitorProtocol]?
 
-    init() {
-
-        monitor.start(queue: queue)
-        connectionMonitor()
-    }
-
-    func connectionMonitor() {
+    init() { }
+    
+    func startMonitor() {
         monitor.pathUpdateHandler = { path in
             switch path.status {
             case .satisfied:
                 print("Интернет соединение установлено")
-                self.queue.async { [weak self] in
-                    if let presenters = self?.presenters {
-                        for presenter in presenters {
-                            presenter.connectionSatisfied()
-                        }
+                if let presenters = self.presenters {
+                    for presenter in presenters {
+                        presenter.connectionSatisfied()
                     }
-                    
                 }
             case .unsatisfied:
                 print("Интернет соединение отсутствует")
-                self.queue.async { [weak self] in
-                    if let presenters = self?.presenters {
-                        for presenter in presenters {
-                            presenter.connectionUnsatisfied()
-                        }
+                if let presenters = self.presenters {
+                    for presenter in presenters {
+                        presenter.connectionUnsatisfied()
                     }
                 }
             default:
                 break
             }
         }
+        
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
-
+    
+    func stopMonitor() {
+        monitor.cancel()
+    }
 
 }

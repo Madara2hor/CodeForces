@@ -210,7 +210,7 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
     }
     
     func failure(error: String?) {
-        self.topUsersCollection.setEmptyTableView(title: "Упс...", message: error ?? "")
+        topUsersCollection.setMessageBackgroundView(title: "Упс...", message: error ?? "")
     }
     
     func topUsersSorted() {
@@ -236,7 +236,7 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
     
     func removeMessageSubview() {
         if topUsersCollection != nil {
-            self.topUsersCollection.restore()
+            topUsersCollection.restore()
         }
     }
     

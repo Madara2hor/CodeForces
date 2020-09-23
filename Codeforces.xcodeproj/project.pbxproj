@@ -16,6 +16,7 @@
 		0203488324FCAD3B008DE39E /* SearchUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */; };
 		02045AA7251897E4003FD1A7 /* ContestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA6251897E4003FD1A7 /* ContestTests.swift */; };
 		02045AA92518A418003FD1A7 /* TopUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA82518A418003FD1A7 /* TopUsersTests.swift */; };
+		0209F6CE251B4D2A0074BC8B /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */; };
 		02454520251B278400D81096 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0245990A24FF6C9500F1099F /* InternetConnection.swift */; };
 		0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */; };
 		02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */; };
@@ -82,6 +83,7 @@
 		0203488E24FCFC8A008DE39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02045AA6251897E4003FD1A7 /* ContestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestTests.swift; sourceTree = "<group>"; };
 		02045AA82518A418003FD1A7 /* TopUsersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersTests.swift; sourceTree = "<group>"; };
+		0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		0245990A24FF6C9500F1099F /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 		02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentableProtocol.swift; sourceTree = "<group>"; };
 		02B849A7250B1F5900D766C7 /* TopUsersViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersViewContoller.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				02D09E7E24DBAC4200DEF1A9 /* Date.swift */,
 				02D09E8324DBDD5500DEF1A9 /* UIView.swift */,
 				02D09E8B24DD313D00DEF1A9 /* UITableView.swift */,
+				0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				02D09E9324E0F8E900DEF1A9 /* ContestDetailViewController.swift in Sources */,
 				02D09E7424DA89F400DEF1A9 /* Contest.swift in Sources */,
 				02D09E3824D9343700DEF1A9 /* Router.swift in Sources */,
+				0209F6CE251B4D2A0074BC8B /* UICollectionView.swift in Sources */,
 				02D09E6E24DA757A00DEF1A9 /* UIImageView.swift in Sources */,
 				02D09E7F24DBAC4200DEF1A9 /* Date.swift in Sources */,
 				02B849AF250B215F00D766C7 /* UserCell.swift in Sources */,
@@ -849,7 +853,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Evraz.testApp.Codeforces;
 				PRODUCT_NAME = "Code Forces";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -871,7 +875,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Evraz.testApp.Codeforces;
 				PRODUCT_NAME = "Code Forces";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -31,6 +31,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
         let networkService = NetworkService()
         let presenter = ContestsPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
+        loadView(view: view)
         
         setPresenterToConnectionMonitor(presenter: presenter)
         
@@ -49,6 +50,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
         let networkService = NetworkService()
         let presenter = SearchUserPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
+        loadView(view: view)
         
         let navigationController = createNavigationController(view: view, title: "Поиск пользователей")
         
@@ -65,6 +67,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
         let networkService = NetworkService()
         let presenter = TopUsersPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
+        loadView(view: view)
         
         setPresenterToConnectionMonitor(presenter: presenter)
         
@@ -107,5 +110,10 @@ class ModuleBuilder: ModuleBuilderProtocol {
             InternetConnection.sharedIC.presenters = [presenter]
         }
         
+    }
+    
+    func loadView(view: UIViewController) {
+        view.loadView()
+        view.viewDidLoad()
     }
 }

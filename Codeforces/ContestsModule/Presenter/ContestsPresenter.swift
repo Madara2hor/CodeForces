@@ -102,16 +102,14 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func connectionSatisfied() {
-        DispatchQueue.main.async {
-            if self.contests == nil {
-                self.getContests()
-            }
+        if self.contests == nil {
+            self.getContests()
         }
     }
     
     func connectionUnsatisfied() {
-        DispatchQueue.main.async {
-            if self.contests == nil {
+        if self.contests == nil {
+            DispatchQueue.main.async {
                 self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
             }
         }

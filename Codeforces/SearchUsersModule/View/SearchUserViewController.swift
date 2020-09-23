@@ -94,7 +94,7 @@ class SearchUserViewController: UIViewController {
     }
     
     @IBAction func menuDidTpped(_ sender: Any) {
-        if self.menu.tag == 0 {
+        if menu.tag == 0 {
             self.showMenuItems()
         } else {
             self.hideMenuItems()
@@ -114,8 +114,8 @@ class SearchUserViewController: UIViewController {
                                         anchorConstant: 20,
                                         view: clearPage)
 
-        self.menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        self.menu.tag = 1
+        menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        menu.tag = 1
         
         isMenuShow = true
     }
@@ -133,8 +133,8 @@ class SearchUserViewController: UIViewController {
                                         anchorConstant: 20,
                                         view: clearPage)
 
-        self.menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        self.menu.tag = 0
+        menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        menu.tag = 0
         
         isMenuShow = false
     }
@@ -157,22 +157,22 @@ extension SearchUserViewController: SearchUserViewProtocol {
     
     func success() {
         if let url = presenter.user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-            self.profileImage.load(url: urlImage)
-            self.profileImage.isHidden = false
+            profileImage.load(url: urlImage)
+            profileImage.isHidden = false
         }
-        self.profileImage.makeRounded()
-        self.online.text = String().getDateValue(title: nil, UNIX: presenter.user?.lastOnlineTimeSeconds)
-        self.contribution.text = String().getTitledValue(title: "Друзья", value: presenter.user?.contribution)
-        self.rating.text = String().getTitledValue(title: "Рейтинг", value: presenter.user?.rating)
-        self.handle.text = String().getTitledValue(title: nil, value: presenter.user?.handle)
-        self.firstName.text = String().getTitledValue(title: "Имя", value: presenter.user?.firstName)
-        self.lastName.text = String().getTitledValue(title: "Фамилия", value: presenter.user?.lastName)
-        self.country.text = String().getTitledValue(title: "Страна", value: presenter.user?.country)
-        self.city.text = String().getTitledValue(title: "Город", value: presenter.user?.city)
-        self.organization.text = String().getTitledValue(title: "Организачия", value: presenter.user?.organization)
-        self.rank.text = String().getTitledValue(title: "Ранг", value: presenter.user?.rank)
-        self.email.text = String().getTitledValue(title: "E-mail", value: presenter.user?.email)
-        self.vkId.text = String().getTitledValue(title: "ВКонтакте", value: presenter.user?.vkId)
+        profileImage.makeRounded()
+        online.text = String().getDateValue(title: nil, UNIX: presenter.user?.lastOnlineTimeSeconds)
+        contribution.text = String().getTitledValue(title: "Друзья", value: presenter.user?.contribution)
+        rating.text = String().getTitledValue(title: "Рейтинг", value: presenter.user?.rating)
+        handle.text = String().getTitledValue(title: nil, value: presenter.user?.handle)
+        firstName.text = String().getTitledValue(title: "Имя", value: presenter.user?.firstName)
+        lastName.text = String().getTitledValue(title: "Фамилия", value: presenter.user?.lastName)
+        country.text = String().getTitledValue(title: "Страна", value: presenter.user?.country)
+        city.text = String().getTitledValue(title: "Город", value: presenter.user?.city)
+        organization.text = String().getTitledValue(title: "Организачия", value: presenter.user?.organization)
+        rank.text = String().getTitledValue(title: "Ранг", value: presenter.user?.rank)
+        email.text = String().getTitledValue(title: "E-mail", value: presenter.user?.email)
+        vkId.text = String().getTitledValue(title: "ВКонтакте", value: presenter.user?.vkId)
     }
     
     func failure(error: String?) {

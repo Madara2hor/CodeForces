@@ -91,7 +91,7 @@ extension UIView {
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinnerView.translatesAutoresizingMaskIntoConstraints = false
         
-        spinner.style = .large
+        spinner.style = .medium
         spinner.startAnimating()
         spinner.color = .white
         

@@ -50,8 +50,6 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         self.router = router
         self.networkService = networkService
         self.activeOnly = true
-        
-        getTopUsers()
     }
     
     func getTopUsers() {
@@ -109,16 +107,14 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     }
     
     func connectionSatisfied() {
-        DispatchQueue.main.async {
-            if self.topUsers == nil {
-                self.getTopUsers()
-            }
+        if self.topUsers == nil {
+            self.getTopUsers()
         }
     }
     
     func connectionUnsatisfied() {
-        DispatchQueue.main.async {
-            if self.topUsers == nil {
+        if self.topUsers == nil {
+            DispatchQueue.main.async {
                 self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
             }
         }

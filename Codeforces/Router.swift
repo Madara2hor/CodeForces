@@ -40,6 +40,7 @@ class Router: RouterProtocol {
             tabBarController.viewControllers = [contestsNavigationController,
                                                 searchNavigationController,
                                                 notificationNavigationController]
+            InternetConnection.sharedIC.startMonitor()
         }
     }
     
