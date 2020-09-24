@@ -17,8 +17,8 @@ extension UIImageView {
         DispatchQueue.global().async { [weak self] in
             guard let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) else {
                 if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    imageCache.setObject(image, forKey: url.absoluteString as NSString)
                     DispatchQueue.main.async {
-                        imageCache.setObject(image, forKey: url.absoluteString as NSString)
                         self?.image = image
                     }
                 }

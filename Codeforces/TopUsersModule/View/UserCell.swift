@@ -14,15 +14,11 @@ class UserCell: UICollectionViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var handler: UILabel!
-    var loadedImage: UIImage?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.profileImage.makeRounded()
-        //self.contentView.makeRounded()
-        //self.makeRounded()
-        //self.setShadow()
     }
     
     override func prepareForReuse() {
@@ -32,13 +28,7 @@ class UserCell: UICollectionViewCell {
     func configure(user: User?) {
         self.handler.text = user?.handle
         if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-            
-            if loadedImage == nil {
-                self.profileImage.load(url: urlImage)
-                loadedImage = profileImage.image
-            } else {
-                profileImage.image = loadedImage
-            }
+            self.profileImage.load(url: urlImage)
         }
         
         awakeFromNib()
