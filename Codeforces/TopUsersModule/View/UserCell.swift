@@ -22,6 +22,7 @@ class UserCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         profileImage.image = nil
     }
     

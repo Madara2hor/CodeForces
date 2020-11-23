@@ -201,6 +201,7 @@ extension TopUsersViewContoller: UICollectionViewDataSource {
 }
 
 extension TopUsersViewContoller: TopUsersViewProtocol {
+    
     func success() {
         searchBar.text = ""
         topUsersCollection.reloadData()
@@ -225,6 +226,7 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
         topUsersCollection.reloadData()
         topUsersCollection.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
+
     
     func setLoadingView() {
         self.view.setLoadingSubview()

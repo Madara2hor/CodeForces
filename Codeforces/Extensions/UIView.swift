@@ -81,19 +81,59 @@ extension UIView {
         }
     }
     
+    func setProgressSubview() {
+        self.isUserInteractionEnabled = false
+        
+        let progressView = UIView()
+        let progress = UIProgressView()
+        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        
+        progress.setProgress(0.0, animated: false)
+        progress.tintColor = UIColor.green
+        
+        progressView.addSubview(progress)
+        self.addSubview(progressView)
+        
+        //Отображается не корректно, нужны доп констрейнты
+        let progressViewConstraints: [NSLayoutConstraint] = [
+            progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            progressView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            progressView.heightAnchor.constraint(equalToConstant: 80),
+            progressView.widthAnchor.constraint(equalToConstant: self.frame.width - 80),
+            progress.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),
+            progress.centerXAnchor.constraint(equalTo: progressView.centerXAnchor)
+            ]
+        
+        active(constraints: progressViewConstraints)
+        
+        progressView.layoutIfNeeded()
+        progressView.makeRounded()
+        progressView.makeTransparentBlue()
+        
+        progress.accessibilityIdentifier = "progress"
+        progressView.accessibilityIdentifier = "progressView"
+    }
+    
     func setLoadingSubview() {
         self.isUserInteractionEnabled = false
         let spinnerViewFrame: CGFloat = 100
         
         let spinnerView = UIView()
         let spinner = UIActivityIndicatorView()
+        let progress = UIProgressView()
         
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        progress.translatesAutoresizingMaskIntoConstraints = false
         
         spinner.style = .medium
         spinner.startAnimating()
         spinner.color = .white
+        
+        progress.setProgress(0.0, animated: false)
+        progress.tintColor = UIColor.buttonColor
         
         spinnerView.addSubview(spinner)
         self.addSubview(spinnerView)
@@ -169,6 +209,12 @@ extension UIView {
         for constraint in constraints {
             constraint.isActive = true
         }
+    }
+    
+    func removeProgressView() {
+        guard let progressView = getViewWithIdentifier(identifier: "progressView") else { return }
+        progressView.removeFromSuperview()
+        self.isUserInteractionEnabled = true
     }
     
     func removeLoadingSubview() {

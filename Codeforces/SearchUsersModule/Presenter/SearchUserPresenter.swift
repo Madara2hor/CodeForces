@@ -43,7 +43,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
             self.view?.setLoadingView()
         }
         
-        networkService.getUser(username: searchedUser ?? "", completion: { [weak self] result in
+        networkService.getUser(username: searchedUser ?? "") { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -72,7 +72,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
             }
                 
             
-        })
+        } 
     }
 
 }

@@ -92,7 +92,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                     }
                 }
             }
-        }
+        } 
     }
     
     func sortContests() { }

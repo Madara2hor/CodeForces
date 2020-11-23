@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -57,6 +57,9 @@
 		02D09E9424E0F8E900DEF1A9 /* ContestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9224E0F8E900DEF1A9 /* ContestDetailViewController.xib */; };
 		02D09E9724E1175200DEF1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9624E1175200DEF1A9 /* Assets.xcassets */; };
 		02F92D0124F50A890095A82E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02F92D0024F50A890095A82E /* .gitignore */; };
+		C3E0AA867F49B125CD266BFF /* Pods_CodeforcesUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CB764B69205AD8FB9FD96F /* Pods_CodeforcesUnitTests.framework */; };
+		CCF7769246DCB934B35E4D09 /* Pods_Codeforces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871A70523A0DBAAEE06BC51B /* Pods_Codeforces.framework */; };
+		CF0815B358AB65BBECF06895 /* Pods_Codeforces_CodeforcesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6059A995B2CCAF12DEA645 /* Pods_Codeforces_CodeforcesUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +136,15 @@
 		02D4177524F8D6FB00F1A33B /* MockTopUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopUsersView.swift; sourceTree = "<group>"; };
 		02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTests.swift; sourceTree = "<group>"; };
 		02F92D0024F50A890095A82E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		13D9523CE7C1672F558CF918 /* Pods-Codeforces-CodeforcesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Codeforces-CodeforcesUITests.debug.xcconfig"; path = "Target Support Files/Pods-Codeforces-CodeforcesUITests/Pods-Codeforces-CodeforcesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		21502380692049945E789F02 /* Pods-Codeforces-CodeforcesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Codeforces-CodeforcesUITests.release.xcconfig"; path = "Target Support Files/Pods-Codeforces-CodeforcesUITests/Pods-Codeforces-CodeforcesUITests.release.xcconfig"; sourceTree = "<group>"; };
+		31CB764B69205AD8FB9FD96F /* Pods_CodeforcesUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodeforcesUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		582EBF1B01FC979F94F4E0BB /* Pods-Codeforces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Codeforces.debug.xcconfig"; path = "Target Support Files/Pods-Codeforces/Pods-Codeforces.debug.xcconfig"; sourceTree = "<group>"; };
+		6E6059A995B2CCAF12DEA645 /* Pods_Codeforces_CodeforcesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Codeforces_CodeforcesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		871A70523A0DBAAEE06BC51B /* Pods_Codeforces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Codeforces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0F2FC3119A49C5C06032EDA /* Pods-CodeforcesUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeforcesUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-CodeforcesUnitTests/Pods-CodeforcesUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E96D942D8122EDF3DC76FBC8 /* Pods-CodeforcesUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeforcesUnitTests.release.xcconfig"; path = "Target Support Files/Pods-CodeforcesUnitTests/Pods-CodeforcesUnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		FA4696521BEA07BB48F03D3A /* Pods-Codeforces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Codeforces.release.xcconfig"; path = "Target Support Files/Pods-Codeforces/Pods-Codeforces.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0815B358AB65BBECF06895 /* Pods_Codeforces_CodeforcesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF7769246DCB934B35E4D09 /* Pods_Codeforces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3E0AA867F49B125CD266BFF /* Pods_CodeforcesUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +214,8 @@
 				02D4175C24F7AD9000F1A33B /* CodeforcesUnitTests */,
 				0203488B24FCFC8A008DE39E /* CodeforcesUITests */,
 				02D09E1124D9333D00DEF1A9 /* Products */,
+				0BD2B197102075BE708525D8 /* Pods */,
+				73D70AB9E204AFDDEB5BC4A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -454,6 +471,29 @@
 			path = TopUsersModuleTests;
 			sourceTree = "<group>";
 		};
+		0BD2B197102075BE708525D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				582EBF1B01FC979F94F4E0BB /* Pods-Codeforces.debug.xcconfig */,
+				FA4696521BEA07BB48F03D3A /* Pods-Codeforces.release.xcconfig */,
+				13D9523CE7C1672F558CF918 /* Pods-Codeforces-CodeforcesUITests.debug.xcconfig */,
+				21502380692049945E789F02 /* Pods-Codeforces-CodeforcesUITests.release.xcconfig */,
+				D0F2FC3119A49C5C06032EDA /* Pods-CodeforcesUnitTests.debug.xcconfig */,
+				E96D942D8122EDF3DC76FBC8 /* Pods-CodeforcesUnitTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		73D70AB9E204AFDDEB5BC4A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				871A70523A0DBAAEE06BC51B /* Pods_Codeforces.framework */,
+				6E6059A995B2CCAF12DEA645 /* Pods_Codeforces_CodeforcesUITests.framework */,
+				31CB764B69205AD8FB9FD96F /* Pods_CodeforcesUnitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -461,9 +501,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0203489124FCFC8A008DE39E /* Build configuration list for PBXNativeTarget "CodeforcesUITests" */;
 			buildPhases = (
+				F0DCAB7CB8E521E5F71F6D38 /* [CP] Check Pods Manifest.lock */,
 				0203488624FCFC8A008DE39E /* Sources */,
 				0203488724FCFC8A008DE39E /* Frameworks */,
 				0203488824FCFC8A008DE39E /* Resources */,
+				B581F16B9FAC9EAE1A09B3D6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -479,9 +521,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02D09E2F24D9334200DEF1A9 /* Build configuration list for PBXNativeTarget "Codeforces" */;
 			buildPhases = (
+				C91526C2592EE23956C7C62B /* [CP] Check Pods Manifest.lock */,
 				02D09E0C24D9333D00DEF1A9 /* Sources */,
 				02D09E0D24D9333D00DEF1A9 /* Frameworks */,
 				02D09E0E24D9333D00DEF1A9 /* Resources */,
+				AF8014BC3E9D7B08642D0474 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -496,6 +540,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02D4176024F7AD9000F1A33B /* Build configuration list for PBXNativeTarget "CodeforcesUnitTests" */;
 			buildPhases = (
+				F02FE7E7938D4988CB287A9E /* [CP] Check Pods Manifest.lock */,
 				02D4175724F7AD9000F1A33B /* Sources */,
 				02D4175824F7AD9000F1A33B /* Frameworks */,
 				02D4175924F7AD9000F1A33B /* Resources */,
@@ -517,7 +562,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = Madara2hor;
 				TargetAttributes = {
 					0203488924FCFC8A008DE39E = {
@@ -587,6 +632,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AF8014BC3E9D7B08642D0474 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Codeforces/Pods-Codeforces-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Codeforces/Pods-Codeforces-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Codeforces/Pods-Codeforces-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B581F16B9FAC9EAE1A09B3D6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Codeforces-CodeforcesUITests/Pods-Codeforces-CodeforcesUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Codeforces-CodeforcesUITests/Pods-Codeforces-CodeforcesUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Codeforces-CodeforcesUITests/Pods-Codeforces-CodeforcesUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C91526C2592EE23956C7C62B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Codeforces-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F02FE7E7938D4988CB287A9E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CodeforcesUnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0DCAB7CB8E521E5F71F6D38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Codeforces-CodeforcesUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0203488624FCFC8A008DE39E /* Sources */ = {
@@ -686,6 +834,7 @@
 /* Begin XCBuildConfiguration section */
 		0203489224FCFC8A008DE39E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13D9523CE7C1672F558CF918 /* Pods-Codeforces-CodeforcesUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4JE63ZJST;
@@ -705,6 +854,7 @@
 		};
 		0203489324FCFC8A008DE39E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21502380692049945E789F02 /* Pods-Codeforces-CodeforcesUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4JE63ZJST;
@@ -748,6 +898,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -810,6 +961,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -842,6 +994,7 @@
 		};
 		02D09E3024D9334200DEF1A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 582EBF1B01FC979F94F4E0BB /* Pods-Codeforces.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -853,7 +1006,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Evraz.testApp.Codeforces;
 				PRODUCT_NAME = "Code Forces";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -864,6 +1017,7 @@
 		};
 		02D09E3124D9334200DEF1A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA4696521BEA07BB48F03D3A /* Pods-Codeforces.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -875,7 +1029,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Evraz.testApp.Codeforces;
 				PRODUCT_NAME = "Code Forces";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -886,6 +1040,7 @@
 		};
 		02D4176124F7AD9000F1A33B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0F2FC3119A49C5C06032EDA /* Pods-CodeforcesUnitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -908,6 +1063,7 @@
 		};
 		02D4176224F7AD9000F1A33B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E96D942D8122EDF3DC76FBC8 /* Pods-CodeforcesUnitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

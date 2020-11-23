@@ -7,12 +7,15 @@
 //
 
 import Foundation
-import Network
+import Alamofire
 
 protocol NetworkServiceProtocol {
-    func getContests(gym: Bool, completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void)
-    func getUser(username: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
-    func getTopUsers(activeOnly: Bool, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
+    func getContests(gym: Bool,
+                     completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void)
+    func getUser(username: String,
+                 completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
+    func getTopUsers(activeOnly: Bool,
+                     completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
 }
 
 class NetworkService: NetworkServiceProtocol {
@@ -21,7 +24,8 @@ class NetworkService: NetworkServiceProtocol {
     var apiURL: String = "http://codeforces.com/api/"
     var apiSecret: String = "c1d9a1a42cab4419d6f14040eac4701ece37ee5a"
     
-    func getContests(gym: Bool, completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void) {
+    func getContests(gym: Bool,
+                     completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void) {
         let parameters = ["gym": "\(gym)"]
         let urlString = getUrlString(endpoint: apiEndpoint.contestList.rawValue, parameters: parameters)
         
@@ -30,10 +34,10 @@ class NetworkService: NetworkServiceProtocol {
         fetchData(type: RequestResult<Contest>.self, urlString: urlString) { result in
             completion(result)
         }
-        
     }
     
-    func getUser(username: String, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
+    func getUser(username: String,
+                 completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
         let parameters = ["handles": "\(username)"]
         let urlString = getUrlString(endpoint: apiEndpoint.userInfo.rawValue, parameters: parameters)
         
@@ -43,7 +47,8 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func getTopUsers(activeOnly: Bool, completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
+    func getTopUsers(activeOnly: Bool,
+                     completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
         let parameters = ["activeOnly": "\(activeOnly)"]
         let urlString = getUrlString(endpoint: apiEndpoint.topUsers.rawValue, parameters: parameters)
         
@@ -71,7 +76,6 @@ class NetworkService: NetworkServiceProtocol {
     func getUrlString(endpoint: String, parameters: [String: String]) -> String {
         var parametersString = String()
         
-        
         for (key, value) in parameters {
             parametersString += "\(key)=\(value)&"
         }
@@ -82,21 +86,16 @@ class NetworkService: NetworkServiceProtocol {
     }
     
     func fetchData<T: Decodable>(type: T.Type = T.self, urlString: String, completion: @escaping (Result<T?, Error>) -> Void) {
-        
-        guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
+        AF.request(urlString).downloadProgress { progress in
+            print(progress.fractionCompleted)
+        }.responseDecodable(of: T.self) { response in
             do {
-                let obj = try JSONDecoder().decode(T.self, from: data!)
+                let obj = try JSONDecoder().decode(T.self, from: response.data!)
                 completion(.success(obj))
             } catch {
-                completion(.failure(error))
+                completion(.failure(response.error!))
             }
-        }.resume()
+        }
     }
 
 }
