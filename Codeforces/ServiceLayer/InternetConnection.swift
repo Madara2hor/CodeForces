@@ -9,12 +9,14 @@
 import Foundation
 import Network
 
-protocol ConnectionMonitorProtocol: class {
+protocol ConnectionMonitorProtocol: AnyObject {
+    
     func connectionSatisfied()
     func connectionUnsatisfied()
 }
 
-protocol InternetConnectionMonitorProtocol: class {
+protocol InternetConnectionMonitorProtocol: AnyObject {
+    
     func startMonitor()
     func stopMonitor()
 }
@@ -29,22 +31,16 @@ class InternetConnection: InternetConnectionMonitorProtocol {
     init() { }
     
     func startMonitor() {
-        monitor.pathUpdateHandler = { path in
+        monitor.pathUpdateHandler = { [weak self] path in
             switch path.status {
             case .satisfied:
                 print("Интернет соединение установлено")
-                if let presenters = self.presenters {
-                    for presenter in presenters {
-                        presenter.connectionSatisfied()
-                    }
-                }
+                
+                self?.connectionChanged(on: true)
             case .unsatisfied:
                 print("Интернет соединение отсутствует")
-                if let presenters = self.presenters {
-                    for presenter in presenters {
-                        presenter.connectionUnsatisfied()
-                    }
-                }
+                
+                self?.connectionChanged(on: false)
             default:
                 break
             }
@@ -57,5 +53,20 @@ class InternetConnection: InternetConnectionMonitorProtocol {
     func stopMonitor() {
         monitor.cancel()
     }
-
+    
+    private func connectionChanged(on isConnected: Bool) {
+        guard let presenters = self.presenters else {
+            return
+        }
+        
+        for presenter in presenters {
+            DispatchQueue.main.async {
+                if isConnected {
+                    presenter.connectionSatisfied()
+                } else {
+                    presenter.connectionUnsatisfied()
+                }
+            }
+        }
+    }
 }

@@ -35,33 +35,33 @@ class UserDetailViewController: UIViewController {
         presenter.setUser()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
-        self.view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tap)
     }
     
     @objc func hideUserDetail(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
-
 }
 
 extension UserDetailViewController: UserDetailViewProtocol {
     func setUser(user: User?) {
         if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-            self.profileImage.load(url: urlImage)
-            self.profileImage.isHidden = false
+            profileImage.load(url: urlImage)
+            profileImage.isHidden = false
         }
-        self.profileImage.makeRounded()
-        self.online.text = String().getDateValue(title: nil, UNIX: user?.lastOnlineTimeSeconds)
-        self.contribution.text = String().getTitledValue(title: "Друзья", value: user?.contribution)
-        self.rating.text = String().getTitledValue(title: "Рейтинг", value: user?.rating)
-        self.handle.text = String().getTitledValue(title: nil, value: user?.handle)
-        self.firstName.text = String().getTitledValue(title: "Имя", value: user?.firstName)
-        self.lastName.text = String().getTitledValue(title: "Фамилия", value: user?.lastName)
-        self.country.text = String().getTitledValue(title: "Страна", value: user?.country)
-        self.city.text = String().getTitledValue(title: "Город", value: user?.city)
-        self.organization.text = String().getTitledValue(title: "Организачия", value: user?.organization)
-        self.rank.text = String().getTitledValue(title: "Ранг", value: user?.rank)
-        self.email.text = String().getTitledValue(title: "E-mail", value: user?.email)
-        self.vkId.text = String().getTitledValue(title: "ВКонтакте", value: user?.vkId)
+        
+        profileImage.makeRounded()
+        online.text = String().getDateValue(title: nil, UNIX: user?.lastOnlineTimeSeconds)
+        contribution.text = String().getTitledValue(title: "Друзья", value: user?.contribution)
+        rating.text = String().getTitledValue(title: "Рейтинг", value: user?.rating)
+        handle.text = String().getTitledValue(title: nil, value: user?.handle)
+        firstName.text = String().getTitledValue(title: "Имя", value: user?.firstName)
+        lastName.text = String().getTitledValue(title: "Фамилия", value: user?.lastName)
+        country.text = String().getTitledValue(title: "Страна", value: user?.country)
+        city.text = String().getTitledValue(title: "Город", value: user?.city)
+        organization.text = String().getTitledValue(title: "Организачия", value: user?.organization)
+        rank.text = String().getTitledValue(title: "Ранг", value: user?.rank)
+        email.text = String().getTitledValue(title: "E-mail", value: user?.email)
+        vkId.text = String().getTitledValue(title: "ВКонтакте", value: user?.vkId)
     }
 }

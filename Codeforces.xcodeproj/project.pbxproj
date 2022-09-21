@@ -1000,14 +1000,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = E4JE63ZJST;
+				DEVELOPMENT_TEAM = WT4WD839DY;
 				INFOPLIST_FILE = Codeforces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Evraz.testApp.Codeforces;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0x01eva.Codeforces;
 				PRODUCT_NAME = "Code Forces";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1023,14 +1023,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = E4JE63ZJST;
+				DEVELOPMENT_TEAM = WT4WD839DY;
 				INFOPLIST_FILE = Codeforces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Evraz.testApp.Codeforces;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0x01eva.Codeforces;
 				PRODUCT_NAME = "Code Forces";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

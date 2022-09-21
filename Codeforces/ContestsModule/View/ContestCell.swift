@@ -13,23 +13,12 @@ class ContestCell: UITableViewCell {
     @IBOutlet weak var contestName: UILabel!
     @IBOutlet weak var phase: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func setContestData(contest: Contest?) {
-        self.contestName.text = contest?.name
-        self.phase.text = contest?.phase.rawValue
+        contestName.text = contest?.name
+        phase.text = contest?.phase.rawValue
+        
         awakeFromNib()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }
 
 

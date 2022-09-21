@@ -10,21 +10,16 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    
     class var darkModeMainColor: UIColor {
-        get {
-           return UIColor(red: 22/255, green: 32/255, blue: 42/255, alpha: 1)
-        }
+        get { UIColor(red: 22/255, green: 32/255, blue: 42/255, alpha: 1) }
     }
     
     class var darkModeBackgroundColor: UIColor {
-        get {
-            return UIColor(red: 22/255, green: 32/255, blue: 42/255, alpha: 1)
-        }
+        get { UIColor(red: 22/255, green: 32/255, blue: 42/255, alpha: 1) }
     }
     
     class var buttonColor: UIColor {
-        get {
-            return UIColor(red: 29/255, green: 123/255, blue: 190/255, alpha: 1)
-        }
+        get { UIColor(red: 29/255, green: 123/255, blue: 190/255, alpha: 1) }
     }
 }

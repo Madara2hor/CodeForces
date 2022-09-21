@@ -12,10 +12,14 @@ import UIKit
 public extension UICollectionView {
     
     func setMessageBackgroundView(title: String, message: String) {
-        let emptyView = UIView(frame: CGRect(x: self.center.x,
-                                             y: self.center.y,
-                                             width: self.bounds.size.width,
-                                             height: self.bounds.size.height))
+        let emptyView = UIView(
+            frame: CGRect(
+                x: center.x,
+                y: center.y,
+                width: bounds.size.width,
+                height: bounds.size.height
+            )
+        )
         let titleLabel = UILabel()
         let messageLabel = UILabel()
         
@@ -38,7 +42,7 @@ public extension UICollectionView {
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             titleLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20),
             titleLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20)
-            ]
+        ]
         
         for constraint in constraints {
             constraint.isActive = true
@@ -48,7 +52,7 @@ public extension UICollectionView {
         titleLabel.textAlignment = .center
         
         messageLabel.text = message
-        messageLabel.numberOfLines = 0
+        messageLabel.numberOfLines = .zero
         messageLabel.textAlignment = .center
         
         self.backgroundView = emptyView
@@ -57,5 +61,4 @@ public extension UICollectionView {
     func restore() {
         self.backgroundView = nil
     }
-    
 }

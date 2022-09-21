@@ -36,33 +36,33 @@ class ContestDetailViewController: UIViewController {
         scrollView.roundCorners([.topLeft, .topRight], radius: 20)
         contentView.roundCorners([.topLeft, .topRight], radius: 20)
         presenter?.setContest()
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
-        self.view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tap)
     }
     
     @objc func hideUserDetail(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
-    
 }
 
 extension ContestDetailViewController: ContestDetailViewProtocol {
     
     func setContest(contest: Contest?) {
-        self.name.text = String().getTitledValue(title: nil, value: contest?.name)
-        self.type.text = String().getTitledValue(title: "Система оценки", value: contest?.type.rawValue)
-        self.phase.text = String().getTitledValue(title: "Этап соревнований", value: contest?.phase.rawValue)
-        self.duration.text = String().getDurationValue(title: "Продолжительность", seconds: contest?.durationSeconds)
-        self.start.text = String().getDateValue(title: "Начало соревнования", UNIX: contest?.startTimeSeconds)
-        self.preparedBy.text = String().getTitledValue(title: "Содатель", value: contest?.preparedBy)
-        self.website.text = String().getTitledValue(title: "Сайт", value: contest?.websiteUrl)
-        self.contestDescription.text = String().getTitledValue(title: "Описание", value: contest?.description)
-        self.difficulty.text = String().getTitledValue(title: "Сложность", value: contest?.difficulty)
-        self.kind.text = String().getTitledValue(title: "Тип соревнования", value: contest?.kind)
-        self.region.text = String().getTitledValue(title: "Регион", value: contest?.icpcRegion)
-        self.country.text = String().getTitledValue(title: "Страна", value: contest?.country)
-        self.city.text = String().getTitledValue(title: "Город", value: contest?.city)
-        self.season.text = String().getTitledValue(title: "Сезон", value: contest?.season)
+        name.text = String().getTitledValue(title: nil, value: contest?.name)
+        type.text = String().getTitledValue(title: "Система оценки", value: contest?.type.rawValue)
+        phase.text = String().getTitledValue(title: "Этап соревнований", value: contest?.phase.rawValue)
+        duration.text = String().getDurationValue(title: "Продолжительность", seconds: contest?.durationSeconds)
+        start.text = String().getDateValue(title: "Начало соревнования", UNIX: contest?.startTimeSeconds)
+        preparedBy.text = String().getTitledValue(title: "Содатель", value: contest?.preparedBy)
+        website.text = String().getTitledValue(title: "Сайт", value: contest?.websiteUrl)
+        contestDescription.text = String().getTitledValue(title: "Описание", value: contest?.description)
+        difficulty.text = String().getTitledValue(title: "Сложность", value: contest?.difficulty)
+        kind.text = String().getTitledValue(title: "Тип соревнования", value: contest?.kind)
+        region.text = String().getTitledValue(title: "Регион", value: contest?.icpcRegion)
+        country.text = String().getTitledValue(title: "Страна", value: contest?.country)
+        city.text = String().getTitledValue(title: "Город", value: contest?.city)
+        season.text = String().getTitledValue(title: "Сезон", value: contest?.season)
     }
     
 }

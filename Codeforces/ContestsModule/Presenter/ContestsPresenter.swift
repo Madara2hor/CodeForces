@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol ContestsViewProtocol: class {
+protocol ContestsViewProtocol: AnyObject {
+    
     func setLoadingView()
     func removeLoadingView()
     func removeMessageSubview()
@@ -18,6 +19,7 @@ protocol ContestsViewProtocol: class {
 }
 
 protocol ContestsViewPresenterProtocol: FilterContestsProtocol, ConnectionMonitorProtocol {
+    
     var contests: [Contest]? { get set }
     var gym: Bool! { get set }
     
@@ -27,7 +29,8 @@ protocol ContestsViewPresenterProtocol: FilterContestsProtocol, ConnectionMonito
     func showContestDetail(contest: Contest?, selectedIndex: Int?)
 }
 
-protocol FilterContestsProtocol: class {
+protocol FilterContestsProtocol: AnyObject {
+    
     var filtredContests: [Contest]? { get set }
     
     func sortContests()
@@ -43,52 +46,56 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     var filtredContests: [Contest]?
     var gym: Bool!
     
-    required init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    required init(
+        view: ContestsViewProtocol,
+        networkService: NetworkServiceProtocol,
+        router: RouterProtocol
+    ) {
         self.view = view
         self.router = router
         self.networkService = networkService
-        self.gym = false
+        gym = false
     }
     
     func getContests() {
-        DispatchQueue.main.async {
-            self.view?.removeMessageSubview()
-            self.view?.setLoadingView()
-        }
+        view?.removeMessageSubview()
+        view?.setLoadingView()
         
-        networkService.getContests(gym: gym) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.view?.removeLoadingView()
+        networkService.getContests(gym: gym) { result in
+            DispatchQueue.main.async { [weak self] in
+                self?.view?.removeLoadingView()
                 
                 switch result {
                 case .success(let requsetResult):
                     switch requsetResult?.status {
                         case .success:
-                            guard let resultData = requsetResult?.result, !resultData.isEmpty else {
-                                self.view?.failure(error: "Соревнований нет...")
+                            guard
+                                let resultData = requsetResult?.result,
+                                resultData.isEmpty == false
+                            else {
+                                self?.view?.failure(error: "Соревнований нет...")
                                 return
                             }
                             
-                            self.contests = resultData
-                            self.filtredContests = resultData
+                            self?.contests = resultData
+                            self?.filtredContests = resultData
                             
-                            if self.gym {
-                                self.contests?.reverse()
-                                self.filtredContests?.reverse()
+                            if self?.gym ?? false {
+                                self?.contests?.reverse()
+                                self?.filtredContests?.reverse()
                             }
                             
-                            self.view?.success()
+                            self?.view?.success()
                         case .failure:
-                            if self.contests == nil {
-                                self.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+                            if self?.contests == nil {
+                                self?.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
                             }
                         case .none:
                             break
                     }
                 case .failure:
-                    if self.contests == nil {
-                        self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+                    if self?.contests == nil {
+                        self?.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
                     }
                 }
             }
@@ -102,17 +109,14 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func connectionSatisfied() {
-        if self.contests == nil {
-            self.getContests()
+        if contests == nil {
+            getContests()
         }
     }
     
     func connectionUnsatisfied() {
-        if self.contests == nil {
-            DispatchQueue.main.async {
-                self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
-            }
+        if contests == nil {
+            view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
         }
     }
-    
 }

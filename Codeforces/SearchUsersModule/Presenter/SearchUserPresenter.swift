@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol SearchUserViewProtocol: class {
+protocol SearchUserViewProtocol: AnyObject {
+    
     func setLoadingView()
     func removeLoadingView()
     func removeMessageSubview()
@@ -17,21 +18,29 @@ protocol SearchUserViewProtocol: class {
     func failure(error: String?)
 }
 
-protocol SearchUserViewPresenterProtocol: class {
+protocol SearchUserViewPresenterProtocol: AnyObject {
+    
     var user: User? { get set }
     var searchedUser: String? { get set }
+    
     init(view: SearchUserViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
+    
     func getUser()
 }
 
 class SearchUserPresenter: SearchUserViewPresenterProtocol {
+    
     weak var view: SearchUserViewProtocol?
     var router: RouterProtocol?
     let networkService: NetworkServiceProtocol!
     var searchedUser: String?
     var user: User?
     
-    required init(view: SearchUserViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol) {
+    required init(
+        view: SearchUserViewProtocol,
+        networkService: NetworkServiceProtocol,
+        router: RouterProtocol
+    ) {
         self.view = view
         self.router = router
         self.networkService = networkService
@@ -43,36 +52,31 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
             self.view?.setLoadingView()
         }
         
-        networkService.getUser(username: searchedUser ?? "") { [weak self] result in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.view?.removeLoadingView()
+        networkService.getUser(username: searchedUser ?? "") { result in
+            DispatchQueue.main.async { [weak self] in
+                self?.view?.removeLoadingView()
                 
                 switch result {
                     case .success(let requsetResult):
                         switch requsetResult?.status {
                         case .success:
                             guard let resultUser = requsetResult?.result?[0] else {
-                                self.view?.failure(error: "Ошибка получения пользователя")
+                                self?.view?.failure(error: "Ошибка получения пользователя")
                                 return
                             }
-                            self.user = resultUser
+                            self?.user = resultUser
                             
-                            self.view?.success()
+                            self?.view?.success()
                         case .failure:
-                            self.user = nil
-                            self.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+                            self?.user = nil
+                            self?.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
                         case .none:
                             break
                     }
                 case .failure:
-                        self.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+                        self?.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
                 }
             }
-                
-            
         } 
     }
-
 }

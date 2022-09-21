@@ -9,6 +9,7 @@
 import Foundation
 
 struct User: Codable, Equatable {
+    
     var handle: String
     var email: String?
     var vkId: String?

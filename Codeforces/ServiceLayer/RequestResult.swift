@@ -9,12 +9,14 @@
 import Foundation
 
 struct RequestResult<T: Codable>: Codable {
+    
     var status: Status
     var result: [T]?
     var comment: String?
 }
 
 enum Status: String, Codable {
+    
     case failure = "FAILED"
     case success = "OK"
 }

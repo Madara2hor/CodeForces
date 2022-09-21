@@ -10,12 +10,18 @@ import Foundation
 import Alamofire
 
 protocol NetworkServiceProtocol {
-    func getContests(gym: Bool,
-                     completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void)
-    func getUser(username: String,
-                 completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
-    func getTopUsers(activeOnly: Bool,
-                     completion: @escaping (Result<RequestResult<User>?, Error>) -> Void)
+    func getContests(
+        gym: Bool,
+        completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void
+    )
+    func getUser(
+        username: String,
+        completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
+    )
+    func getTopUsers(
+        activeOnly: Bool,
+        completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
+    )
 }
 
 class NetworkService: NetworkServiceProtocol {
@@ -24,20 +30,23 @@ class NetworkService: NetworkServiceProtocol {
     var apiURL: String = "http://codeforces.com/api/"
     var apiSecret: String = "c1d9a1a42cab4419d6f14040eac4701ece37ee5a"
     
-    func getContests(gym: Bool,
-                     completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void) {
+    func getContests(
+        gym: Bool,
+        completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void
+    ) {
         let parameters = ["gym": "\(gym)"]
         let urlString = getUrlString(endpoint: apiEndpoint.contestList.rawValue, parameters: parameters)
         
         print(urlString)
-        
         fetchData(type: RequestResult<Contest>.self, urlString: urlString) { result in
             completion(result)
         }
     }
     
-    func getUser(username: String,
-                 completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
+    func getUser(
+        username: String,
+        completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
+    ) {
         let parameters = ["handles": "\(username)"]
         let urlString = getUrlString(endpoint: apiEndpoint.userInfo.rawValue, parameters: parameters)
         
@@ -47,8 +56,10 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func getTopUsers(activeOnly: Bool,
-                     completion: @escaping (Result<RequestResult<User>?, Error>) -> Void) {
+    func getTopUsers(
+        activeOnly: Bool,
+        completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
+    ) {
         let parameters = ["activeOnly": "\(activeOnly)"]
         let urlString = getUrlString(endpoint: apiEndpoint.topUsers.rawValue, parameters: parameters)
         
@@ -101,8 +112,8 @@ class NetworkService: NetworkServiceProtocol {
 }
 
 enum apiEndpoint: String {
+    
     case contestList = "contest.list"
     case userInfo = "user.info"
     case topUsers = "user.ratedList"
-    
 }

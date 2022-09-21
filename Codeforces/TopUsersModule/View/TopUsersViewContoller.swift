@@ -54,14 +54,14 @@ class TopUsersViewContoller: UIViewController {
     }
     
     @IBAction func activeFilterDidTapped(_ sender: UIButton) {
-        if sender.tag == 0 {
+        if sender.tag == .zero {
             sender.setImage(UIImage(systemName: "tortoise"), for: .normal)
             sender.tag = 1
             
             presenter.activeOnly = false
         } else {
             sender.setImage(UIImage(systemName: "hare"), for: .normal)
-            sender.tag = 0
+            sender.tag = .zero
             
             presenter.activeOnly = true
         }
@@ -74,57 +74,75 @@ class TopUsersViewContoller: UIViewController {
     }
     
     @IBAction func menuDidTapped(_ sender: Any) {
-        if self.menu.tag == 0 {
-            self.showMenuItems()
+        if menu.tag == .zero {
+            showMenuItems()
         } else {
-            self.hideMenuItems()
+            hideMenuItems()
         }
     }
     
     func showMenuItems() {
-        if isMenuShow { return }
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0,
-                                        anchor: reloadRightAnchor,
-                                        anchorConstant: 20,
-                                        view: reloadData)
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0.3,
-                                        anchor: activeRightAnchor,
-                                        anchorConstant: 20,
-                                        view: activeOnlyFilter)
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0.6,
-                                        anchor: sortRightAnchor,
-                                        anchorConstant: 20,
-                                        view: ratingSort)
+        if isMenuShow {
+            return
+        }
+        
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: 0,
+            anchor: reloadRightAnchor,
+            anchorConstant: 20,
+            view: reloadData
+        )
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: 0.3,
+            anchor: activeRightAnchor,
+            anchorConstant: 20,
+            view: activeOnlyFilter
+        )
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: 0.6,
+            anchor: sortRightAnchor,
+            anchorConstant: 20,
+            view: ratingSort
+        )
 
-        self.menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        self.menu.tag = 1
+        menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        menu.tag = 1
         
         isMenuShow = true
     }
     
     func hideMenuItems() {
-        if !isMenuShow { return }
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0.6,
-                                        anchor: reloadRightAnchor,
-                                        anchorConstant: 20,
-                                        view: reloadData)
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0.3,
-                                        anchor: activeRightAnchor,
-                                        anchorConstant: 20,
-                                        view: activeOnlyFilter)
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0,
-                                        anchor: sortRightAnchor,
-                                        anchorConstant: 20,
-                                        view: ratingSort)
+        if isMenuShow == false {
+            return
+        }
         
-        self.menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        self.menu.tag = 0
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: 0.6,
+            anchor: reloadRightAnchor,
+            anchorConstant: 20,
+            view: reloadData
+        )
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: 0.3,
+            anchor: activeRightAnchor,
+            anchorConstant: 20,
+            view: activeOnlyFilter
+        )
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: 0,
+            anchor: sortRightAnchor,
+            anchorConstant: 20,
+            view: ratingSort
+        )
+        
+        menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        menu.tag = 0
         
         isMenuShow = false
     }
@@ -134,9 +152,12 @@ class TopUsersViewContoller: UIViewController {
 extension TopUsersViewContoller: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let lowerSearchText = searchText.lowercased()
-        presenter.filtredTopUsers = searchText.isEmpty ? presenter.topUsers : presenter.topUsers?.filter { user -> Bool in
-            return user.handle.lowercased().contains(lowerSearchText)
-        }
+        presenter.filtredTopUsers = searchText.isEmpty
+            ? presenter.topUsers
+            : presenter.topUsers?.filter { user -> Bool in
+                return user.handle.lowercased().contains(lowerSearchText)
+            }
+        
         topUsersCollection.reloadData()
     }
     
@@ -147,9 +168,11 @@ extension TopUsersViewContoller: UISearchBarDelegate {
 
 extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
       let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
       let availableWidth = view.frame.width - paddingSpace
       let widthPerItem = availableWidth / itemsPerRow
@@ -158,42 +181,49 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
     }
     
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
       return sectionInsets
     }
     
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
       return sectionInsets.left
     }
 }
 
 extension TopUsersViewContoller: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        return presenter.filtredTopUsers?.count ?? 0
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return presenter.filtredTopUsers?.count ?? .zero
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = UICollectionViewCell()
-        
-        if let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.identifier)", for: indexPath) as? UserCell {
-            
-            userCell.configure(user: presenter.filtredTopUsers?[indexPath.row])
-            
-            cell = userCell
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.identifier)", for: indexPath) as? UserCell else {
+            return UICollectionViewCell()
         }
         
-        return cell
+        userCell.configure(user: presenter.filtredTopUsers?[indexPath.row])
+        
+        return userCell
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         let user = presenter.filtredTopUsers?[indexPath.row]
         
         presenter.showUserDetail(user: user, selectedIndex: self.tabBarController?.selectedIndex)
@@ -205,8 +235,13 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
     func success() {
         searchBar.text = ""
         topUsersCollection.reloadData()
-        if topUsersCollection.cellForItem(at: IndexPath(row: 0, section: 0)) != nil {
-            topUsersCollection.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        
+        if topUsersCollection.cellForItem(at: IndexPath(row: .zero, section: .zero)) != nil {
+            topUsersCollection.scrollToItem(
+                at: IndexPath(row: .zero, section: .zero),
+                at: .top,
+                animated: true
+            )
         }
     }
     
@@ -215,25 +250,25 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
     }
     
     func topUsersSorted() {
-        if ratingSort.tag == 0 {
+        if ratingSort.tag == .zero {
             ratingSort.setImage(UIImage(systemName: "arrow.up"), for: .normal)
             ratingSort.tag = 1
         } else {
             ratingSort.setImage(UIImage(systemName: "arrow.down"), for: .normal)
-            ratingSort.tag = 0
+            ratingSort.tag = .zero
         }
         
         topUsersCollection.reloadData()
-        topUsersCollection.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        topUsersCollection.scrollToItem(at: IndexPath(row: .zero, section: .zero), at: .top, animated: true)
     }
 
     
     func setLoadingView() {
-        self.view.setLoadingSubview()
+        view.setLoadingSubview()
     }
     
     func removeLoadingView() {
-        self.view.removeLoadingSubview()
+        view.removeLoadingSubview()
     }
     
     func removeMessageSubview() {

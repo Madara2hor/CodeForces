@@ -8,16 +8,20 @@
 
 import Foundation
 
-protocol ContestDetailViewProtocol: class {
+protocol ContestDetailViewProtocol: AnyObject {
+    
     func setContest(contest: Contest?)
 }
 
-protocol ContestDetailViewPresenterProtocol: class {
+protocol ContestDetailViewPresenterProtocol: AnyObject {
+    
     init(view: ContestDetailViewProtocol, router: RouterProtocol, contest: Contest?)
+    
     func setContest()
 }
 
 class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
+    
     weak var view: ContestDetailViewProtocol?
     var router: RouterProtocol?
     var contest: Contest?
@@ -29,6 +33,6 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
     }
     
     func setContest() {
-        self.view?.setContest(contest: contest)
+        view?.setContest(contest: contest)
     }
 }

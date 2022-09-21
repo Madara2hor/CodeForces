@@ -83,36 +83,46 @@ class SearchUserViewController: UIViewController {
     @IBAction func clearPageDidTapped(_ sender: UIButton) {
         searchBar.text = ""
         presenter?.searchedUser = nil
-        self.view.removeMessageSubview()
+        
+        view.removeMessageSubview()
         hideProfileItems()
     }
     
     @IBAction func reloadDataDidTapped(_ sender: UIButton) {
-        if presenter?.searchedUser != nil {
-            presenter?.getUser()
+        guard presenter?.searchedUser != nil else {
+            return
         }
+        
+        presenter?.getUser()
     }
     
     @IBAction func menuDidTpped(_ sender: Any) {
-        if menu.tag == 0 {
-            self.showMenuItems()
+        if menu.tag == .zero {
+            showMenuItems()
         } else {
-            self.hideMenuItems()
+            hideMenuItems()
         }
     }
     
     func showMenuItems() {
-        if isMenuShow { return }
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0,
-                                        anchor: reloadRightAnchor,
-                                        anchorConstant: 20,
-                                        view: reloadData)
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0.3,
-                                        anchor: clearRightAnchor,
-                                        anchorConstant: 20,
-                                        view: clearPage)
+        if isMenuShow {
+            return
+        }
+        
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: .zero,
+            anchor: reloadRightAnchor,
+            anchorConstant: 20,
+            view: reloadData
+        )
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: 0.3,
+            anchor: clearRightAnchor,
+            anchorConstant: 20,
+            view: clearPage
+        )
 
         menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         menu.tag = 1
@@ -121,24 +131,30 @@ class SearchUserViewController: UIViewController {
     }
     
     func hideMenuItems() {
-        if !isMenuShow { return }
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0.3,
-                                        anchor: reloadRightAnchor,
-                                        anchorConstant: 20,
-                                        view: reloadData)
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0,
-                                        anchor: clearRightAnchor,
-                                        anchorConstant: 20,
-                                        view: clearPage)
+        if isMenuShow == false {
+            return
+        }
+        
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: 0.3,
+            anchor: reloadRightAnchor,
+            anchorConstant: 20,
+            view: reloadData
+        )
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: 0,
+            anchor: clearRightAnchor,
+            anchorConstant: 20,
+            view: clearPage
+        )
 
         menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        menu.tag = 0
+        menu.tag = .zero
         
         isMenuShow = false
     }
-
 }
 
 extension SearchUserViewController: SearchUserViewProtocol {
@@ -160,7 +176,9 @@ extension SearchUserViewController: SearchUserViewProtocol {
             profileImage.load(url: urlImage)
             profileImage.isHidden = false
         }
+        
         profileImage.makeRounded()
+        
         online.text = String().getDateValue(title: nil, UNIX: presenter.user?.lastOnlineTimeSeconds)
         contribution.text = String().getTitledValue(title: "Друзья", value: presenter.user?.contribution)
         rating.text = String().getTitledValue(title: "Рейтинг", value: presenter.user?.rating)
@@ -176,9 +194,12 @@ extension SearchUserViewController: SearchUserViewProtocol {
     }
     
     func failure(error: String?) {
-        guard let error = error else { return }
+        guard let error = error else {
+            return
+        }
         
         hideProfileItems()
+        
         if error != "handles: Field should not be empty" {
             self.view.setMessageSubview(title: "Эх...", message: "Пользователь не найден")
         } else {
@@ -193,6 +214,7 @@ extension SearchUserViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let cleanText = searchText.replacingOccurrences(of: " ", with: "")
         searchBar.text = cleanText
+        
         if cleanText == "" {
             presenter.searchedUser = nil
             removeMessageSubview()
@@ -206,6 +228,7 @@ extension SearchUserViewController: UISearchBarDelegate {
         if presenter.searchedUser != nil {
             presenter.getUser()
         }
+        
         view.endEditing(true)
     }
 

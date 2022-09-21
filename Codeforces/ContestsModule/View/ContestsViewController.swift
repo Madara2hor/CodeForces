@@ -66,47 +66,61 @@ class ContestsViewController: UIViewController {
     }
     
     @IBAction func menuDidTapped(_ sender: Any) {
-        if self.menu.tag == 0 {
-            self.showMenuItems()
+        if menu.tag == 0 {
+            showMenuItems()
         } else {
-            self.hideMenuItems()
+            hideMenuItems()
         }
     }
     
     func showMenuItems() {
-        if isMenuShow { return }
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0,
-                                        anchor: reloadRightAnchor,
-                                        anchorConstant: 20,
-                                        view: reloadData)
-        self.view.showViewWithAnimation(duration: 0.5,
-                                        delay: 0.3,
-                                        anchor: gymRightAnchor,
-                                        anchorConstant: 20,
-                                        view: gymFilter)
+        if isMenuShow {
+            return
+        }
+        
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: .zero,
+            anchor: reloadRightAnchor,
+            anchorConstant: 20,
+            view: reloadData
+        )
+        view.showViewWithAnimation(
+            duration: 0.5,
+            delay: 0.3,
+            anchor: gymRightAnchor,
+            anchorConstant: 20,
+            view: gymFilter
+        )
 
-        self.menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        self.menu.tag = 1
+        menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        menu.tag = 1
         
         isMenuShow = true
     }
     
     func hideMenuItems() {
-        if !isMenuShow { return }
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0.3,
-                                        anchor: reloadRightAnchor,
-                                        anchorConstant: 20,
-                                        view: reloadData)
-        self.view.hideViewWithAnimation(duration: 0.5,
-                                        delay: 0,
-                                        anchor: gymRightAnchor,
-                                        anchorConstant: 20,
-                                        view: gymFilter)
+        if isMenuShow == false {
+            return
+        }
+        
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: 0.3,
+            anchor: reloadRightAnchor,
+            anchorConstant: 20,
+            view: reloadData
+        )
+        view.hideViewWithAnimation(
+            duration: 0.5,
+            delay: .zero,
+            anchor: gymRightAnchor,
+            anchorConstant: 20,
+            view: gymFilter
+        )
 
-        self.menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        self.menu.tag = 0
+        menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        menu.tag = .zero
         
         isMenuShow = false
     }
@@ -114,11 +128,16 @@ class ContestsViewController: UIViewController {
 }
 
 extension ContestsViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let lowerSearchText = searchText.lowercased()
-        presenter.filtredContests = searchText.isEmpty ? presenter.contests : presenter.contests?.filter { contest -> Bool in
-            return contest.name.lowercased().contains(lowerSearchText)
-        }
+        
+        presenter.filtredContests = searchText.isEmpty
+            ? presenter.contests
+            : presenter.contests?.filter { contest -> Bool in
+                return contest.name.lowercased().contains(lowerSearchText)
+            }
+        
         contestTable.reloadData()
     }
     
@@ -130,7 +149,7 @@ extension ContestsViewController: UISearchBarDelegate {
 extension ContestsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.filtredContests?.count ?? 0
+        return presenter.filtredContests?.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,7 +159,6 @@ extension ContestsViewController: UITableViewDataSource {
         
         return cell
     }
-    
 }
 
 extension ContestsViewController: UITableViewDelegate {
@@ -148,15 +166,17 @@ extension ContestsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contest = presenter?.filtredContests?[indexPath.row]
         
-        presenter?.showContestDetail(contest: contest, selectedIndex: self.tabBarController?.selectedIndex)
+        presenter?.showContestDetail(
+            contest: contest,
+            selectedIndex: tabBarController?.selectedIndex
+        )
     }
-    
 }
 
 extension ContestsViewController: ContestsViewProtocol {
     func success() {
         contestTable.reloadData()
-        contestTable.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        contestTable.scrollToRow(at: IndexPath(row: .zero, section: .zero), at: .top, animated: true)
     }
     
     func failure(error: String?) {

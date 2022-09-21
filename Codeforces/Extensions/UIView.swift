@@ -12,77 +12,76 @@ import UIKit
 extension UIView {
     
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-        if #available(iOS 11.0, *) {
-            clipsToBounds = true
-            layer.cornerRadius = radius
-            layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
-        } else {
-            let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-            let mask = CAShapeLayer()
-            mask.path = path.cgPath
-            layer.mask = mask
-        }
+        clipsToBounds = true
+        layer.cornerRadius = radius
+        layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
     }
     
     func makeRounded() {
-        self.layer.cornerRadius = self.frame.height / 6
-        self.layer.masksToBounds = true
-        self.clipsToBounds = true
+        layer.cornerRadius = frame.height / 6
+        layer.masksToBounds = true
+        clipsToBounds = true
     }
     
     func makeCircle() {
-        self.layer.cornerRadius = self.frame.height / 2
-        self.layer.masksToBounds = true
-        self.clipsToBounds = true
+        layer.cornerRadius = frame.height / 2
+        layer.masksToBounds = true
+        clipsToBounds = true
     }
     
     func makeTransparentBlue() {
-        self.backgroundColor = UIColor.buttonColor.withAlphaComponent(0.7)
+        backgroundColor = UIColor.buttonColor.withAlphaComponent(0.7)
     }
     
     func makeTransparentBlack() {
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        backgroundColor = UIColor.black.withAlphaComponent(0.7)
     }
     
     func setShadow() {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 3.0
-        self.layer.masksToBounds = false
-        self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:self.layer.cornerRadius).cgPath
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 3.0
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
     }
     
     func showViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat , view: UIView) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: duration,
-                           delay: delay,
-                           options: .curveEaseInOut,
-                           animations: {
-                            anchor.constant += anchorConstant + view.frame.width
-                            view.alpha += 1
+            UIView.animate(
+                withDuration: duration,
+                delay: delay,
+                options: .curveEaseInOut,
+                animations: { [weak self] in
+                    anchor.constant += anchorConstant + view.frame.width
+                    view.alpha += 1
                             
-                            self.layoutIfNeeded()
-            }, completion: nil)
+                    self?.layoutIfNeeded()
+                },
+                completion: nil
+            )
         }
     }
     
     func hideViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat, view: UIView) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: duration,
-                           delay: delay,
-                           options: .curveEaseInOut,
-                           animations: {
-                            anchor.constant -= anchorConstant + view.frame.width
-                            view.alpha -= 1
+            UIView.animate(
+                withDuration: duration,
+                delay: delay,
+                options: .curveEaseInOut,
+                animations: { [weak self] in
+                    anchor.constant -= anchorConstant + view.frame.width
+                    view.alpha -= 1
                             
-                            self.layoutIfNeeded()
-            }, completion: nil)
+                    self?.layoutIfNeeded()
+                },
+                completion: nil
+            )
         }
     }
     
     func setProgressSubview() {
-        self.isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
         
         let progressView = UIView()
         let progress = UIProgressView()
@@ -104,7 +103,7 @@ extension UIView {
             progressView.widthAnchor.constraint(equalToConstant: self.frame.width - 80),
             progress.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),
             progress.centerXAnchor.constraint(equalTo: progressView.centerXAnchor)
-            ]
+        ]
         
         active(constraints: progressViewConstraints)
         
@@ -132,7 +131,7 @@ extension UIView {
         spinner.startAnimating()
         spinner.color = .white
         
-        progress.setProgress(0.0, animated: false)
+        progress.setProgress(.zero, animated: false)
         progress.tintColor = UIColor.buttonColor
         
         spinnerView.addSubview(spinner)
@@ -145,7 +144,7 @@ extension UIView {
             spinnerView.widthAnchor.constraint(equalToConstant: spinnerViewFrame),
             spinner.centerYAnchor.constraint(equalTo: spinnerView.centerYAnchor),
             spinner.centerXAnchor.constraint(equalTo: spinnerView.centerXAnchor)
-            ]
+        ]
         
         active(constraints: spinnerViewConstraints)
         
@@ -189,7 +188,7 @@ extension UIView {
             messageLabel.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 8),
             messageLabel.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: -8),
             messageLabel.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: -8)
-            ]
+        ]
         
         active(constraints: constraints)
         
@@ -200,7 +199,7 @@ extension UIView {
         
         messageLabel.text = message
         messageLabel.textAlignment = .center
-        messageLabel.numberOfLines = 0
+        messageLabel.numberOfLines = .zero
         
         messageView.accessibilityIdentifier = "messageView"
     }
@@ -212,19 +211,28 @@ extension UIView {
     }
     
     func removeProgressView() {
-        guard let progressView = getViewWithIdentifier(identifier: "progressView") else { return }
+        guard let progressView = getViewWithIdentifier(identifier: "progressView") else {
+            return
+        }
+        
         progressView.removeFromSuperview()
-        self.isUserInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
     
     func removeLoadingSubview() {
-        guard let loadingView = getViewWithIdentifier(identifier: "loadingView") else { return }
+        guard let loadingView = getViewWithIdentifier(identifier: "loadingView") else {
+            return
+        }
+        
         loadingView.removeFromSuperview()
-        self.isUserInteractionEnabled = true
+        isUserInteractionEnabled = true
     }
     
     func removeMessageSubview() {
-        guard let messageView = getViewWithIdentifier(identifier: "messageView") else { return }
+        guard let messageView = getViewWithIdentifier(identifier: "messageView") else {
+            return
+        }
+        
         messageView.removeFromSuperview()
     }
     
@@ -234,7 +242,7 @@ extension UIView {
                 return view
             }
         }
+        
         return nil
     }
-    
 }

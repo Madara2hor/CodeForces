@@ -14,10 +14,12 @@ public extension String {
     var sha512: String {
         let data = self.data(using: .utf8) ?? Data()
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
+        
         data.withUnsafeBytes{
             _ = CC_SHA512($0.baseAddress, CC_LONG(data.count), &digest)
         }
-        return digest.map({ String(format: "%02hhx", $0)}).joined(separator: "")
+        
+        return digest.map({ String(format: "%02hhx", $0) }).joined(separator: "")
     }
     
     func getTitledValue(title: String?, value: String?) -> String? {
@@ -30,6 +32,7 @@ public extension String {
         } else if let title = title {
             return "\(title):"
         }
+        
         return nil
     }
     
@@ -43,6 +46,7 @@ public extension String {
         } else if let title = title {
             return "\(title):"
         }
+        
         return nil
     }
     
@@ -56,6 +60,7 @@ public extension String {
         } else if let title = title {
             return "\(title):"
         }
+        
         return nil
     }
     
@@ -69,11 +74,14 @@ public extension String {
         } else if let title = title {
             return "\(title):"
         }
+        
         return nil
     }
     
     var date: String {
-       guard let doubleDate = Double(self) else { return "Invalid date" }
+       guard let doubleDate = Double(self) else {
+           return "Invalid date"
+       }
        
        let date = Date(timeIntervalSince1970: doubleDate)
        let dateFormatter = DateFormatter()
@@ -87,31 +95,34 @@ public extension String {
     }
        
     var durationFromSeconds: String {
-        guard let intSeconds = Int(self) else { return "Invalid time" }
+        guard let intSeconds = Int(self) else {
+            return "Invalid time"
+        }
         
         var hours = intSeconds / 3600
         let minutes = (intSeconds % 3600) / 60
         let days = intSeconds / 86400
         
-        if days > 0 {
+        if days > .zero {
             hours %= 24
         }
         
         var duration = ""
         
-        if days > 0 {
+        if days > .zero {
             let firstDaysNumber = days / 10
             let lastDaysNumber = days % 10
-            if firstDaysNumber == 0 {
+            if firstDaysNumber == .zero {
                 duration = "\(days) \(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
             } else {
                 duration = "\(days) \(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
             }
         }
         
-        if hours == 0 {
+        if hours == .zero {
             return duration
         }
+        
         if hours < 10 {
             duration += "0\(hours):"
         } else {
@@ -124,7 +135,6 @@ public extension String {
             duration += "\(minutes)"
         }
         
- 
         return duration
     }
     
@@ -132,7 +142,8 @@ public extension String {
         if firstDaysNumber == 1 && lastDaysNumber == 1 {
             return " дней "
         }
-        if firstDaysNumber == 0 {
+        
+        if firstDaysNumber == .zero {
             switch lastDaysNumber {
             case 1:
                 return " день "
@@ -142,11 +153,12 @@ public extension String {
                 return " дней "
             }
         }
+        
         return " дней "
     }
-    
 }
 
 extension String: LocalizedError {
-    public var errorDescription: String? { return self }
+    
+    public var errorDescription: String? { self }
 }

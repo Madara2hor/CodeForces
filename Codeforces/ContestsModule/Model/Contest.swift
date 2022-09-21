@@ -9,6 +9,7 @@
 import Foundation
 
 struct Contest: Codable {
+    
     var id: Int
     var name: String
     var type: ContestType
@@ -29,12 +30,14 @@ struct Contest: Codable {
 }
 
 enum ContestType: String, Codable {
+    
     case CF = "CF"
     case IOI = "IOI"
     case ICPC = "ICPC"
 }
 
 enum ContestPhase: String, Codable {
+    
     case BEFORE = "BEFORE"
     case CODING = "CODING"
     case PENDING_SYSTEM_TEST = "PENDING_SYSTEM_TEST"
