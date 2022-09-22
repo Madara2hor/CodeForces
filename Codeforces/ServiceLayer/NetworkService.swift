@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 protocol NetworkServiceProtocol {
+    
     func getContests(
         gym: Bool,
         completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void
@@ -35,11 +36,13 @@ class NetworkService: NetworkServiceProtocol {
         completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void
     ) {
         let parameters = ["gym": "\(gym)"]
-        let urlString = getUrlString(endpoint: apiEndpoint.contestList.rawValue, parameters: parameters)
+        let urlString = getUrlString(endpoint: ApiEndpoint.contestList.rawValue, parameters: parameters)
         
         print(urlString)
         fetchData(type: RequestResult<Contest>.self, urlString: urlString) { result in
-            completion(result)
+            DispatchQueue.main.async {
+                completion(result)
+            }
         }
     }
     
@@ -48,11 +51,13 @@ class NetworkService: NetworkServiceProtocol {
         completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
     ) {
         let parameters = ["handles": "\(username)"]
-        let urlString = getUrlString(endpoint: apiEndpoint.userInfo.rawValue, parameters: parameters)
+        let urlString = getUrlString(endpoint: ApiEndpoint.userInfo.rawValue, parameters: parameters)
         
         print(urlString)
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in
-            completion(result)
+            DispatchQueue.main.async {
+                completion(result)
+            }
         }
     }
     
@@ -61,11 +66,13 @@ class NetworkService: NetworkServiceProtocol {
         completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
     ) {
         let parameters = ["activeOnly": "\(activeOnly)"]
-        let urlString = getUrlString(endpoint: apiEndpoint.topUsers.rawValue, parameters: parameters)
+        let urlString = getUrlString(endpoint: ApiEndpoint.topUsers.rawValue, parameters: parameters)
         
         print(urlString)
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in
-            completion(result)
+            DispatchQueue.main.async {
+                completion(result)
+            }
         }
     }
     
@@ -96,7 +103,11 @@ class NetworkService: NetworkServiceProtocol {
         return hashedUrlString
     }
     
-    func fetchData<T: Decodable>(type: T.Type = T.self, urlString: String, completion: @escaping (Result<T?, Error>) -> Void) {
+    func fetchData<T: Decodable>(
+        type: T.Type = T.self,
+        urlString: String,
+        completion: @escaping (Result<T?, Error>) -> Void
+    ) {
         AF.request(urlString).downloadProgress { progress in
             print(progress.fractionCompleted)
         }.responseDecodable(of: T.self) { response in
@@ -111,7 +122,7 @@ class NetworkService: NetworkServiceProtocol {
 
 }
 
-enum apiEndpoint: String {
+enum ApiEndpoint: String {
     
     case contestList = "contest.list"
     case userInfo = "user.info"

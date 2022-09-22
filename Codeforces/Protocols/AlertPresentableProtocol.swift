@@ -34,7 +34,7 @@ extension AlertPresentableProtocol where Self: UIViewController {
         alert.view.tintColor = .systemIndigo
         
         alert.addTextField { (textField) in
-            textField.placeholder = placeholder ?? ""
+            textField.placeholder = placeholder ?? .empty
         }
         
         alert.addAction(UIAlertAction(

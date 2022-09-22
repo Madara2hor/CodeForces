@@ -8,19 +8,23 @@
 
 import Foundation
 
-protocol UserDetailViewProtocol: class {
+protocol UserDetailViewProtocol: AnyObject {
+    
     func setUser(user: User?)
 }
 
 protocol UserDetailViewPresenterProtocol {
+    
     init(view: UserDetailViewProtocol, router: RouterProtocol, user: User?)
+    
     func setUser()
 }
 
 class UserDetailPresenter: UserDetailViewPresenterProtocol {
-    weak var view: UserDetailViewProtocol?
-    var router: RouterProtocol?
-    var user: User?
+    
+    private weak var view: UserDetailViewProtocol?
+    private var router: RouterProtocol?
+    private var user: User?
     
     required init(view: UserDetailViewProtocol, router: RouterProtocol, user: User?) {
         self.view = view

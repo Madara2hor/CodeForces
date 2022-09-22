@@ -22,11 +22,18 @@ protocol InternetConnectionMonitorProtocol: AnyObject {
 }
 
 class InternetConnection: InternetConnectionMonitorProtocol {
+    
+    private enum Constants {
+        
+        static let queueLabel = "com.InternetConnection.MonitorQueue"
+    }
 
-    static let sharedIC = InternetConnection()
-    private let monitor = NWPathMonitor()
+    static let shared = InternetConnection()
     
     var presenters: [ConnectionMonitorProtocol]?
+    
+    private let monitorQueue = DispatchQueue(label: Constants.queueLabel)
+    private let monitor = NWPathMonitor()
 
     init() { }
     
@@ -46,8 +53,7 @@ class InternetConnection: InternetConnectionMonitorProtocol {
             }
         }
         
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
+        monitor.start(queue: monitorQueue)
     }
     
     func stopMonitor() {
@@ -55,7 +61,7 @@ class InternetConnection: InternetConnectionMonitorProtocol {
     }
     
     private func connectionChanged(on isConnected: Bool) {
-        guard let presenters = self.presenters else {
+        guard let presenters = presenters else {
             return
         }
         

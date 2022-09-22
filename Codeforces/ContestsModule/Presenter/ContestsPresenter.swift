@@ -13,38 +13,32 @@ protocol ContestsViewProtocol: AnyObject {
     func setLoadingView()
     func removeLoadingView()
     func removeMessageSubview()
+    func updateGymFilterButton(isFiltred: Bool)
     
     func success()
     func failure(error: String?)
 }
 
-protocol ContestsViewPresenterProtocol: FilterContestsProtocol, ConnectionMonitorProtocol {
-    
-    var contests: [Contest]? { get set }
-    var gym: Bool! { get set }
-    
+protocol ContestsViewPresenterProtocol: ConnectionMonitorProtocol {
+        
     init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
     func getContests()
+    func serachContest(by text: String)
+    func getFiltredContests() -> [Contest]?
+    func filterByGym()
     func showContestDetail(contest: Contest?, selectedIndex: Int?)
-}
-
-protocol FilterContestsProtocol: AnyObject {
-    
-    var filtredContests: [Contest]? { get set }
-    
-    func sortContests()
 }
 
 class ContestsPresenter: ContestsViewPresenterProtocol {
     
-    weak var view: ContestsViewProtocol?
-    var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol!
+    private weak var view: ContestsViewProtocol?
+    private var router: RouterProtocol?
+    private let networkService: NetworkServiceProtocol!
     
-    var contests: [Contest]?
-    var filtredContests: [Contest]?
-    var gym: Bool!
+    private var contests: [Contest]?
+    private var filtredContests: [Contest]?
+    private var isFiltredByGym: Bool!
     
     required init(
         view: ContestsViewProtocol,
@@ -54,55 +48,54 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         self.view = view
         self.router = router
         self.networkService = networkService
-        gym = false
+        isFiltredByGym = false
     }
     
     func getContests() {
         view?.removeMessageSubview()
         view?.setLoadingView()
         
-        networkService.getContests(gym: gym) { result in
+        networkService.getContests(gym: isFiltredByGym) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.view?.removeLoadingView()
                 
                 switch result {
                 case .success(let requsetResult):
-                    switch requsetResult?.status {
-                        case .success:
-                            guard
-                                let resultData = requsetResult?.result,
-                                resultData.isEmpty == false
-                            else {
-                                self?.view?.failure(error: "Соревнований нет...")
-                                return
-                            }
-                            
-                            self?.contests = resultData
-                            self?.filtredContests = resultData
-                            
-                            if self?.gym ?? false {
-                                self?.contests?.reverse()
-                                self?.filtredContests?.reverse()
-                            }
-                            
-                            self?.view?.success()
-                        case .failure:
-                            if self?.contests == nil {
-                                self?.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
-                            }
-                        case .none:
-                            break
+                    guard let requsetResult = requsetResult else {
+                        self?.handleFailure()
+                        return
+                    }
+                    switch requsetResult.status {
+                    case .success:
+                        self?.handleSuccess(requsetResult.result)
+                    case .failure:
+                        self?.handleFailure()
                     }
                 case .failure:
-                    if self?.contests == nil {
-                        self?.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
-                    }
+                    self?.handleFailure()
                 }
             }
         } 
     }
     
-    func sortContests() { }
+    func serachContest(by text: String) {
+        let lowerSearchText = text.lowercased()
+        
+        filtredContests = text.isEmpty
+        ? contests
+        : contests?.filter { contest -> Bool in
+            return contest.name.lowercased().contains(lowerSearchText)
+        }
+    }
+    
+    func getFiltredContests() -> [Contest]? {
+        return filtredContests
+    }
+    
+    func filterByGym() {
+        isFiltredByGym = !isFiltredByGym
+        getContests()
+    }
     
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
         router?.showContestDetail(contest: contest, selectedIndex: selectedIndex)
@@ -117,6 +110,36 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     func connectionUnsatisfied() {
         if contests == nil {
             view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+        } else {
+            view?.failure(error: "Интернет куда-то пропал...")
+        }
+    }
+    
+    private func handleSuccess(_ result: [Contest]?) {
+        guard
+            let resultData = result,
+            resultData.isEmpty == false
+        else {
+            view?.failure(error: "Соревнований нет")
+            return
+        }
+        
+        contests = resultData
+        filtredContests = resultData
+        
+        if isFiltredByGym {
+            contests?.reverse()
+            filtredContests?.reverse()
+        }
+        
+        view?.success()
+    }
+    
+    private func handleFailure() {
+        if contests == nil {
+            view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+        } else {
+            view?.failure(error: "Не удалось обновить список соревнований.")
         }
     }
 }

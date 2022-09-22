@@ -10,33 +10,41 @@ import UIKit
 
 class UserCell: UICollectionViewCell {
     
-    static let identifier = "UserCell"
+    private enum Constants {
+        
+        static let reuseId = "UserCell"
+    }
+    
+    static var reuseId: String { Constants.reuseId }
 
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var handler: UILabel!
+    @IBOutlet private weak var profileImage: UIImageView!
+    @IBOutlet private weak var handler: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.profileImage.makeRounded()
+        profileImage.makeRounded()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         profileImage.image = nil
+        handler.text = nil
     }
     
     func configure(user: User?) {
-        self.handler.text = user?.handle
+        handler.text = user?.handle
+        
         if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-            self.profileImage.load(url: urlImage)
+            profileImage.load(url: urlImage)
         }
         
         awakeFromNib()
     }
     
     static func nib() -> UINib {
-        return UINib(nibName: "UserCell", bundle: nil)
+        return UINib(nibName: Constants.reuseId, bundle: nil)
     }
 
 }

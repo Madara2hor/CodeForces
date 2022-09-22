@@ -9,34 +9,34 @@
 import UIKit
 
 class ContestsViewController: UIViewController {
-
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var contestTable: UITableView!
-    @IBOutlet weak var reloadData: UIButton!
-    @IBOutlet weak var gymFilter: UIButton!
-    @IBOutlet weak var menu: UIButton!
     
-    @IBOutlet weak var reloadRightAnchor: NSLayoutConstraint!
-    @IBOutlet weak var gymRightAnchor: NSLayoutConstraint!
-    
-    var isMenuShow = false
+    private enum Constants {
+        
+        
+    }
     
     var presenter: ContestsViewPresenterProtocol!
+
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var contestTable: UITableView!
+    @IBOutlet private weak var reloadData: UIButton!
+    @IBOutlet private weak var gymFilter: UIButton!
+    @IBOutlet private weak var menu: UIButton!
+    
+    @IBOutlet private weak var reloadRightAnchor: NSLayoutConstraint!
+    @IBOutlet private weak var gymRightAnchor: NSLayoutConstraint!
+    
+    private var isMenuShown = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMenuItemStyle(item: reloadData)
-        setupMenuItemStyle(item: gymFilter)
-        setupMenuItemStyle(item: menu)
+        setupMenuItemStyle(reloadData)
+        setupMenuItemStyle(gymFilter)
+        setupMenuItemStyle(menu)
         
-        contestTable.register(UINib(nibName: "ContestCellView", bundle: nil), forCellReuseIdentifier: "ContestCell")
+        contestTable.register(InfoCell.self)
         contestTable.tableFooterView = UIView()
-    }
-    
-    func setupMenuItemStyle(item: UIView) {
-        item.makeCircle()
-        item.makeTransparentBlue()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -45,39 +45,28 @@ class ContestsViewController: UIViewController {
         hideMenuItems()
     }
     
-    @IBAction func gymFilterDidTapped(_ sender: UIButton) {
-        if sender.tag == 0 {
-            sender.setImage(UIImage(named: "outline_gym"), for: .normal)
-            sender.tag = 1
-            
-            presenter?.gym = true
-        } else {
-            sender.setImage(UIImage(named: "outline_rating"), for: .normal)
-            sender.tag = 0
-            
-            presenter?.gym = false
-        }
-        
-        presenter?.getContests()
+    @IBAction private func gymFilterDidTapped(_ sender: UIButton) {
+        presenter.filterByGym()
     }
     
-    @IBAction func reloadDataDidTapped(_ sender: UIButton) {
-        presenter?.getContests()
+    @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
+        presenter.getContests()
     }
     
-    @IBAction func menuDidTapped(_ sender: Any) {
-        if menu.tag == 0 {
-            showMenuItems()
-        } else {
+    @IBAction private func menuDidTapped(_ sender: Any) {
+        if isMenuShown {
             hideMenuItems()
+        } else {
+            showMenuItems()
         }
     }
     
-    func showMenuItems() {
-        if isMenuShow {
-            return
-        }
-        
+    private func setupMenuItemStyle(_ item: UIView) {
+        item.makeCircle()
+        item.makeTransparentBlue()
+    }
+    
+    private func showMenuItems() {
         view.showViewWithAnimation(
             duration: 0.5,
             delay: .zero,
@@ -94,16 +83,11 @@ class ContestsViewController: UIViewController {
         )
 
         menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        menu.tag = 1
         
-        isMenuShow = true
+        isMenuShown = true
     }
     
-    func hideMenuItems() {
-        if isMenuShow == false {
-            return
-        }
-        
+    private func hideMenuItems() {
         view.hideViewWithAnimation(
             duration: 0.5,
             delay: 0.3,
@@ -120,23 +104,15 @@ class ContestsViewController: UIViewController {
         )
 
         menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        menu.tag = .zero
         
-        isMenuShow = false
+        isMenuShown = false
     }
-    
 }
 
 extension ContestsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let lowerSearchText = searchText.lowercased()
-        
-        presenter.filtredContests = searchText.isEmpty
-            ? presenter.contests
-            : presenter.contests?.filter { contest -> Bool in
-                return contest.name.lowercased().contains(lowerSearchText)
-            }
+        presenter.serachContest(by: searchText)
         
         contestTable.reloadData()
     }
@@ -149,13 +125,13 @@ extension ContestsViewController: UISearchBarDelegate {
 extension ContestsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.filtredContests?.count ?? .zero
+        return presenter.getFiltredContests()?.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContestCell", for: indexPath) as! ContestCell
+        let cell: InfoCell = tableView.dequeueReusableCell(for: indexPath)
         
-        cell.setContestData(contest: presenter.filtredContests?[indexPath.row])
+        cell.setContestData(contest: presenter.getFiltredContests()?[indexPath.row])
         
         return cell
     }
@@ -164,7 +140,7 @@ extension ContestsViewController: UITableViewDataSource {
 extension ContestsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contest = presenter?.filtredContests?[indexPath.row]
+        let contest = presenter?.getFiltredContests()?[indexPath.row]
         
         presenter?.showContestDetail(
             contest: contest,
@@ -174,26 +150,37 @@ extension ContestsViewController: UITableViewDelegate {
 }
 
 extension ContestsViewController: ContestsViewProtocol {
+    
+    func updateGymFilterButton(isFiltred: Bool) {
+        if isFiltred {
+            gymFilter.setImage(UIImage(named: "outline_gym"), for: .normal)
+        } else {
+            gymFilter.setImage(UIImage(named: "outline_rating"), for: .normal)
+        }
+    }
+    
     func success() {
         contestTable.reloadData()
-        contestTable.scrollToRow(at: IndexPath(row: .zero, section: .zero), at: .top, animated: true)
+        contestTable.scrollToRow(
+            at: IndexPath(row: .zero, section: .zero),
+            at: .top,
+            animated: true
+        )
     }
     
     func failure(error: String?) {
-        contestTable.setMessageBackgroundView(title: "Упс...", message: error ?? "")
+        contestTable.setMessageBackgroundView(title: "Упс...", message: error ?? .empty)
     }
     
     func setLoadingView() {
-        self.view.setLoadingSubview()
+        view.setLoadingSubview()
     }
     
     func removeLoadingView() {
-        self.view.removeLoadingSubview()
+        view.removeLoadingSubview()
     }
     
     func removeMessageSubview() {
-        if contestTable != nil {
-            contestTable.restore()
-        }
+        contestTable.restore()
     }
 }

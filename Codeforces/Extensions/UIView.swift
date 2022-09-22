@@ -37,15 +37,6 @@ extension UIView {
         backgroundColor = UIColor.black.withAlphaComponent(0.7)
     }
     
-    func setShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        layer.shadowOpacity = 1
-        layer.shadowRadius = 3.0
-        layer.masksToBounds = false
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-    }
-    
     func showViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat , view: UIView) {
         DispatchQueue.main.async {
             UIView.animate(
@@ -80,43 +71,8 @@ extension UIView {
         }
     }
     
-    func setProgressSubview() {
-        isUserInteractionEnabled = false
-        
-        let progressView = UIView()
-        let progress = UIProgressView()
-        
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progress.translatesAutoresizingMaskIntoConstraints = false
-        
-        progress.setProgress(0.0, animated: false)
-        progress.tintColor = UIColor.green
-        
-        progressView.addSubview(progress)
-        self.addSubview(progressView)
-        
-        //Отображается не корректно, нужны доп констрейнты
-        let progressViewConstraints: [NSLayoutConstraint] = [
-            progressView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            progressView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 80),
-            progressView.widthAnchor.constraint(equalToConstant: self.frame.width - 80),
-            progress.centerYAnchor.constraint(equalTo: progressView.centerYAnchor),
-            progress.centerXAnchor.constraint(equalTo: progressView.centerXAnchor)
-        ]
-        
-        active(constraints: progressViewConstraints)
-        
-        progressView.layoutIfNeeded()
-        progressView.makeRounded()
-        progressView.makeTransparentBlue()
-        
-        progress.accessibilityIdentifier = "progress"
-        progressView.accessibilityIdentifier = "progressView"
-    }
-    
     func setLoadingSubview() {
-        self.isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
         let spinnerViewFrame: CGFloat = 100
         
         let spinnerView = UIView()
@@ -172,7 +128,7 @@ extension UIView {
         messageView.addSubview(titleLabel)
         messageView.addSubview(messageLabel)
         
-        self.addSubview(messageView)
+        addSubview(messageView)
         
         let constraints: [NSLayoutConstraint] = [
             messageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -208,15 +164,6 @@ extension UIView {
         for constraint in constraints {
             constraint.isActive = true
         }
-    }
-    
-    func removeProgressView() {
-        guard let progressView = getViewWithIdentifier(identifier: "progressView") else {
-            return
-        }
-        
-        progressView.removeFromSuperview()
-        isUserInteractionEnabled = true
     }
     
     func removeLoadingSubview() {

@@ -35,7 +35,7 @@ class TopUsersViewContoller: UIViewController {
         setupMenuItemStyle(item: reloadData)
         setupMenuItemStyle(item: menu)
         
-        topUsersCollection.register(UserCell.nib(), forCellWithReuseIdentifier: "\(UserCell.identifier)")
+        topUsersCollection.register(UserCell.nib(), forCellWithReuseIdentifier: "\(UserCell.reuseId)")
     }
     
     func setupMenuItemStyle(item: UIView) {
@@ -211,7 +211,7 @@ extension TopUsersViewContoller: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.identifier)", for: indexPath) as? UserCell else {
+        guard let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.reuseId)", for: indexPath) as? UserCell else {
             return UICollectionViewCell()
         }
         

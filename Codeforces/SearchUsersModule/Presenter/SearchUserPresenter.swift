@@ -30,11 +30,13 @@ protocol SearchUserViewPresenterProtocol: AnyObject {
 
 class SearchUserPresenter: SearchUserViewPresenterProtocol {
     
-    weak var view: SearchUserViewProtocol?
-    var router: RouterProtocol?
-    let networkService: NetworkServiceProtocol!
     var searchedUser: String?
     var user: User?
+    
+    private weak var view: SearchUserViewProtocol?
+    
+    private let networkService: NetworkServiceProtocol!
+    private var router: RouterProtocol?
     
     required init(
         view: SearchUserViewProtocol,
@@ -47,36 +49,47 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     }
     
     func getUser() {
-        DispatchQueue.main.async {
-            self.view?.removeMessageSubview()
-            self.view?.setLoadingView()
-        }
+        view?.removeMessageSubview()
+        view?.setLoadingView()
         
-        networkService.getUser(username: searchedUser ?? "") { result in
+        networkService.getUser(username: searchedUser ?? .empty) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.view?.removeLoadingView()
                 
                 switch result {
                     case .success(let requsetResult):
-                        switch requsetResult?.status {
+                        guard let result = requsetResult else {
+                            self?.handleFailure()
+                            return
+                        }
+                    
+                        switch result.status {
                         case .success:
                             guard let resultUser = requsetResult?.result?[0] else {
                                 self?.view?.failure(error: "Ошибка получения пользователя")
                                 return
                             }
-                            self?.user = resultUser
                             
-                            self?.view?.success()
+                            self?.handleSuccess(resultUser)
                         case .failure:
-                            self?.user = nil
-                            self?.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
-                        case .none:
-                            break
+                            self?.handleFailure()
                     }
                 case .failure:
-                        self?.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+                    self?.handleFailure()
                 }
             }
         } 
+    }
+    
+    private func handleSuccess(_ resultUser: User) {
+        user = resultUser
+        
+        view?.success()
+    }
+    
+    private func handleFailure() {
+        user = nil
+        
+        view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
     }
 }

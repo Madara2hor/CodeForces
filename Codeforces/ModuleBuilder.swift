@@ -104,12 +104,11 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func setPresenterToConnectionMonitor(presenter: ConnectionMonitorProtocol) {
-        if InternetConnection.sharedIC.presenters != nil {
-            InternetConnection.sharedIC.presenters?.append(presenter)
+        if InternetConnection.shared.presenters != nil {
+            InternetConnection.shared.presenters?.append(presenter)
         } else {
-            InternetConnection.sharedIC.presenters = [presenter]
+            InternetConnection.shared.presenters = [presenter]
         }
-        
     }
     
     func loadView(view: UIViewController) {

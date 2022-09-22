@@ -9,10 +9,10 @@
 import Foundation
 import CommonCrypto
 
-public extension String {
+extension String {
    
     var sha512: String {
-        let data = self.data(using: .utf8) ?? Data()
+        let data = data(using: .utf8) ?? Data()
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
         
         data.withUnsafeBytes{
@@ -20,62 +20,6 @@ public extension String {
         }
         
         return digest.map({ String(format: "%02hhx", $0) }).joined(separator: "")
-    }
-    
-    func getTitledValue(title: String?, value: String?) -> String? {
-        if let stringValue = value {
-            if let title = title {
-                return "\(title): \(stringValue)"
-            } else {
-                return "\(stringValue)"
-            }
-        } else if let title = title {
-            return "\(title):"
-        }
-        
-        return nil
-    }
-    
-    func getTitledValue(title: String?, value: Int?) -> String? {
-        if let intValue = value {
-            if let title = title {
-                return "\(title): \(intValue)"
-            } else {
-                return "\(intValue)"
-            }
-        } else if let title = title {
-            return "\(title):"
-        }
-        
-        return nil
-    }
-    
-    func getDurationValue(title: String?, seconds: Int?) -> String? {
-        if let timeInSeconds = seconds {
-            if let title = title {
-                return "\(title): \(String(describing: timeInSeconds).durationFromSeconds)"
-            } else {
-                return String(describing: timeInSeconds).durationFromSeconds
-            }
-        } else if let title = title {
-            return "\(title):"
-        }
-        
-        return nil
-    }
-    
-    func getDateValue(title: String?, UNIX: Int?) -> String? {
-        if let timeInUNIX = UNIX {
-            if let title = title {
-                return "\(title): \(String(describing: timeInUNIX).date)"
-            } else {
-                return String(describing: timeInUNIX).date
-            }
-        } else if let title = title {
-            return "\(title):"
-        }
-        
-        return nil
     }
     
     var date: String {
@@ -113,9 +57,9 @@ public extension String {
             let firstDaysNumber = days / 10
             let lastDaysNumber = days % 10
             if firstDaysNumber == .zero {
-                duration = "\(days) \(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
+                duration = "\(days)\(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
             } else {
-                duration = "\(days) \(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
+                duration = "\(days)\(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
             }
         }
         
