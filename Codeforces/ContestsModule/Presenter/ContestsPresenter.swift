@@ -40,7 +40,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     private var router: RouterProtocol?
     private let networkService: NetworkServiceProtocol!
     
-    private var filtredContests: [Contest]?
+    private var notFiltredContests: [Contest]?
     
     required init(
         view: ContestsViewProtocol,
@@ -85,9 +85,9 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     func searchContest(by text: String) {
         let lowerSearchText = text.lowercased()
         
-        filtredContests = text.isEmpty
-            ? contests
-            : contests?.filter { $0.name.lowercased().contains(lowerSearchText) }
+        contests = text.isEmpty
+            ? notFiltredContests
+            : notFiltredContests?.filter { $0.name.lowercased().contains(lowerSearchText) }
     }
     
     func filterByGym() {
@@ -123,11 +123,11 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         }
         
         contests = resultData
-        filtredContests = resultData
+        notFiltredContests = resultData
         
         if isFiltredByGym {
             contests?.reverse()
-            filtredContests?.reverse()
+            notFiltredContests?.reverse()
         }
         
         view?.success()

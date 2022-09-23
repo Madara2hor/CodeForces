@@ -37,14 +37,15 @@ protocol TopUsersViewPresenterProtocol: ConnectionMonitorProtocol {
 
 class TopUsersPresenter: TopUsersViewPresenterProtocol {
     
-    weak var view: TopUsersViewProtocol?
-    var router: RouterProtocol?
-    var networkService: NetworkServiceProtocol!
-    
     var topUsers: [User]?
-    var filtredTopUsers: [User]?
     var isActiveOnly: Bool!
     var isHighToLow: Bool!
+    
+    private weak var view: TopUsersViewProtocol?
+    private var router: RouterProtocol?
+    private var networkService: NetworkServiceProtocol!
+    
+    private var notFiltredTopUsers: [User]?
     
     required init(
         view: TopUsersViewProtocol,
@@ -105,15 +106,15 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     func searchTopUser(_ username: String) {
         let lowerSearchText = username.lowercased()
         
-        filtredTopUsers = username.isEmpty
-            ? topUsers
-            : topUsers?.filter { $0.handle.lowercased().contains(lowerSearchText) }
+        topUsers = username.isEmpty
+            ? notFiltredTopUsers
+            : notFiltredTopUsers?.filter { $0.handle.lowercased().contains(lowerSearchText) }
     }
     
     func sortTopUsersByRating() {
         isHighToLow = !isHighToLow
         
-        filtredTopUsers = filtredTopUsers?.reversed()
+        topUsers = topUsers?.reversed()
         
         view?.topUsersSortedByRating()
     }
@@ -132,7 +133,7 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     
     private func handleSuccess(with users: [User]) {
         topUsers = isHighToLow ? users : users.reversed()
-        filtredTopUsers = isHighToLow ? users : users.reversed()
+        notFiltredTopUsers = isHighToLow ? users : users.reversed()
         
         view?.success()
     }

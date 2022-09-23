@@ -153,6 +153,7 @@ extension SearchUserViewController: UITableViewDelegate {
         
         let headerView = userTableView.dequeueReusableHeaderFooterView(UserHeaderView.self)
         headerView.setup(with: model)
+        
         let containerView: UIView = UIView()
         containerView.layoutSubview(headerView)
         containerView.backgroundColor = .systemBackground

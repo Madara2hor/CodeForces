@@ -13,6 +13,7 @@ class UserDetailViewController: UIViewController {
     private enum Constants {
         
         static let containerViewCornerRadius: CGFloat = 20
+        static let headerHeight: CGFloat = 150
     }
     
     var presenter: UserDetailViewPresenterProtocol!
@@ -25,7 +26,7 @@ class UserDetailViewController: UIViewController {
         super.viewDidLoad()
         
         containerView.roundCorners([.topLeft, .topRight], radius: Constants.containerViewCornerRadius)
-        presenter.setUser()
+        presenter.requestUser()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
         view.addGestureRecognizer(tap)
@@ -36,26 +37,54 @@ class UserDetailViewController: UIViewController {
     }
 }
 
+extension UserDetailViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter?.userInfo.count ?? .zero
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard
+            let userInfo = presenter?.userInfo,
+            indexPath.row < userInfo.count
+        else {
+            return UITableViewCell()
+        }
+        
+        let cell: InfoCell = userDetailTableView.dequeueReusableCell(for: indexPath)
+        
+        cell.update(with: userInfo[indexPath.row])
+        
+        return cell
+    }
+}
+
+extension UserDetailViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return presenter?.userHeaderModel == nil ? .zero : Constants.headerHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let model = presenter?.userHeaderModel else {
+            userDetailTableView.tableHeaderView = nil
+            return nil
+        }
+        
+        let headerView = userDetailTableView.dequeueReusableHeaderFooterView(UserHeaderView.self)
+        headerView.setup(with: model)
+        
+        let containerView: UIView = UIView()
+        containerView.layoutSubview(headerView)
+        containerView.backgroundColor = .systemBackground
+        
+        return containerView
+    }
+}
+
 extension UserDetailViewController: UserDetailViewProtocol {
     
-    func setUser(user: User?) {
-//        if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-//            profileImage.load(url: urlImage)
-//            profileImage.isHidden = false
-//        }
-        
-//        profileImage.makeRounded()
-//        online.text = String.getDateValue(title: nil, UNIX: user?.lastOnlineTimeSeconds)
-//        contribution.text = String.getTitledValue(title: "Друзья", value: user?.contribution)
-//        rating.text = String.getTitledValue(title: "Рейтинг", value: user?.rating)
-//        handle.text = String.getTitledValue(title: nil, value: user?.handle)
-//        firstName.text = String.getTitledValue(title: "Имя", value: user?.firstName)
-//        lastName.text = String.getTitledValue(title: "Фамилия", value: user?.lastName)
-//        country.text = String.getTitledValue(title: "Страна", value: user?.country)
-//        city.text = String.getTitledValue(title: "Город", value: user?.city)
-//        organization.text = String.getTitledValue(title: "Организачия", value: user?.organization)
-//        rank.text = String.getTitledValue(title: "Ранг", value: user?.rank)
-//        email.text = String.getTitledValue(title: "E-mail", value: user?.email)
-//        vkId.text = String.getTitledValue(title: "ВКонтакте", value: user?.vkId)
+    func updateUser() {
+        userDetailTableView.reloadData()
     }
 }

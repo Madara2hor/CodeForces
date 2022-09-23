@@ -25,9 +25,13 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kud-Qs-DX0" userLabel="Content view">
                     <rect key="frame" x="0.0" y="324.5" width="414" height="537.5"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="B9o-pY-QKL">
-                            <rect key="frame" x="0.0" y="20" width="414" height="509.5"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="B9o-pY-QKL">
+                            <rect key="frame" x="0.0" y="20" width="414" height="517.5"/>
                             <color key="backgroundColor" name="AppTheme"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Ns0-tR-Lgh"/>
+                                <outlet property="delegate" destination="-1" id="Ju7-HZ-IxG"/>
+                            </connections>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtd-WI-P0e">
                             <rect key="frame" x="184.5" y="8" width="45" height="4"/>
@@ -45,6 +49,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="B9o-pY-QKL" secondAttribute="bottom" id="EHp-dv-df6"/>
                         <constraint firstItem="gtd-WI-P0e" firstAttribute="top" secondItem="kud-Qs-DX0" secondAttribute="top" constant="8" id="MMY-yO-eHj"/>
                         <constraint firstItem="gtd-WI-P0e" firstAttribute="centerX" secondItem="kud-Qs-DX0" secondAttribute="centerX" id="XyO-9G-dpD"/>
                         <constraint firstAttribute="trailing" secondItem="B9o-pY-QKL" secondAttribute="trailing" id="ngC-l5-tHl"/>
