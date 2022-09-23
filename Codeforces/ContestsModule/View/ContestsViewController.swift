@@ -15,7 +15,7 @@ class ContestsViewController: UIViewController {
         
     }
     
-    var presenter: ContestsViewPresenterProtocol!
+    var presenter: ContestsViewPresenterProtocol?
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var contestTable: UITableView!
@@ -38,15 +38,27 @@ class ContestsViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        hideMenuItems()
+        if isMenuShown {
+            hideMenuItems()
+        }
     }
     
     @IBAction private func gymFilterDidTapped(_ sender: UIButton) {
+        guard let presenter = presenter else {
+            return
+        }
+        
+        if presenter.isFiltredByGym {
+            gymFilter.setImage(UIImage(named: "outline_rating"), for: .normal)
+        } else {
+            gymFilter.setImage(UIImage(named: "outline_gym"), for: .normal)
+        }
+        
         presenter.filterByGym()
     }
     
     @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
-        presenter.requestContests()
+        presenter?.requestContests()
     }
     
     @IBAction private func menuDidTapped(_ sender: Any) {
@@ -103,7 +115,7 @@ class ContestsViewController: UIViewController {
 extension ContestsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchContest(by: searchText)
+        presenter?.searchContest(by: searchText)
         
         contestTable.reloadData()
     }
@@ -116,13 +128,20 @@ extension ContestsViewController: UISearchBarDelegate {
 extension ContestsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.contests?.count ?? .zero
+        return presenter?.contests?.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard
+            let contests = presenter?.contests,
+            indexPath.row < contests.count
+        else {
+            return UITableViewCell()
+        }
+        
         let cell: ContestCell = tableView.dequeueReusableCell(for: indexPath)
         
-        cell.update(with: presenter.contests?[indexPath.row])
+        cell.update(with: contests[indexPath.row])
         
         return cell
     }
@@ -141,14 +160,6 @@ extension ContestsViewController: UITableViewDelegate {
 }
 
 extension ContestsViewController: ContestsViewProtocol {
-    
-    func updateGymFilterButton(isFiltred: Bool) {
-        if isFiltred {
-            gymFilter.setImage(UIImage(named: "outline_gym"), for: .normal)
-        } else {
-            gymFilter.setImage(UIImage(named: "outline_rating"), for: .normal)
-        }
-    }
     
     func success() {
         contestTable.reloadData()

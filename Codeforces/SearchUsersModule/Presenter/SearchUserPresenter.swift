@@ -75,7 +75,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
                         switch result.status {
                         case .success:
                             guard let resultUser = requsetResult?.result?[0] else {
-                                self?.view?.failure(error: "Ошибка получения пользователя")
+                                self?.handleFailure()
                                 return
                             }
                             
@@ -145,8 +145,11 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     }
     
     private func handleFailure() {
-        user = nil
-        
-        view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+        if user == nil {
+            view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+        } else {
+            user = nil
+            view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+        }
     }
 }

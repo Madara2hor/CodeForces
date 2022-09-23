@@ -15,6 +15,8 @@ class SearchUserViewController: UIViewController {
         static let headerHeight: CGFloat = 150
     }
     
+    var presenter: SearchUserViewPresenterProtocol?
+    
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var userTableView: UITableView!
     
@@ -25,9 +27,7 @@ class SearchUserViewController: UIViewController {
     @IBOutlet private weak var clearRightAnchor: NSLayoutConstraint!
     @IBOutlet private weak var reloadRightAnchor: NSLayoutConstraint!
     
-    var isMenuShown = false
-    
-    var presenter: SearchUserViewPresenterProtocol?
+    private var isMenuShown = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,9 @@ class SearchUserViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        hideMenuItems()
+        if isMenuShown {
+            hideMenuItems()
+        }
     }
     
     @IBAction private func clearPageDidTapped(_ sender: UIButton) {
@@ -178,17 +180,9 @@ extension SearchUserViewController: SearchUserViewProtocol {
     }
     
     func failure(error: String?) {
-        guard let error = error else {
-            return
-        }
-        
         userTableView.tableHeaderView = UIView()
         
-        if error != "handles: Field should not be empty" {
-            view.setMessageSubview(title: "Эх...", message: "Пользователь не найден")
-        } else {
-            view.setMessageSubview(title: "Вау!", message: error)
-        }
+        view.setMessageSubview(title: "Упс...", message: error ?? .empty)
     }
 }
 

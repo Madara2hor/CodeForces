@@ -48,29 +48,44 @@ class Router: RouterProtocol {
                 searchNavigationController,
                 notificationNavigationController
             ]
+            
             InternetConnection.shared.startMonitor()
         }
     }
     
     func showUserDetail(user: User?, selectedIndex: Int?) {
-        if selectedIndex == nil { return }
-        if let tabBarPage = tabBarController?.viewControllers?[selectedIndex!] {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        
+        if let tabBarPage = tabBarController?.viewControllers?[selectedIndex] {
             let viewController = tabBarPage as? UINavigationController
             
-            guard let navigationController = viewController else { return }
-            guard let detailViewController = moduleBuilder?.createUserDetailModule(user: user, router: self) else { return }
+            guard
+                let navigationController = viewController,
+                let detailViewController = moduleBuilder?.createUserDetailModule(user: user, router: self)
+            else {
+                return
+            }
             
             navigationController.present(detailViewController, animated: true)
         }
     }
     
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
-        if selectedIndex == nil { return }
-        if let tabBarPage = tabBarController?.viewControllers?[selectedIndex!] {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        
+        if let tabBarPage = tabBarController?.viewControllers?[selectedIndex] {
             let viewController = tabBarPage as? UINavigationController
             
-            guard let navigationController = viewController else { return }
-            guard let detailViewController = moduleBuilder?.createContestDetailModule(contest: contest, router: self) else { return }
+            guard
+                let navigationController = viewController,
+                let detailViewController = moduleBuilder?.createContestDetailModule(contest: contest, router: self)
+            else {
+                return
+            }
             
             navigationController.present(detailViewController, animated: true)
         }

@@ -15,71 +15,78 @@ class TopUsersViewContoller: UIViewController {
         static let itemsPerRow: CGFloat = 4
         static let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     }
-
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var topUsersCollection: UICollectionView!
     
-    @IBOutlet weak var ratingSort: UIButton!
-    @IBOutlet weak var activeOnlyFilter: UIButton!
-    @IBOutlet weak var reloadData: UIButton!
-    @IBOutlet weak var menu: UIButton!
+    var presenter: TopUsersViewPresenterProtocol?
     
-    @IBOutlet weak var reloadRightAnchor: NSLayoutConstraint!
-    @IBOutlet weak var activeRightAnchor: NSLayoutConstraint!
-    @IBOutlet weak var sortRightAnchor: NSLayoutConstraint!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var topUsersCollection: UICollectionView!
     
-    var isMenuShow = false
-    var presenter: TopUsersViewPresenterProtocol!
+    @IBOutlet private weak var ratingSort: UIButton!
+    @IBOutlet private weak var activeOnlyFilter: UIButton!
+    @IBOutlet private weak var reloadData: UIButton!
+    @IBOutlet private weak var menu: UIButton!
+    
+    @IBOutlet private weak var reloadRightAnchor: NSLayoutConstraint!
+    @IBOutlet private weak var activeRightAnchor: NSLayoutConstraint!
+    @IBOutlet private weak var sortRightAnchor: NSLayoutConstraint!
+    
+    private var isMenuShown = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topUsersCollection.register(UserCell.nib(), forCellWithReuseIdentifier: "\(UserCell.reuseId)")
+        topUsersCollection.register(UserCell.self)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        hideMenuItems()
-    }
-    
-    @IBAction func ratingSortDidTapped(_ sender: UIButton) {
-        presenter.sortTopUsers()
-    }
-    
-    @IBAction func activeFilterDidTapped(_ sender: UIButton) {
-        if sender.tag == .zero {
-            sender.setImage(UIImage(systemName: "tortoise"), for: .normal)
-            sender.tag = 1
-            
-            presenter.activeOnly = false
-        } else {
-            sender.setImage(UIImage(systemName: "hare"), for: .normal)
-            sender.tag = .zero
-            
-            presenter.activeOnly = true
-        }
-        
-        presenter.getTopUsers()
-    }
-    
-    @IBAction func reloadDataDidTapped(_ sender: UIButton) {
-        presenter.getTopUsers()
-    }
-    
-    @IBAction func menuDidTapped(_ sender: Any) {
-        if menu.tag == .zero {
-            showMenuItems()
-        } else {
+        if isMenuShown {
             hideMenuItems()
         }
     }
     
-    func showMenuItems() {
-        if isMenuShow {
+    @IBAction private func ratingSortDidTapped(_ sender: UIButton) {
+        guard let presenter = presenter else {
             return
         }
         
+        if presenter.isHighToLow {
+            ratingSort.setImage(UIImage(systemName: "arrow.up"), for: .normal)
+        } else {
+            ratingSort.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+        }
+        
+        presenter.sortTopUsersByRating()
+    }
+    
+    @IBAction private func activeFilterDidTapped(_ sender: UIButton) {
+        guard let presenter = presenter else {
+            return
+        }
+        
+        if presenter.isActiveOnly {
+            activeOnlyFilter.setImage(UIImage(systemName: "hare"), for: .normal)
+        } else {
+            activeOnlyFilter.setImage(UIImage(systemName: "tortoise"), for: .normal)
+        }
+        
+        presenter.requestTopUsers(isActiveOnly: presenter.isActiveOnly)
+    }
+    
+    @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
+        presenter?.requestTopUsers(isActiveOnly: nil)
+    }
+    
+    @IBAction private func menuDidTapped(_ sender: Any) {
+        if isMenuShown {
+            hideMenuItems()
+        } else {
+            showMenuItems()
+        }
+    }
+    
+    private func showMenuItems() {
         view.showViewWithAnimation(
             duration: 0.5,
             delay: .zero,
@@ -103,16 +110,11 @@ class TopUsersViewContoller: UIViewController {
         )
 
         menu.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-        menu.tag = 1
         
-        isMenuShow = true
+        isMenuShown = true
     }
     
-    func hideMenuItems() {
-        if isMenuShow == false {
-            return
-        }
-        
+    private func hideMenuItems() {
         view.hideViewWithAnimation(
             duration: 0.5,
             delay: 0.6,
@@ -136,21 +138,15 @@ class TopUsersViewContoller: UIViewController {
         )
         
         menu.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        menu.tag = 0
         
-        isMenuShow = false
+        isMenuShown = false
     }
-
 }
 
 extension TopUsersViewContoller: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let lowerSearchText = searchText.lowercased()
-        presenter.filtredTopUsers = searchText.isEmpty
-            ? presenter.topUsers
-            : presenter.topUsers?.filter { user -> Bool in
-                return user.handle.lowercased().contains(lowerSearchText)
-            }
+        presenter?.searchTopUser(searchText)
         
         topUsersCollection.reloadData()
     }
@@ -174,7 +170,6 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -182,7 +177,6 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
     ) -> UIEdgeInsets {
         return Constants.sectionInsets
     }
-    
     
     func collectionView(
         _ collectionView: UICollectionView,
@@ -194,22 +188,28 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
 }
 
 extension TopUsersViewContoller: UICollectionViewDataSource {
+    
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return presenter.filtredTopUsers?.count ?? .zero
+        return presenter?.topUsers?.count ?? .zero
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let userCell = topUsersCollection.dequeueReusableCell(withReuseIdentifier:  "\(UserCell.reuseId)", for: indexPath) as? UserCell else {
+        guard
+            let topUsers = presenter?.topUsers,
+            indexPath.row < topUsers.count
+        else {
             return UICollectionViewCell()
         }
         
-        userCell.setup(with: presenter.filtredTopUsers?[indexPath.row])
+        let userCell: UserCell = topUsersCollection.dequeueReusableCell(for: indexPath)
+        
+        userCell.setup(with: topUsers[indexPath.row])
         
         return userCell
     }
@@ -218,9 +218,16 @@ extension TopUsersViewContoller: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let user = presenter.filtredTopUsers?[indexPath.row]
+        guard
+            let topUsers = presenter?.topUsers,
+            indexPath.row < topUsers.count
+        else {
+            return
+        }
         
-        presenter.showUserDetail(user: user, selectedIndex: self.tabBarController?.selectedIndex)
+        let user = topUsers[indexPath.row]
+        
+        presenter?.showUserDetail(user: user, selectedIndex: tabBarController?.selectedIndex)
     }
 }
 
@@ -243,19 +250,10 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
         topUsersCollection.setMessageBackgroundView(title: "Упс...", message: error ?? .empty)
     }
     
-    func topUsersSorted() {
-        if ratingSort.tag == .zero {
-            ratingSort.setImage(UIImage(systemName: "arrow.up"), for: .normal)
-            ratingSort.tag = 1
-        } else {
-            ratingSort.setImage(UIImage(systemName: "arrow.down"), for: .normal)
-            ratingSort.tag = .zero
-        }
-        
+    func topUsersSortedByRating() {
         topUsersCollection.reloadData()
         topUsersCollection.scrollToItem(at: IndexPath(row: .zero, section: .zero), at: .top, animated: true)
     }
-
     
     func setLoadingView() {
         view.setLoadingSubview()
@@ -270,5 +268,4 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
             topUsersCollection.restore()
         }
     }
-    
 }

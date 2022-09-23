@@ -10,28 +10,21 @@ import UIKit
 
 class UserDetailViewController: UIViewController {
     
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var handle: UILabel!
-    @IBOutlet weak var online: UILabel!
-    @IBOutlet weak var firstName: UILabel!
-    @IBOutlet weak var lastName: UILabel!
-    @IBOutlet weak var country: UILabel!
-    @IBOutlet weak var city: UILabel!
-    @IBOutlet weak var organization: UILabel!
-    @IBOutlet weak var contribution: UILabel!
-    @IBOutlet weak var rank: UILabel!
-    @IBOutlet weak var rating: UILabel!
-    @IBOutlet weak var email: UILabel!
-    @IBOutlet weak var vkId: UILabel!
-    
-    @IBOutlet weak var contentView: UIView!
+    private enum Constants {
+        
+        static let containerViewCornerRadius: CGFloat = 20
+    }
     
     var presenter: UserDetailViewPresenterProtocol!
+    
+    @IBOutlet private weak var userDetailTableView: UITableView!
+    @IBOutlet private weak var containerView: UIView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contentView.roundCorners([.topLeft, .topRight], radius: 20)
+        containerView.roundCorners([.topLeft, .topRight], radius: Constants.containerViewCornerRadius)
         presenter.setUser()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
@@ -44,11 +37,12 @@ class UserDetailViewController: UIViewController {
 }
 
 extension UserDetailViewController: UserDetailViewProtocol {
+    
     func setUser(user: User?) {
-        if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-            profileImage.load(url: urlImage)
-            profileImage.isHidden = false
-        }
+//        if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
+//            profileImage.load(url: urlImage)
+//            profileImage.isHidden = false
+//        }
         
 //        profileImage.makeRounded()
 //        online.text = String.getDateValue(title: nil, UNIX: user?.lastOnlineTimeSeconds)

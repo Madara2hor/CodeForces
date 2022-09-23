@@ -6,7 +6,6 @@
 //  Copyright © 2020 Madara2hor. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UITableView {
@@ -27,7 +26,10 @@ extension UITableView {
         register(nib, forCellReuseIdentifier: String(describing: cellType.self))
     }
 
-    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath, reuseIdentifier: String? = nil) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(
+        for indexPath: IndexPath,
+        reuseIdentifier: String? = nil
+    ) -> T {
         return dequeueReusableCell(
             withIdentifier: reuseIdentifier ?? String(describing: T.self),
             for: indexPath

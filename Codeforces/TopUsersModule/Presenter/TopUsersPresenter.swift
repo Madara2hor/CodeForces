@@ -17,24 +17,22 @@ protocol TopUsersViewProtocol: AnyObject {
     func success()
     func failure(error: String?)
     
-    func topUsersSorted()
+    func topUsersSortedByRating()
 }
 
-protocol TopUsersViewPresenterProtocol: FilterTopUsersProtocol, ConnectionMonitorProtocol {
-    var topUsers: [User]? { get set }
-    var activeOnly: Bool! { get set }
+protocol TopUsersViewPresenterProtocol: ConnectionMonitorProtocol {
+    
+    var topUsers: [User]? { get }
+    var isActiveOnly: Bool! { get }
+    var isHighToLow: Bool! { get }
     
     init(view: TopUsersViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
+    func requestTopUsers(isActiveOnly: Bool?)
+    func searchTopUser(_ username: String)
+    func sortTopUsersByRating()
+    
     func showUserDetail(user: User?, selectedIndex: Int?)
-    func getTopUsers()
-}
-
-protocol FilterTopUsersProtocol: AnyObject {
-    
-    var filtredTopUsers: [User]? { get set }
-    
-    func sortTopUsers()
 }
 
 class TopUsersPresenter: TopUsersViewPresenterProtocol {
@@ -45,7 +43,8 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     
     var topUsers: [User]?
     var filtredTopUsers: [User]?
-    var activeOnly: Bool!
+    var isActiveOnly: Bool!
+    var isHighToLow: Bool!
     
     required init(
         view: TopUsersViewProtocol,
@@ -55,44 +54,45 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         self.view = view
         self.router = router
         self.networkService = networkService
-        activeOnly = true
+        
+        isActiveOnly = true
+        isHighToLow = true
     }
     
-    func getTopUsers() {
+    func requestTopUsers(isActiveOnly: Bool? = nil) {
+        if let isActiveOnly = isActiveOnly {
+            self.isActiveOnly = isActiveOnly
+        }
+        
         view?.removeMessageSubview()
         view?.setLoadingView()
         
-        networkService.getTopUsers(activeOnly: activeOnly) { result in
+        networkService.getTopUsers(activeOnly: self.isActiveOnly) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.view?.removeLoadingView()
                 
                 switch result {
                 case .success(let requestResult):
-                    switch requestResult?.status {
-                        case .success:
-                            guard
-                                let resultTopUsers = requestResult?.result,
-                                !resultTopUsers.isEmpty
-                            else {
-                                self?.view?.failure(error: "Топ-пользователей нет...")
-                                return
-                            }
+                    guard let result = requestResult else {
+                        return
+                    }
+                    
+                    switch result.status {
+                    case .success:
+                        guard
+                            let resultTopUsers = requestResult?.result,
+                            resultTopUsers.isEmpty == false
+                        else {
+                            self?.handleFailure()
+                            return
+                        }
                             
-                            self?.topUsers = resultTopUsers
-                            self?.filtredTopUsers = resultTopUsers
-                            
-                            self?.view?.success()
-                        case .failure:
-                            if self?.topUsers == nil {
-                                self?.view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
-                            }
-                        case .none:
-                            break
+                        self?.handleSuccess(with: resultTopUsers)
+                    case .failure:
+                        self?.handleFailure()
                     }
                 case .failure:
-                    if self?.topUsers == nil {
-                        self?.view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
-                    }
+                    self?.handleFailure()
                 }
             }
         }
@@ -102,30 +102,46 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         router?.showUserDetail(user: user, selectedIndex: selectedIndex)
     }
     
-    func sortTopUsers() {
-        guard
-            let filtredUsers = self.filtredTopUsers,
-            filtredUsers.isEmpty == false
-        else {
-            return
-        }
+    func searchTopUser(_ username: String) {
+        let lowerSearchText = username.lowercased()
         
-        filtredTopUsers?.reverse()
+        filtredTopUsers = username.isEmpty
+            ? topUsers
+            : topUsers?.filter { $0.handle.lowercased().contains(lowerSearchText) }
+    }
+    
+    func sortTopUsersByRating() {
+        isHighToLow = !isHighToLow
         
-        DispatchQueue.main.async {
-            self.view?.topUsersSorted()
-        }
+        filtredTopUsers = filtredTopUsers?.reversed()
+        
+        view?.topUsersSortedByRating()
     }
     
     func connectionSatisfied() {
         if topUsers == nil {
-            getTopUsers()
+            requestTopUsers()
         }
     }
     
     func connectionUnsatisfied() {
         if topUsers == nil {
             view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
+        }
+    }
+    
+    private func handleSuccess(with users: [User]) {
+        topUsers = isHighToLow ? users : users.reversed()
+        filtredTopUsers = isHighToLow ? users : users.reversed()
+        
+        view?.success()
+    }
+    
+    private func handleFailure() {
+        if topUsers == nil {
+            view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
+        } else {
+            view?.failure(error: "Не удалось получить список топ пользователей.")
         }
     }
 }

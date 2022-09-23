@@ -8,14 +8,14 @@
 
 import UIKit
 
-class UserCell: UICollectionViewCell {
+class UserCell: UICollectionViewCell, CellRegistrable {
     
     private enum Constants {
         
-        static let reuseId = "UserCell"
+        static let nibName = "UserCell"
     }
     
-    static var reuseId: String { Constants.reuseId }
+    static var nibName: String { Constants.nibName }
 
     @IBOutlet private weak var profileImage: UIImageView!
     @IBOutlet private weak var usernameContainer: UIView!
@@ -39,9 +39,4 @@ class UserCell: UICollectionViewCell {
         handler.text = user?.handle
         blurView = usernameContainer.configureBlur(effect: .dark)
     }
-    
-    static func nib() -> UINib {
-        return UINib(nibName: Constants.reuseId, bundle: nil)
-    }
-
 }

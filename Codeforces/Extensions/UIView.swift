@@ -6,7 +6,6 @@
 //  Copyright © 2020 Madara2hor. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UIView {
@@ -50,26 +49,6 @@ extension UIView {
         layer.cornerRadius = radius
         layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
     }
-//
-//    func makeRounded() {
-//        layer.cornerRadius = frame.height / 6
-//        layer.masksToBounds = true
-//        clipsToBounds = true
-//    }
-    
-//    func makeCircle() {
-//        layer.cornerRadius = frame.height / 2
-//        layer.masksToBounds = true
-//        clipsToBounds = true
-//    }
-    
-//    func makeTransparentBlue() {
-//        backgroundColor = UIColor.buttonColor.withAlphaComponent(0.7)
-//    }
-//
-//    func makeTransparentBlack() {
-//        backgroundColor = UIColor.black.withAlphaComponent(0.7)
-//    }
     
     func showViewWithAnimation(
         duration: Double,
@@ -101,7 +80,7 @@ extension UIView {
         anchorConstant: CGFloat,
         view: UIView
     ) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             UIView.animate(
                 withDuration: duration,
                 delay: delay,

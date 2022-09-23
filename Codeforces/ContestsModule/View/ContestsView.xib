@@ -117,8 +117,8 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ak2-qa-PhA" secondAttribute="trailing" constant="20" id="w9q-tP-1UD"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="wqw-FQ-PH5"/>
                 <constraint firstItem="ak2-qa-PhA" firstAttribute="top" secondItem="fRw-iP-Xkw" secondAttribute="bottom" constant="8" id="xH0-x0-ngT"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fRw-iP-Xkw" secondAttribute="trailing" constant="-55" id="xS6-BL-Rk2"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HDV-5t-XAn" secondAttribute="trailing" constant="-55" id="zK4-05-f9Y"/>
+                <constraint firstAttribute="trailing" secondItem="fRw-iP-Xkw" secondAttribute="trailing" constant="-55" id="xS6-BL-Rk2"/>
+                <constraint firstAttribute="trailing" secondItem="HDV-5t-XAn" secondAttribute="trailing" constant="-55" id="zK4-05-f9Y"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="144.64285714285714"/>
         </view>

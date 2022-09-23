@@ -10,18 +10,23 @@ import UIKit
 
 class ContestDetailViewController: UIViewController {
     
-    @IBOutlet private weak var detailTableView: UITableView!
-    @IBOutlet private weak var scrollView: UIScrollView!
+    private enum Constants {
+        
+        static let containerViewCornerRadius: CGFloat = 20
+    }
     
     var presenter: ContestDetailViewPresenterProtocol?
+    
+    @IBOutlet private weak var contestDetailTableView: UITableView!
+    @IBOutlet private weak var containerView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailTableView.register(InfoCell.self)
-        detailTableView.tableFooterView = UIView()
+        contestDetailTableView.register(InfoCell.self)
+        contestDetailTableView.tableFooterView = UIView()
         
-        scrollView.roundCorners([.topLeft, .topRight], radius: 20)
+        containerView.roundCorners([.topLeft, .topRight], radius: Constants.containerViewCornerRadius)
         presenter?.requestContest()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
@@ -47,7 +52,7 @@ extension ContestDetailViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let cell: InfoCell = detailTableView.dequeueReusableCell(for: indexPath)
+        let cell: InfoCell = contestDetailTableView.dequeueReusableCell(for: indexPath)
         
         cell.update(with: contestInfo[indexPath.row])
         
@@ -62,6 +67,6 @@ extension ContestDetailViewController: UITableViewDataSource {
 extension ContestDetailViewController: ContestDetailViewProtocol {
     
     func updateContest() {
-        detailTableView.reloadData()
+        contestDetailTableView.reloadData()
     }
 }

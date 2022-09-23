@@ -12,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContestDetailViewController" customModule="Code_Forces" customModuleProvider="target">
             <connections>
+                <outlet property="containerView" destination="k0m-dF-0ow" id="KQd-ha-xj6"/>
                 <outlet property="detailTableView" destination="uuR-eL-Itq" id="dFc-GQ-k3r"/>
-                <outlet property="scrollView" destination="tN9-Ts-eTg" id="mYx-TK-xgZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,63 +22,49 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN9-Ts-eTg">
-                    <rect key="frame" x="0.0" y="358.5" width="414" height="537.5"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0m-dF-0ow" userLabel="Content view">
+                    <rect key="frame" x="0.0" y="324.5" width="414" height="537.5"/>
                     <subviews>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0m-dF-0ow" userLabel="Content view">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="537.5"/>
-                            <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-eL-Itq">
-                                    <rect key="frame" x="0.0" y="20" width="414" height="509.5"/>
-                                    <color key="backgroundColor" name="AppTheme"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="DoM-xb-6CZ"/>
-                                        <outlet property="delegate" destination="-1" id="h2B-75-GGZ"/>
-                                    </connections>
-                                </tableView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-Sc-a4r">
-                                    <rect key="frame" x="184.5" y="8" width="45" height="4"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="45" id="jJa-td-aRD"/>
-                                        <constraint firstAttribute="height" constant="4" id="vde-rj-Gnf"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="2"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-eL-Itq">
+                            <rect key="frame" x="0.0" y="20" width="414" height="509.5"/>
+                            <color key="backgroundColor" name="AppTheme"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="DoM-xb-6CZ"/>
+                                <outlet property="delegate" destination="-1" id="h2B-75-GGZ"/>
+                            </connections>
+                        </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4GU-Sc-a4r">
+                            <rect key="frame" x="184.5" y="8" width="45" height="4"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="uuR-eL-Itq" secondAttribute="bottom" constant="8" id="0vD-dX-OoA"/>
-                                <constraint firstAttribute="trailing" secondItem="uuR-eL-Itq" secondAttribute="trailing" id="91W-dn-9oE"/>
-                                <constraint firstItem="uuR-eL-Itq" firstAttribute="top" secondItem="k0m-dF-0ow" secondAttribute="top" constant="20" symbolic="YES" id="Rca-oc-rxN"/>
-                                <constraint firstItem="uuR-eL-Itq" firstAttribute="leading" secondItem="k0m-dF-0ow" secondAttribute="leading" id="SpN-hD-nQE"/>
-                                <constraint firstItem="4GU-Sc-a4r" firstAttribute="top" secondItem="k0m-dF-0ow" secondAttribute="top" constant="8" id="Xr9-nr-qDL"/>
-                                <constraint firstItem="4GU-Sc-a4r" firstAttribute="centerX" secondItem="k0m-dF-0ow" secondAttribute="centerX" id="xdb-o0-1o8"/>
+                                <constraint firstAttribute="width" constant="45" id="jJa-td-aRD"/>
+                                <constraint firstAttribute="height" constant="4" id="vde-rj-Gnf"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" name="AppTheme"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="k0m-dF-0ow" secondAttribute="trailing" id="BZb-8t-FNE"/>
-                        <constraint firstAttribute="bottom" secondItem="k0m-dF-0ow" secondAttribute="bottom" id="Jv4-Ux-daW"/>
-                        <constraint firstItem="k0m-dF-0ow" firstAttribute="top" secondItem="tN9-Ts-eTg" secondAttribute="top" id="RMn-Cp-pup"/>
-                        <constraint firstItem="k0m-dF-0ow" firstAttribute="width" secondItem="tN9-Ts-eTg" secondAttribute="width" id="Z4h-L6-DlF"/>
-                        <constraint firstItem="k0m-dF-0ow" firstAttribute="height" secondItem="tN9-Ts-eTg" secondAttribute="height" priority="250" id="kmc-73-9yj"/>
-                        <constraint firstItem="k0m-dF-0ow" firstAttribute="leading" secondItem="tN9-Ts-eTg" secondAttribute="leading" id="xbj-Fg-1KP"/>
+                        <constraint firstAttribute="bottom" secondItem="uuR-eL-Itq" secondAttribute="bottom" constant="8" id="0vD-dX-OoA"/>
+                        <constraint firstAttribute="trailing" secondItem="uuR-eL-Itq" secondAttribute="trailing" id="91W-dn-9oE"/>
+                        <constraint firstItem="uuR-eL-Itq" firstAttribute="top" secondItem="k0m-dF-0ow" secondAttribute="top" constant="20" symbolic="YES" id="Rca-oc-rxN"/>
+                        <constraint firstItem="uuR-eL-Itq" firstAttribute="leading" secondItem="k0m-dF-0ow" secondAttribute="leading" id="SpN-hD-nQE"/>
+                        <constraint firstItem="4GU-Sc-a4r" firstAttribute="top" secondItem="k0m-dF-0ow" secondAttribute="top" constant="8" id="Xr9-nr-qDL"/>
+                        <constraint firstItem="4GU-Sc-a4r" firstAttribute="centerX" secondItem="k0m-dF-0ow" secondAttribute="centerX" id="xdb-o0-1o8"/>
                     </constraints>
-                </scrollView>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="tN9-Ts-eTg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="50O-Zb-VRV"/>
-                <constraint firstItem="tN9-Ts-eTg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="eqr-xB-UK7"/>
-                <constraint firstAttribute="bottom" secondItem="tN9-Ts-eTg" secondAttribute="bottom" id="ypg-II-J02"/>
-                <constraint firstItem="tN9-Ts-eTg" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.2:2" priority="750" id="ysw-DC-vlB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="k0m-dF-0ow" secondAttribute="bottom" id="3N1-Ak-2Hl"/>
+                <constraint firstItem="k0m-dF-0ow" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.2:2" id="Fz7-SP-uvi"/>
+                <constraint firstItem="k0m-dF-0ow" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dZn-gc-jf8"/>
+                <constraint firstItem="k0m-dF-0ow" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rom-Ly-l0r"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="102.45535714285714"/>
         </view>

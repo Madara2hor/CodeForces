@@ -13,7 +13,6 @@ protocol ContestsViewProtocol: AnyObject {
     func setLoadingView()
     func removeLoadingView()
     func removeMessageSubview()
-    func updateGymFilterButton(isFiltred: Bool)
     
     func success()
     func failure(error: String?)
@@ -22,6 +21,7 @@ protocol ContestsViewProtocol: AnyObject {
 protocol ContestsViewPresenterProtocol: ConnectionMonitorProtocol {
     
     var contests: [Contest]? { get }
+    var isFiltredByGym: Bool! { get }
     
     init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
@@ -34,13 +34,13 @@ protocol ContestsViewPresenterProtocol: ConnectionMonitorProtocol {
 class ContestsPresenter: ContestsViewPresenterProtocol {
     
     var contests: [Contest]?
+    var isFiltredByGym: Bool!
     
     private weak var view: ContestsViewProtocol?
     private var router: RouterProtocol?
     private let networkService: NetworkServiceProtocol!
     
     private var filtredContests: [Contest]?
-    private var isFiltredByGym: Bool!
     
     required init(
         view: ContestsViewProtocol,
@@ -68,6 +68,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                         self?.handleFailure()
                         return
                     }
+                    
                     switch requsetResult.status {
                     case .success:
                         self?.handleSuccess(requsetResult.result)
@@ -85,10 +86,8 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         let lowerSearchText = text.lowercased()
         
         filtredContests = text.isEmpty
-        ? contests
-        : contests?.filter { contest -> Bool in
-            return contest.name.lowercased().contains(lowerSearchText)
-        }
+            ? contests
+            : contests?.filter { $0.name.lowercased().contains(lowerSearchText) }
     }
     
     func filterByGym() {
@@ -138,7 +137,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         if contests == nil {
             view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
         } else {
-            view?.failure(error: "Не удалось обновить список соревнований.")
+            view?.failure(error: "Не удалось получить список соревнований.")
         }
     }
 }

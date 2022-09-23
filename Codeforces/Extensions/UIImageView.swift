@@ -1,12 +1,11 @@
 //
 //  UIImageView.swift
-//  Twitter
+//  Codeforces
 //
 //  Created by Madara2hor on 05.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Alamofire
 

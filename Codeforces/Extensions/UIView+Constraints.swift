@@ -1,9 +1,9 @@
 //
-//  UIView+Constraints.swift
-//  DMVGenius
+//  PrimitiveLiterals.swift
+//  Codeforces
 //
-//  Created by Nikolai Timonin on 16.06.2022.
-//  Copyright © 2022 MobileUp LLC. All rights reserved.
+//  Created by Кирилл on 22.09.2022.
+//  Copyright © 2022 Madara2hor. All rights reserved.
 //
 
 import UIKit
@@ -26,7 +26,6 @@ struct LayoutInsets {
         return LayoutInsets(top: top, left: left, bottom: bottom, right: right)
     }
 }
-
 
 struct LayoutDimension: OptionSet {
 
