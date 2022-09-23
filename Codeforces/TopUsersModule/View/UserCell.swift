@@ -18,29 +18,26 @@ class UserCell: UICollectionViewCell {
     static var reuseId: String { Constants.reuseId }
 
     @IBOutlet private weak var profileImage: UIImageView!
+    @IBOutlet private weak var usernameContainer: UIView!
     @IBOutlet private weak var handler: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        profileImage.makeRounded()
-    }
+    private var blurView: UIVisualEffectView?
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         profileImage.image = nil
         handler.text = nil
+        blurView?.removeFromSuperview()
     }
     
-    func configure(user: User?) {
-        handler.text = user?.handle
-        
+    func setup(with user: User?) {
         if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
             profileImage.load(url: urlImage)
         }
         
-        awakeFromNib()
+        handler.text = user?.handle
+        blurView = usernameContainer.configureBlur(effect: .dark)
     }
     
     static func nib() -> UINib {

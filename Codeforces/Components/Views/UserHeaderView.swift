@@ -12,14 +12,35 @@ struct UserHeaderViewModel {
     
     let image: String
     let username: String
-    let status: String
+    let isOnline: Bool
 }
 
-final class UserHeaderView: UITableViewHeaderFooterView {
+final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
+    
+    private enum Constants {
+        
+        static let nibName = "UserHeaderView"
+    }
+    
+    static var nibName: String { Constants.nibName }
+    
     
     @IBOutlet private weak var userImage: UIImageView!
+    @IBOutlet private weak var userStatusImage: UIImageView!
+    @IBOutlet private weak var usernameContainer: UIView!
     @IBOutlet private weak var usernameTitle: UILabel!
-    @IBOutlet private weak var userStatus: UILabel!
+    
+    private var blurView: UIVisualEffectView?
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        userImage.image = nil
+        usernameTitle.text = nil
+        blurView?.removeFromSuperview()
+        
+        userStatusImage.tintColor = .red
+    }
     
     func setup(with model: UserHeaderViewModel) {
         if let urlImage = URL(string: "http:\(model.image)" ) {
@@ -28,9 +49,13 @@ final class UserHeaderView: UITableViewHeaderFooterView {
             userImage.image = UIImage(systemName: "person")
         }
         
-        userImage.makeRounded()
-        
         usernameTitle.text = model.username
-        userStatus.text = model.status
+        blurView = usernameContainer.configureBlur()
+        
+        if model.isOnline {
+            userStatusImage.tintColor = .green
+        } else {
+            userStatusImage.tintColor = .red
+        }
     }
 }

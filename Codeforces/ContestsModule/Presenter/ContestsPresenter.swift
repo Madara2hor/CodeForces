@@ -20,23 +20,25 @@ protocol ContestsViewProtocol: AnyObject {
 }
 
 protocol ContestsViewPresenterProtocol: ConnectionMonitorProtocol {
-        
+    
+    var contests: [Contest]? { get }
+    
     init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
-    func getContests()
-    func serachContest(by text: String)
-    func getFiltredContests() -> [Contest]?
+    func requestContests()
+    func searchContest(by text: String)
     func filterByGym()
     func showContestDetail(contest: Contest?, selectedIndex: Int?)
 }
 
 class ContestsPresenter: ContestsViewPresenterProtocol {
     
+    var contests: [Contest]?
+    
     private weak var view: ContestsViewProtocol?
     private var router: RouterProtocol?
     private let networkService: NetworkServiceProtocol!
     
-    private var contests: [Contest]?
     private var filtredContests: [Contest]?
     private var isFiltredByGym: Bool!
     
@@ -48,10 +50,11 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         self.view = view
         self.router = router
         self.networkService = networkService
+        
         isFiltredByGym = false
     }
     
-    func getContests() {
+    func requestContests() {
         view?.removeMessageSubview()
         view?.setLoadingView()
         
@@ -78,7 +81,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         } 
     }
     
-    func serachContest(by text: String) {
+    func searchContest(by text: String) {
         let lowerSearchText = text.lowercased()
         
         filtredContests = text.isEmpty
@@ -88,13 +91,9 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         }
     }
     
-    func getFiltredContests() -> [Contest]? {
-        return filtredContests
-    }
-    
     func filterByGym() {
         isFiltredByGym = !isFiltredByGym
-        getContests()
+        requestContests()
     }
     
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
@@ -103,7 +102,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     
     func connectionSatisfied() {
         if contests == nil {
-            getContests()
+            requestContests()
         }
     }
     

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,8 +29,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Aeh-xG-MrP">
-                    <rect key="frame" x="0.0" y="100" width="414" height="762"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="q97-SH-phD">
                         <size key="itemSize" width="100" height="100"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -40,68 +42,90 @@
                         <outlet property="delegate" destination="-1" id="Bkc-Oc-AFT"/>
                     </connections>
                 </collectionView>
-                <searchBar contentMode="redraw" placeholder="Введите имя пользователя" translatesAutoresizingMaskIntoConstraints="NO" id="1Ut-oj-Hhk">
-                    <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите имя пользователя" translatesAutoresizingMaskIntoConstraints="NO" id="1Ut-oj-Hhk">
+                    <rect key="frame" x="0.0" y="48" width="414" height="56"/>
+                    <color key="barTintColor" name="AppTheme"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="xCl-1A-rka"/>
                     </connections>
                 </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-UF-56L" userLabel="Menu">
-                    <rect key="frame" x="319" y="760" width="75" height="75"/>
+                    <rect key="frame" x="320" y="761" width="74" height="74"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" identifier="menu"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="75" id="cDx-pC-op0"/>
-                        <constraint firstAttribute="height" constant="75" id="eOo-wM-8rd"/>
+                        <constraint firstAttribute="width" constant="74" id="cDx-pC-op0"/>
+                        <constraint firstAttribute="height" constant="74" id="eOo-wM-8rd"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="chevron.left" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="37"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="menuDidTapped:" destination="-1" eventType="touchUpInside" id="re3-H5-R9f"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZx-M6-cpT" userLabel="Active">
-                    <rect key="frame" x="414" y="634" width="55" height="55"/>
+                    <rect key="frame" x="415" y="637" width="54" height="54"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="CH4-ha-PHD"/>
-                        <constraint firstAttribute="width" constant="55" id="SZh-97-kC9"/>
+                        <constraint firstAttribute="height" constant="54" id="CH4-ha-PHD"/>
+                        <constraint firstAttribute="width" constant="54" id="SZh-97-kC9"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="hare" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="activeFilterDidTapped:" destination="-1" eventType="touchUpInside" id="Bda-SK-sjx"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5h-ds-bdv" userLabel="Update">
-                    <rect key="frame" x="414" y="697" width="55" height="55"/>
+                    <rect key="frame" x="415" y="699" width="54" height="54"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="55" id="D52-Fc-FXy"/>
-                        <constraint firstAttribute="height" constant="55" id="aJf-pf-UvW"/>
+                        <constraint firstAttribute="width" constant="54" id="D52-Fc-FXy"/>
+                        <constraint firstAttribute="height" constant="54" id="aJf-pf-UvW"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="arrow.2.circlepath" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="kFG-4a-kNL"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jE2-Em-yUT" userLabel="Sort">
-                    <rect key="frame" x="414" y="571" width="55" height="55"/>
+                    <rect key="frame" x="415" y="575" width="54" height="54"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="55" id="Oam-OK-Ax2"/>
-                        <constraint firstAttribute="height" constant="55" id="veS-gF-7il"/>
+                        <constraint firstAttribute="width" constant="54" id="Oam-OK-Ax2"/>
+                        <constraint firstAttribute="height" constant="54" id="veS-gF-7il"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="arrow.down" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="ratingSortDidTapped:" destination="-1" eventType="touchUpInside" id="jWQ-qy-Hyq"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="AppTheme"/>
             <constraints>
                 <constraint firstItem="Sgf-UF-56L" firstAttribute="top" secondItem="J5h-ds-bdv" secondAttribute="bottom" constant="8" id="3XS-o7-Pqg"/>
                 <constraint firstItem="eZx-M6-cpT" firstAttribute="top" secondItem="jE2-Em-yUT" secondAttribute="bottom" constant="8" id="6Pa-bx-rcV"/>
@@ -119,14 +143,16 @@
                 <constraint firstItem="1Ut-oj-Hhk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="r4i-tX-r8I"/>
                 <constraint firstItem="1Ut-oj-Hhk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xPg-sG-Cyq"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140.57971014492756" y="105.80357142857143"/>
         </view>
     </objects>
     <resources>
-        <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
-        <image name="arrow.down" catalog="system" width="120" height="128"/>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="hare" catalog="system" width="128" height="92"/>
+        <image name="arrow.2.circlepath" catalog="system" width="128" height="104"/>
+        <image name="arrow.down" catalog="system" width="118" height="128"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="hare" catalog="system" width="128" height="89"/>
+        <namedColor name="AppTheme">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

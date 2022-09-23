@@ -18,11 +18,11 @@ class ContestDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailTableView.register(ContestDetailCell.self)
+        detailTableView.register(InfoCell.self)
         detailTableView.tableFooterView = UIView()
         
         scrollView.roundCorners([.topLeft, .topRight], radius: 20)
-        presenter?.setContest()
+        presenter?.requestContest()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
         view.addGestureRecognizer(tap)
@@ -36,32 +36,32 @@ class ContestDetailViewController: UIViewController {
 extension ContestDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.getContenstInfo().count ?? .zero
+        return presenter?.contestInfo.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let contestInfo = presenter?.getContenstInfo(),
+            let contestInfo = presenter?.contestInfo,
             indexPath.row < contestInfo.count
         else {
             return UITableViewCell()
         }
         
-        let cell: ContestDetailCell = detailTableView.dequeueReusableCell(for: indexPath)
+        let cell: InfoCell = detailTableView.dequeueReusableCell(for: indexPath)
         
-        cell.setup(with: contestInfo[indexPath.row])
+        cell.update(with: contestInfo[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return presenter?.getContestName()
+        return presenter?.contestName
     }
 }
 
 extension ContestDetailViewController: ContestDetailViewProtocol {
     
-    func setContest() {
+    func updateContest() {
         detailTableView.reloadData()
     }
 }

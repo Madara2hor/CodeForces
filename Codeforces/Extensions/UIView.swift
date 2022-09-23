@@ -11,33 +11,73 @@ import UIKit
 
 extension UIView {
     
+    private enum Constants {
+        
+        static let blurViewTag = 101
+    }
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        set { layer.cornerRadius = newValue }
+        get { layer.cornerRadius }
+    }
+    
+    @discardableResult
+    func configureBlur(alpha: CGFloat = .one, effect: UIBlurEffect.Style = .light) -> UIVisualEffectView {
+        let style: UIBlurEffect.Style = effect
+        
+        if let blurEffectView = viewWithTag(Constants.blurViewTag) as? UIVisualEffectView {
+            blurEffectView.effect = UIBlurEffect(style: style)
+            blurEffectView.alpha = alpha
+            
+            return blurEffectView
+        }
+        
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.tag = Constants.blurViewTag
+        blurEffectView.alpha = alpha
+        
+        insertSubview(blurEffectView, at: .zero)
+        
+        return blurEffectView
+    }
+    
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         clipsToBounds = true
         layer.cornerRadius = radius
         layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
     }
+//
+//    func makeRounded() {
+//        layer.cornerRadius = frame.height / 6
+//        layer.masksToBounds = true
+//        clipsToBounds = true
+//    }
     
-    func makeRounded() {
-        layer.cornerRadius = frame.height / 6
-        layer.masksToBounds = true
-        clipsToBounds = true
-    }
+//    func makeCircle() {
+//        layer.cornerRadius = frame.height / 2
+//        layer.masksToBounds = true
+//        clipsToBounds = true
+//    }
     
-    func makeCircle() {
-        layer.cornerRadius = frame.height / 2
-        layer.masksToBounds = true
-        clipsToBounds = true
-    }
+//    func makeTransparentBlue() {
+//        backgroundColor = UIColor.buttonColor.withAlphaComponent(0.7)
+//    }
+//
+//    func makeTransparentBlack() {
+//        backgroundColor = UIColor.black.withAlphaComponent(0.7)
+//    }
     
-    func makeTransparentBlue() {
-        backgroundColor = UIColor.buttonColor.withAlphaComponent(0.7)
-    }
-    
-    func makeTransparentBlack() {
-        backgroundColor = UIColor.black.withAlphaComponent(0.7)
-    }
-    
-    func showViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat , view: UIView) {
+    func showViewWithAnimation(
+        duration: Double,
+        delay: Double,
+        anchor: NSLayoutConstraint,
+        anchorConstant: CGFloat,
+        view: UIView
+    ) {
         DispatchQueue.main.async {
             UIView.animate(
                 withDuration: duration,
@@ -45,7 +85,7 @@ extension UIView {
                 options: .curveEaseInOut,
                 animations: { [weak self] in
                     anchor.constant += anchorConstant + view.frame.width
-                    view.alpha += 1
+                    view.alpha += .one
                             
                     self?.layoutIfNeeded()
                 },
@@ -54,7 +94,13 @@ extension UIView {
         }
     }
     
-    func hideViewWithAnimation(duration: Double, delay: Double, anchor: NSLayoutConstraint, anchorConstant: CGFloat, view: UIView) {
+    func hideViewWithAnimation(
+        duration: Double,
+        delay: Double,
+        anchor: NSLayoutConstraint,
+        anchorConstant: CGFloat,
+        view: UIView
+    ) {
         DispatchQueue.main.async {
             UIView.animate(
                 withDuration: duration,
@@ -62,7 +108,7 @@ extension UIView {
                 options: .curveEaseInOut,
                 animations: { [weak self] in
                     anchor.constant -= anchorConstant + view.frame.width
-                    view.alpha -= 1
+                    view.alpha -= .one
                             
                     self?.layoutIfNeeded()
                 },
@@ -105,8 +151,8 @@ extension UIView {
         active(constraints: spinnerViewConstraints)
         
         spinnerView.layoutIfNeeded()
-        spinnerView.makeRounded()
-        spinnerView.makeTransparentBlue()
+//        spinnerView.makeRounded()
+//        spinnerView.makeTransparentBlue()
         
         spinnerView.accessibilityIdentifier = "loadingView"
     }

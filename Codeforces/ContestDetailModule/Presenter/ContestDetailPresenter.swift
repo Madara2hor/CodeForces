@@ -10,25 +10,27 @@ import Foundation
 
 protocol ContestDetailViewProtocol: AnyObject {
     
-    func setContest()
+    func updateContest()
 }
 
 protocol ContestDetailViewPresenterProtocol: AnyObject {
     
+    var contestName: String? { get }
+    var contestInfo: [String] { get }
+    
     init(view: ContestDetailViewProtocol, router: RouterProtocol, contest: Contest?)
     
-    func setContest()
-    func getContestName() -> String?
-    func getContenstInfo() -> [String]
+    func requestContest()
 }
 
 class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
     
+    var contestName: String?
+    var contestInfo: [String] = []
+    
     private weak var view: ContestDetailViewProtocol?
     private var router: RouterProtocol?
     private var contest: Contest?
-    
-    private var contestInfo: [String] = []
     
     required init(view: ContestDetailViewProtocol, router: RouterProtocol, contest: Contest?) {
         self.view = view
@@ -38,19 +40,13 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
         makeContestInfo()
     }
     
-    func getContestName() -> String? {
-        return contest?.name
-    }
-    
-    func getContenstInfo() -> [String] {
-        return contestInfo
-    }
-    
-    func setContest() {
-        view?.setContest()
+    func requestContest() {
+        view?.updateContest()
     }
     
     private func makeContestInfo() {
+        contestName = contest?.name
+        
         if let type = contest?.type.rawValue {
             contestInfo.append("Система оценки: \(type)")
         }

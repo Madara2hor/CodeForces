@@ -10,10 +10,13 @@ import UIKit
 
 class SearchUserViewController: UIViewController {
     
+    private enum Constants {
+        
+        static let headerHeight: CGFloat = 150
+    }
+    
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var userTableView: UITableView!
-    
-    @IBOutlet private weak var contentView: UIView!
     
     @IBOutlet private weak var clearPage: UIButton!
     @IBOutlet private weak var reloadData: UIButton!
@@ -24,18 +27,17 @@ class SearchUserViewController: UIViewController {
     
     var isMenuShown = false
     
-    var presenter: SearchUserViewPresenterProtocol!
+    var presenter: SearchUserViewPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         userTableView.register(InfoCell.self)
+        userTableView.register(UserHeaderView.self)
         userTableView.tableFooterView = UIView()
-        setupTableHeader()
         
-        setupMenuItemStyle(item: clearPage)
-        setupMenuItemStyle(item: reloadData)
-        setupMenuItemStyle(item: menu)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tableViewDidTap))
+        userTableView.addGestureRecognizer(tap)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,24 +46,18 @@ class SearchUserViewController: UIViewController {
         hideMenuItems()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        contentView.endEditing(true)
-    }
-    
     @IBAction private func clearPageDidTapped(_ sender: UIButton) {
         searchBar.text = .empty
-        presenter?.searchedUser = nil
+        presenter?.clearUser()
         
         view.removeMessageSubview()
-        userTableView.tableHeaderView = UIView()
+        
+        userTableView.tableHeaderView = nil
+        userTableView.reloadData()
     }
     
     @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
-        guard presenter?.searchedUser != nil else {
-            return
-        }
-        
-        presenter?.getUser()
+        presenter?.searchUser()
     }
     
     @IBAction private func menuDidTpped(_ sender: Any) {
@@ -72,15 +68,8 @@ class SearchUserViewController: UIViewController {
         }
     }
     
-    private func setupTableHeader() {
-        let headerView = UserHeaderView()
-
-        userTableView.tableHeaderView = headerView
-    }
-    
-    private func setupMenuItemStyle(item: UIView) {
-        item.makeCircle()
-        item.makeTransparentBlue()
+    @objc private func tableViewDidTap() {
+        view.endEditing(true)
     }
     
     private func showMenuItems() {
@@ -129,11 +118,44 @@ class SearchUserViewController: UIViewController {
 extension SearchUserViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return .zero
+        return presenter?.userInfo.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard
+            let userInfo = presenter?.userInfo,
+            indexPath.row < userInfo.count
+        else {
+            return UITableViewCell()
+        }
+        
+        let cell: InfoCell = userTableView.dequeueReusableCell(for: indexPath)
+        
+        cell.update(with: userInfo[indexPath.row])
+        
+        return cell
+    }
+}
+
+extension SearchUserViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return presenter?.userHeaderModel == nil ? .zero : Constants.headerHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let model = presenter?.userHeaderModel else {
+            userTableView.tableHeaderView = nil
+            return nil
+        }
+        
+        let headerView = userTableView.dequeueReusableHeaderFooterView(UserHeaderView.self)
+        headerView.setup(with: model)
+        let containerView: UIView = UIView()
+        containerView.layoutSubview(headerView)
+        containerView.backgroundColor = .systemBackground
+        
+        return containerView
     }
 }
 
@@ -152,28 +174,7 @@ extension SearchUserViewController: SearchUserViewProtocol {
     }
     
     func success() {
-        setupTableHeader()
-        
         userTableView.reloadData()
-//        if let url = presenter.user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-//            profileImage.load(url: urlImage)
-//            profileImage.isHidden = false
-//        }
-//
-//        profileImage.makeRounded()
-        
-//        online.text = String.getDateValue(title: nil, UNIX: presenter.user?.lastOnlineTimeSeconds)
-//        contribution.text = String.getTitledValue(title: "Друзья", value: presenter.user?.contribution)
-//        rating.text = String.getTitledValue(title: "Рейтинг", value: presenter.user?.rating)
-//        handle.text = String.getTitledValue(title: nil, value: presenter.user?.handle)
-//        firstName.text = String.getTitledValue(title: "Имя", value: presenter.user?.firstName)
-//        lastName.text = String.getTitledValue(title: "Фамилия", value: presenter.user?.lastName)
-//        country.text = String.getTitledValue(title: "Страна", value: presenter.user?.country)
-//        city.text = String.getTitledValue(title: "Город", value: presenter.user?.city)
-//        organization.text = String.getTitledValue(title: "Организачия", value: presenter.user?.organization)
-//        rank.text = String.getTitledValue(title: "Ранг", value: presenter.user?.rank)
-//        email.text = String.getTitledValue(title: "E-mail", value: presenter.user?.email)
-//        vkId.text = String.getTitledValue(title: "ВКонтакте", value: presenter.user?.vkId)
     }
     
     func failure(error: String?) {
@@ -184,12 +185,11 @@ extension SearchUserViewController: SearchUserViewProtocol {
         userTableView.tableHeaderView = UIView()
         
         if error != "handles: Field should not be empty" {
-            self.view.setMessageSubview(title: "Эх...", message: "Пользователь не найден")
+            view.setMessageSubview(title: "Эх...", message: "Пользователь не найден")
         } else {
-            self.view.setMessageSubview(title: "Вау!", message: "Произошла непредвиденная ошибка")
+            view.setMessageSubview(title: "Вау!", message: error)
         }
     }
-    
 }
 
 extension SearchUserViewController: UISearchBarDelegate {
@@ -199,20 +199,17 @@ extension SearchUserViewController: UISearchBarDelegate {
         searchBar.text = cleanText
         
         if cleanText == .empty {
-            presenter.searchedUser = nil
+            presenter?.clearUser()
             removeMessageSubview()
-            userTableView.tableHeaderView = UIView()
+            userTableView.tableHeaderView = nil
         } else {
-            presenter.searchedUser = cleanText.lowercased()
+            presenter?.updateSearchedUser(cleanText.lowercased())
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if presenter.searchedUser != nil {
-            presenter.getUser()
-        }
+        presenter?.searchUser()
         
         view.endEditing(true)
     }
-
 }

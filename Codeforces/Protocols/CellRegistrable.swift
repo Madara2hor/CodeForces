@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CellRegistrable: UITableViewCell {
+protocol CellRegistrable {
     
     static var nibName: String { get }
 }

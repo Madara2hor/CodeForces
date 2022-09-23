@@ -2,13 +2,13 @@
 //  InfoCell.swift
 //  Codeforces
 //
-//  Created by Madara2hor on 05.08.2020.
-//  Copyright © 2020 Madara2hor. All rights reserved.
+//  Created by Кирилл on 22.09.2022.
+//  Copyright © 2022 Madara2hor. All rights reserved.
 //
 
 import UIKit
 
-class InfoCell: UITableViewCell, CellRegistrable {
+final class InfoCell: UITableViewCell, CellRegistrable {
     
     private enum Constants {
         
@@ -16,15 +16,10 @@ class InfoCell: UITableViewCell, CellRegistrable {
     }
     
     static var nibName: String { Constants.nibName }
-
-    @IBOutlet private weak var contestName: UILabel!
-    @IBOutlet private weak var phase: UILabel!
     
-    func setContestData(contest: Contest?) {
-        contestName.text = contest?.name
-        phase.text = contest?.phase.rawValue
+    @IBOutlet private weak var infoLabel: UILabel!
+    
+    func update(with info: String) {
+        infoLabel.text = info
     }
 }
-
-
-

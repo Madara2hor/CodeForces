@@ -20,23 +20,28 @@ protocol SearchUserViewProtocol: AnyObject {
 
 protocol SearchUserViewPresenterProtocol: AnyObject {
     
-    var user: User? { get set }
-    var searchedUser: String? { get set }
+    var userHeaderModel: UserHeaderViewModel? { get }
+    var userInfo: [String] { get }
     
     init(view: SearchUserViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
-    func getUser()
+    func searchUser()
+    func updateSearchedUser(_ username: String)
+    func clearUser()
 }
 
 class SearchUserPresenter: SearchUserViewPresenterProtocol {
     
-    var searchedUser: String?
-    var user: User?
+    var userHeaderModel: UserHeaderViewModel? = nil
+    var userInfo: [String] = []
     
     private weak var view: SearchUserViewProtocol?
     
     private let networkService: NetworkServiceProtocol!
     private var router: RouterProtocol?
+    
+    private var searchedUsername: String?
+    private var user: User?
     
     required init(
         view: SearchUserViewProtocol,
@@ -48,11 +53,15 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         self.networkService = networkService
     }
     
-    func getUser() {
+    func updateSearchedUser(_ username: String) {
+        searchedUsername = username
+    }
+    
+    func searchUser() {
         view?.removeMessageSubview()
         view?.setLoadingView()
         
-        networkService.getUser(username: searchedUser ?? .empty) { result in
+        networkService.getUser(username: searchedUsername ?? .empty) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.view?.removeLoadingView()
                 
@@ -81,8 +90,56 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         } 
     }
     
+    func clearUser() {
+        user = nil
+        searchedUsername = nil
+        userHeaderModel = nil
+        userInfo = []
+    }
+    
+    private func makeUserInfo(for user: User) {
+        userHeaderModel = UserHeaderViewModel(
+            image: user.titlePhoto,
+            username: user.handle,
+            isOnline: user.lastOnlineTimeSeconds == .zero
+        )
+        
+        userInfo.removeAll()
+        
+        userInfo.append("Друзья: \(user.contribution)")
+        
+        if let rating = user.rating {
+            userInfo.append("Рейтинг: \(rating)")
+        }
+        if let firstName = user.firstName {
+            userInfo.append("Имя: \(firstName)")
+        }
+        if let lastName = user.lastName {
+            userInfo.append("Фамилия: \(lastName)")
+        }
+        if let country = user.country {
+            userInfo.append("Страна: \(country)")
+        }
+        if let city = user.city {
+            userInfo.append("Город: \(city)")
+        }
+        if let organization = user.organization {
+            userInfo.append("Организация: \(organization)")
+        }
+        if let rank = user.rank {
+            userInfo.append("Ранг: \(rank)")
+        }
+        if let email = user.email {
+            userInfo.append("E-mail: \(email)")
+        }
+        if let vkId = user.vkId {
+            userInfo.append("ВКонтакте: \(vkId)")
+        }
+    }
+    
     private func handleSuccess(_ resultUser: User) {
         user = resultUser
+        makeUserInfo(for: resultUser)
         
         view?.success()
     }

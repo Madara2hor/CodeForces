@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 protocol ModuleBuilderProtocol {
+    
     func createContestsModule(router: RouterProtocol) -> UINavigationController
     func createContestDetailModule(contest: Contest?, router: RouterProtocol) -> UIViewController
     func createSearchModule(router: RouterProtocol) -> UINavigationController
@@ -23,10 +24,11 @@ class ModuleBuilder: ModuleBuilderProtocol {
     func createContestsModule(router: RouterProtocol) -> UINavigationController {
         let view = ContestsViewController()
         
-        view.tabBarItem =  UITabBarItem(title: nil,
-                                        image: UIImage(named: "outline_list.png"),
-                                        tag: 0)
-        view.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
+        view.tabBarItem =  UITabBarItem(
+            title: "Соревнования",
+            image: UIImage(named: "outline_list.png"),
+            tag: .zero
+        )
         
         let networkService = NetworkService()
         let presenter = ContestsPresenter(view: view, networkService: networkService, router: router)
@@ -42,10 +44,11 @@ class ModuleBuilder: ModuleBuilderProtocol {
     
     func createSearchModule(router: RouterProtocol) -> UINavigationController {
         let view = SearchUserViewController()
-        view.tabBarItem = UITabBarItem(title: nil,
-                                       image: UIImage(named: "outline_search.png"),
-                                       tag: 1)
-        view.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
+        view.tabBarItem = UITabBarItem(
+            title: "Поиск",
+            image: UIImage(named: "outline_search.png"),
+            tag: .one
+        )
         
         let networkService = NetworkService()
         let presenter = SearchUserPresenter(view: view, networkService: networkService, router: router)
@@ -59,10 +62,11 @@ class ModuleBuilder: ModuleBuilderProtocol {
     
     func createTopUsersModule(router: RouterProtocol) -> UINavigationController {
         let view = TopUsersViewContoller()
-        view.tabBarItem = UITabBarItem(title: nil,
-                                       image: UIImage(named: "outline_top.png"),
-                                       tag: 2)
-        view.tabBarItem.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
+        view.tabBarItem = UITabBarItem(
+            title: "Топ",
+            image: UIImage(named: "outline_top.png"),
+            tag: .two
+        )
         
         let networkService = NetworkService()
         let presenter = TopUsersPresenter(view: view, networkService: networkService, router: router)
@@ -98,7 +102,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     func createNavigationController(view: UIViewController, title: String) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: view)
         navigationController.navigationBar.topItem?.title = title
-        navigationController.navigationBar.barTintColor = UIColor.systemBackground
+        navigationController.navigationBar.barTintColor = UIColor(named: "AppTheme")
         
         return navigationController
     }

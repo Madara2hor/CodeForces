@@ -31,11 +31,7 @@ class ContestsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMenuItemStyle(reloadData)
-        setupMenuItemStyle(gymFilter)
-        setupMenuItemStyle(menu)
-        
-        contestTable.register(InfoCell.self)
+        contestTable.register(ContestCell.self)
         contestTable.tableFooterView = UIView()
     }
     
@@ -50,7 +46,7 @@ class ContestsViewController: UIViewController {
     }
     
     @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
-        presenter.getContests()
+        presenter.requestContests()
     }
     
     @IBAction private func menuDidTapped(_ sender: Any) {
@@ -59,11 +55,6 @@ class ContestsViewController: UIViewController {
         } else {
             showMenuItems()
         }
-    }
-    
-    private func setupMenuItemStyle(_ item: UIView) {
-        item.makeCircle()
-        item.makeTransparentBlue()
     }
     
     private func showMenuItems() {
@@ -112,7 +103,7 @@ class ContestsViewController: UIViewController {
 extension ContestsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.serachContest(by: searchText)
+        presenter.searchContest(by: searchText)
         
         contestTable.reloadData()
     }
@@ -125,13 +116,13 @@ extension ContestsViewController: UISearchBarDelegate {
 extension ContestsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getFiltredContests()?.count ?? .zero
+        return presenter.contests?.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: InfoCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: ContestCell = tableView.dequeueReusableCell(for: indexPath)
         
-        cell.setContestData(contest: presenter.getFiltredContests()?[indexPath.row])
+        cell.update(with: presenter.contests?[indexPath.row])
         
         return cell
     }
@@ -140,7 +131,7 @@ extension ContestsViewController: UITableViewDataSource {
 extension ContestsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contest = presenter?.getFiltredContests()?[indexPath.row]
+        let contest = presenter?.contests?[indexPath.row]
         
         presenter?.showContestDetail(
             contest: contest,

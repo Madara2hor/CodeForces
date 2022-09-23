@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,68 +26,85 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5S5-R4-ila">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5S5-R4-ila">
                     <rect key="frame" x="0.0" y="100" width="414" height="762"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <color key="separatorColor" systemColor="opaqueSeparatorColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="fKt-OK-HP5"/>
                         <outlet property="delegate" destination="-1" id="VpP-CF-Lqb"/>
                     </connections>
                 </tableView>
-                <searchBar contentMode="redraw" placeholder="Введите название соревнования" translatesAutoresizingMaskIntoConstraints="NO" id="lur-m6-qbq">
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите название соревнования" translatesAutoresizingMaskIntoConstraints="NO" id="lur-m6-qbq">
                     <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="barTintColor" name="AppTheme"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="PWn-Pi-zF9"/>
                     </connections>
                 </searchBar>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRw-iP-Xkw" userLabel="Reload">
-                    <rect key="frame" x="414" y="697" width="55" height="55"/>
+                    <rect key="frame" x="415" y="699" width="54" height="54"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" identifier="reload"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="55" id="QiQ-9I-8hU"/>
-                        <constraint firstAttribute="height" constant="55" id="V3M-jg-up3"/>
+                        <constraint firstAttribute="width" constant="54" id="QiQ-9I-8hU"/>
+                        <constraint firstAttribute="height" constant="54" id="V3M-jg-up3"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="arrow.2.circlepath" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="FVm-UO-sts"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-5t-XAn" userLabel="Filter">
-                    <rect key="frame" x="414" y="634" width="55" height="55"/>
+                    <rect key="frame" x="415" y="637" width="54" height="54"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" identifier="filter"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="T8N-9i-xqB"/>
-                        <constraint firstAttribute="width" constant="55" id="jPz-TQ-d3R"/>
+                        <constraint firstAttribute="height" constant="54" id="T8N-9i-xqB"/>
+                        <constraint firstAttribute="width" constant="54" id="jPz-TQ-d3R"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="outline_rating"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="gymFilterDidTapped:" destination="-1" eventType="touchUpInside" id="NvB-GO-KqI"/>
                         <action selector="reloadDataDidTapped:" destination="-1" eventType="touchUpInside" id="8J7-lQ-baX"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ak2-qa-PhA" userLabel="Menu">
-                    <rect key="frame" x="319" y="760" width="75" height="75"/>
+                    <rect key="frame" x="320" y="761" width="74" height="74"/>
                     <color key="backgroundColor" red="0.40784313729999999" green="0.1529411765" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" identifier="menu"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="75" id="pF5-2a-9lg"/>
-                        <constraint firstAttribute="width" constant="75" id="rhT-9F-FnS"/>
+                        <constraint firstAttribute="height" constant="74" id="pF5-2a-9lg"/>
+                        <constraint firstAttribute="width" constant="74" id="rhT-9F-FnS"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="chevron.left" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="37"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="menuDidTapped:" destination="-1" eventType="touchUpInside" id="i6t-4r-kG1"/>
                     </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="AppTheme"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ak2-qa-PhA" secondAttribute="bottom" constant="27" id="7Vk-Mk-cKt"/>
                 <constraint firstItem="5S5-R4-ila" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Cbz-qm-2eg"/>
@@ -107,14 +124,11 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="arrow.2.circlepath" catalog="system" width="128" height="104"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="outline_rating" width="24" height="24"/>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="AppTheme">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

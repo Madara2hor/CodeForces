@@ -9,6 +9,12 @@
 import UIKit
 
 class TopUsersViewContoller: UIViewController {
+    
+    private enum Constants {
+        
+        static let itemsPerRow: CGFloat = 4
+        static let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    }
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var topUsersCollection: UICollectionView!
@@ -23,24 +29,12 @@ class TopUsersViewContoller: UIViewController {
     @IBOutlet weak var sortRightAnchor: NSLayoutConstraint!
     
     var isMenuShow = false
-    private let itemsPerRow: CGFloat = 4
-    private let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     var presenter: TopUsersViewPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMenuItemStyle(item: ratingSort)
-        setupMenuItemStyle(item: activeOnlyFilter)
-        setupMenuItemStyle(item: reloadData)
-        setupMenuItemStyle(item: menu)
-        
         topUsersCollection.register(UserCell.nib(), forCellWithReuseIdentifier: "\(UserCell.reuseId)")
-    }
-    
-    func setupMenuItemStyle(item: UIView) {
-        item.makeCircle()
-        item.makeTransparentBlue()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,7 +82,7 @@ class TopUsersViewContoller: UIViewController {
         
         view.showViewWithAnimation(
             duration: 0.5,
-            delay: 0,
+            delay: .zero,
             anchor: reloadRightAnchor,
             anchorConstant: 20,
             view: reloadData
@@ -135,7 +129,7 @@ class TopUsersViewContoller: UIViewController {
         )
         view.hideViewWithAnimation(
             duration: 0.5,
-            delay: 0,
+            delay: .zero,
             anchor: sortRightAnchor,
             anchorConstant: 20,
             view: ratingSort
@@ -173,11 +167,11 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-      let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-      let availableWidth = view.frame.width - paddingSpace
-      let widthPerItem = availableWidth / itemsPerRow
+        let paddingSpace = Constants.sectionInsets.left * (Constants.itemsPerRow + .one)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / Constants.itemsPerRow
       
-      return CGSize(width: widthPerItem, height: widthPerItem)
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
     
@@ -186,7 +180,7 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-      return sectionInsets
+        return Constants.sectionInsets
     }
     
     
@@ -195,7 +189,7 @@ extension TopUsersViewContoller: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-      return sectionInsets.left
+        return Constants.sectionInsets.left
     }
 }
 
@@ -215,7 +209,7 @@ extension TopUsersViewContoller: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        userCell.configure(user: presenter.filtredTopUsers?[indexPath.row])
+        userCell.setup(with: presenter.filtredTopUsers?[indexPath.row])
         
         return userCell
     }
@@ -233,7 +227,7 @@ extension TopUsersViewContoller: UICollectionViewDataSource {
 extension TopUsersViewContoller: TopUsersViewProtocol {
     
     func success() {
-        searchBar.text = ""
+        searchBar.text = .empty
         topUsersCollection.reloadData()
         
         if topUsersCollection.cellForItem(at: IndexPath(row: .zero, section: .zero)) != nil {
@@ -246,7 +240,7 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
     }
     
     func failure(error: String?) {
-        topUsersCollection.setMessageBackgroundView(title: "Упс...", message: error ?? "")
+        topUsersCollection.setMessageBackgroundView(title: "Упс...", message: error ?? .empty)
     }
     
     func topUsersSorted() {

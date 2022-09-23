@@ -50,7 +50,7 @@ extension UserDetailViewController: UserDetailViewProtocol {
             profileImage.isHidden = false
         }
         
-        profileImage.makeRounded()
+//        profileImage.makeRounded()
 //        online.text = String.getDateValue(title: nil, UNIX: user?.lastOnlineTimeSeconds)
 //        contribution.text = String.getTitledValue(title: "Друзья", value: user?.contribution)
 //        rating.text = String.getTitledValue(title: "Рейтинг", value: user?.rating)
