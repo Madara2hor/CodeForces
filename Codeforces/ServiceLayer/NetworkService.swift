@@ -16,6 +16,14 @@ enum ApiEndpoint: String {
     case topUsers = "user.ratedList"
 }
 
+enum AppError: Error {
+    
+    case noDataError
+    case dataDecodingError
+    case unknownError
+    case customError(message: String?)
+}
+
 protocol NetworkServiceProtocol {
     
     func getContests(
@@ -123,10 +131,21 @@ class NetworkService: NetworkServiceProtocol {
             print(progress.fractionCompleted)
         }.responseDecodable(of: T.self) { response in
             do {
-                let obj = try JSONDecoder().decode(T.self, from: response.data!)
-                completion(.success(obj))
+                guard let data = response.data else {
+                    completion(.failure(AppError.noDataError))
+                    return
+                }
+                
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
+                
+                completion(.success(decodedData))
             } catch {
-                completion(.failure(response.error!))
+                guard let error = response.error else {
+                    completion(.failure(AppError.dataDecodingError))
+                    return
+                }
+                
+                completion(.failure(error))
             }
         }
     }

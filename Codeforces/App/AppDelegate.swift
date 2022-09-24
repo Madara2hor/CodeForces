@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Twitter
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        UINavigationBar.appearance().tintColor = UIColor.buttonColor
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.buttonColor]
+        UINavigationBar.appearance().tintColor = UIColor.purple
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.label]
         //UIApplication.shared.statusBarStyle = .lightContent
         
         return true

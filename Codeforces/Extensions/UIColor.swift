@@ -10,15 +10,6 @@ import UIKit
 
 extension UIColor {
     
-    class var darkModeMainColor: UIColor {
-        get { UIColor(red: 22/255, green: 32/255, blue: 42/255, alpha: 1) }
-    }
-    
-    class var darkModeBackgroundColor: UIColor {
-        get { UIColor(red: 22/255, green: 32/255, blue: 42/255, alpha: 1) }
-    }
-    
-    class var buttonColor: UIColor {
-        get { UIColor(red: 29/255, green: 123/255, blue: 190/255, alpha: 1) }
-    }
+    class var appTheme: UIColor? { get { UIColor(named: "AppTheme") } }
+    class var pin: UIColor? { get { UIColor(named: "Pin") } }
 }

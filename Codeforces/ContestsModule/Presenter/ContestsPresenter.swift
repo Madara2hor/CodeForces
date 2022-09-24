@@ -1,6 +1,6 @@
 //
-//  HomeRouter.swift
-//  Twitter
+//  ContestsPresenter.swift
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -18,7 +18,7 @@ protocol ContestsViewProtocol: AnyObject {
     func failure(error: String?)
 }
 
-protocol ContestsViewPresenterProtocol: ConnectionMonitorProtocol {
+protocol ContestsViewPresenterProtocol: ConnectionServiceProtocol {
     
     var contests: [Contest]? { get }
     var isFiltredByGym: Bool! { get }
@@ -71,7 +71,15 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                     
                     switch requsetResult.status {
                     case .success:
-                        self?.handleSuccess(requsetResult.result)
+                        guard
+                            let resultData = requsetResult.result,
+                            resultData.isEmpty == false
+                        else {
+                            self?.view?.failure(error: "Соревнований нет")
+                            return
+                        }
+                        
+                        self?.handleSuccess(resultData)
                     case .failure:
                         self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                     }
@@ -107,24 +115,11 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     
     func connectionUnsatisfied() {
         handleFailure(with: "Потеряно интернет соединение.")
-        if contests == nil {
-            view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
-        } else {
-            view?.failure(error: "Интернет куда-то пропал...")
-        }
     }
     
-    private func handleSuccess(_ result: [Contest]?) {
-        guard
-            let resultData = result,
-            resultData.isEmpty == false
-        else {
-            view?.failure(error: "Соревнований нет")
-            return
-        }
-        
-        contests = resultData
-        notFiltredContests = resultData
+    private func handleSuccess(_ contestsData: [Contest]) {
+        contests = contestsData
+        notFiltredContests = contestsData
         
         if isFiltredByGym {
             contests?.reverse()

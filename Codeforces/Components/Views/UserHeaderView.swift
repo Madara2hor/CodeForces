@@ -50,7 +50,7 @@ final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
         }
         
         usernameTitle.text = model.username
-        blurView = usernameContainer.configureBlur()
+        blurView = usernameContainer.configureBlur(alpha: 0.7, effect: .dark)
         
         if model.isOnline {
             userStatusImage.tintColor = .green

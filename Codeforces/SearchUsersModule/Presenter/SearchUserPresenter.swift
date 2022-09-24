@@ -1,6 +1,6 @@
 //
-//  SearchRouter.swift
-//  Twitter
+//  SearchUserPresenter.swift
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -18,7 +18,7 @@ protocol SearchUserViewProtocol: AnyObject {
     func failure(error: String?)
 }
 
-protocol SearchUserViewPresenterProtocol: ConnectionMonitorProtocol {
+protocol SearchUserViewPresenterProtocol: ConnectionServiceProtocol {
     
     var userHeaderModel: UserHeaderViewModel? { get }
     var userInfo: [String] { get }
@@ -58,10 +58,14 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     }
     
     func searchUser() {
+        guard let searchedUsername = searchedUsername else {
+            return
+        }
+        
         view?.removeMessageSubview()
         view?.setLoadingView()
         
-        networkService.getUser(username: searchedUsername ?? .empty) { result in
+        networkService.getUser(username: searchedUsername) { result in
             DispatchQueue.main.async { [weak self] in
                 self?.view?.removeLoadingView()
                 

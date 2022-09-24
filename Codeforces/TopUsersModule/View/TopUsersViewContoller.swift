@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopUsersViewContoller: UIViewController {
+final class TopUsersViewContoller: UIViewController {
     
     private enum Constants {
         
@@ -52,9 +52,9 @@ class TopUsersViewContoller: UIViewController {
         }
         
         if presenter.isHighToLow {
-            ratingSort.setImage(UIImage(systemName: "arrow.up"), for: .normal)
-        } else {
             ratingSort.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+        } else {
+            ratingSort.setImage(UIImage(systemName: "arrow.up"), for: .normal)
         }
         
         presenter.sortTopUsersByRating()
@@ -66,12 +66,12 @@ class TopUsersViewContoller: UIViewController {
         }
         
         if presenter.isActiveOnly {
-            activeOnlyFilter.setImage(UIImage(systemName: "hare"), for: .normal)
-        } else {
             activeOnlyFilter.setImage(UIImage(systemName: "tortoise"), for: .normal)
+        } else {
+            activeOnlyFilter.setImage(UIImage(systemName: "hare"), for: .normal)
         }
         
-        presenter.requestTopUsers(isActiveOnly: presenter.isActiveOnly)
+        presenter.requestTopUsers(isActiveOnly: !presenter.isActiveOnly)
     }
     
     @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
@@ -266,6 +266,108 @@ extension TopUsersViewContoller: TopUsersViewProtocol {
     func removeMessageSubview() {
         if topUsersCollection != nil {
             topUsersCollection.restore()
+        }
+    }
+}
+
+final class NewTopUsersViewController: UIViewController {
+    
+    var presenter: TopUsersViewPresenterProtocol?
+    
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var topUsersTableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        topUsersTableView.register(NewTopUserCell.self)
+    }
+}
+
+extension NewTopUsersViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter?.topUsers?.count ?? .zero
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard
+            let topUsers = presenter?.topUsers,
+            indexPath.row < topUsers.count
+        else {
+            return UITableViewCell()
+        }
+        
+        let cell: NewTopUserCell = tableView.dequeueReusableCell(for: indexPath)
+        
+        cell.update(with: topUsers[indexPath.row])
+        
+        return cell
+    }
+}
+
+extension NewTopUsersViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = presenter?.topUsers?[indexPath.row]
+        
+        presenter?.showUserDetail(
+            user: user,
+            selectedIndex: tabBarController?.selectedIndex
+        )
+    }
+}
+
+extension NewTopUsersViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter?.searchTopUser(searchText)
+        
+        topUsersTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+}
+
+extension NewTopUsersViewController: TopUsersViewProtocol {
+    
+    func success() {
+        searchBar.text = .empty
+        topUsersTableView.reloadData()
+        
+        topUsersTableView.scrollToRow(
+            at: IndexPath(row: .zero, section: .zero),
+            at: .top,
+            animated: true
+        )
+    }
+    
+    func failure(error: String?) {
+        topUsersTableView.setMessageBackgroundView(title: "Упс...", message: error ?? .empty)
+    }
+    
+    func topUsersSortedByRating() {
+        topUsersTableView.reloadData()
+        topUsersTableView.scrollToRow(
+            at: IndexPath(row: .zero, section: .zero),
+            at: .top,
+            animated: true
+        )
+    }
+    
+    func setLoadingView() {
+        view.setLoadingSubview()
+    }
+    
+    func removeLoadingView() {
+        view.removeLoadingSubview()
+    }
+    
+    func removeMessageSubview() {
+        if topUsersTableView != nil {
+            topUsersTableView.restore()
         }
     }
 }

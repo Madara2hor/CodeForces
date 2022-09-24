@@ -1,6 +1,6 @@
 //
-//  SearchViewController.swift
-//  Twitter
+//  SearchUserViewController.swift
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchUserViewController: UIViewController {
+final class SearchUserViewController: UIViewController {
     
     private enum Constants {
         
@@ -156,7 +156,7 @@ extension SearchUserViewController: UITableViewDelegate {
         
         let containerView: UIView = UIView()
         containerView.layoutSubview(headerView)
-        containerView.backgroundColor = .systemBackground
+        containerView.backgroundColor = .appTheme
         
         return containerView
     }
@@ -196,6 +196,7 @@ extension SearchUserViewController: UISearchBarDelegate {
         if cleanText == .empty {
             presenter?.clearUser()
             removeMessageSubview()
+            
             userTableView.tableHeaderView = nil
         } else {
             presenter?.updateSearchedUser(cleanText.lowercased())

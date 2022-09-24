@@ -1,6 +1,6 @@
 //
-//  HomeViewController.swift
-//  Twitter
+//  ContestsViewController.swift
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -8,12 +8,7 @@
 
 import UIKit
 
-class ContestsViewController: UIViewController {
-    
-    private enum Constants {
-        
-        
-    }
+final class ContestsViewController: UIViewController {
     
     var presenter: ContestsViewPresenterProtocol?
 
@@ -33,6 +28,8 @@ class ContestsViewController: UIViewController {
         
         contestTable.register(ContestCell.self)
         contestTable.tableFooterView = UIView()
+        
+        presenter?.requestContests()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

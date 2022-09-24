@@ -1,6 +1,6 @@
 //
-//  ProfileRouter.swift
-//  Twitter
+//  TopUsersPresenter.swift
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -20,7 +20,7 @@ protocol TopUsersViewProtocol: AnyObject {
     func topUsersSortedByRating()
 }
 
-protocol TopUsersViewPresenterProtocol: ConnectionMonitorProtocol {
+protocol TopUsersViewPresenterProtocol: ConnectionServiceProtocol {
     
     var topUsers: [User]? { get }
     var isActiveOnly: Bool! { get }
@@ -127,9 +127,7 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     }
     
     func connectionUnsatisfied() {
-        if topUsers == nil {
-            view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
-        }
+        handleFailure(with: "Потеряно интернет соединение.")
     }
     
     private func handleSuccess(with users: [User]) {

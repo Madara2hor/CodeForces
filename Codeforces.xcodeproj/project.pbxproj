@@ -17,7 +17,7 @@
 		02045AA7251897E4003FD1A7 /* ContestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA6251897E4003FD1A7 /* ContestTests.swift */; };
 		02045AA92518A418003FD1A7 /* TopUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA82518A418003FD1A7 /* TopUsersTests.swift */; };
 		0209F6CE251B4D2A0074BC8B /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */; };
-		02454520251B278400D81096 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0245990A24FF6C9500F1099F /* InternetConnection.swift */; };
+		02454520251B278400D81096 /* NetworkConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0245990A24FF6C9500F1099F /* NetworkConnectionService.swift */; };
 		0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */; };
 		02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */; };
 		02B849A9250B1F5900D766C7 /* TopUsersViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B849A7250B1F5900D766C7 /* TopUsersViewContoller.swift */; };
@@ -60,6 +60,9 @@
 		136006A128DDE58D00BB4732 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A028DDE58D00BB4732 /* UIView+Constraints.swift */; };
 		136006A328DDE59500BB4732 /* ActivityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A228DDE59500BB4732 /* ActivityDisplayable.swift */; };
 		136006A528DDE64D00BB4732 /* ActivityDisplayableOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A428DDE64D00BB4732 /* ActivityDisplayableOverlayView.swift */; };
+		136006A728DE98E600BB4732 /* NewTopUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136006A628DE98E600BB4732 /* NewTopUsersViewController.xib */; };
+		136006AA28DE997F00BB4732 /* NewTopUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A828DE997F00BB4732 /* NewTopUserCell.swift */; };
+		136006AB28DE997F00BB4732 /* NewTopUserCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136006A928DE997F00BB4732 /* NewTopUserCellView.xib */; };
 		137E5C6928DC146600592D04 /* PrimitiveLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137E5C6828DC146600592D04 /* PrimitiveLiterals.swift */; };
 		137E5C6D28DC162000592D04 /* CellRegistrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137E5C6C28DC162000592D04 /* CellRegistrable.swift */; };
 		137E5C7128DC255700592D04 /* InfoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137E5C7028DC255700592D04 /* InfoCellView.xib */; };
@@ -96,7 +99,7 @@
 		02045AA6251897E4003FD1A7 /* ContestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestTests.swift; sourceTree = "<group>"; };
 		02045AA82518A418003FD1A7 /* TopUsersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersTests.swift; sourceTree = "<group>"; };
 		0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
-		0245990A24FF6C9500F1099F /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
+		0245990A24FF6C9500F1099F /* NetworkConnectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionService.swift; sourceTree = "<group>"; };
 		02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentableProtocol.swift; sourceTree = "<group>"; };
 		02B849A7250B1F5900D766C7 /* TopUsersViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersViewContoller.swift; sourceTree = "<group>"; };
 		02B849A8250B1F5900D766C7 /* TopUsersViewContoller.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopUsersViewContoller.xib; sourceTree = "<group>"; };
@@ -148,6 +151,9 @@
 		136006A028DDE58D00BB4732 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		136006A228DDE59500BB4732 /* ActivityDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDisplayable.swift; sourceTree = "<group>"; };
 		136006A428DDE64D00BB4732 /* ActivityDisplayableOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDisplayableOverlayView.swift; sourceTree = "<group>"; };
+		136006A628DE98E600BB4732 /* NewTopUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewTopUsersViewController.xib; sourceTree = "<group>"; };
+		136006A828DE997F00BB4732 /* NewTopUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTopUserCell.swift; sourceTree = "<group>"; };
+		136006A928DE997F00BB4732 /* NewTopUserCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewTopUserCellView.xib; sourceTree = "<group>"; };
 		137E5C6828DC146600592D04 /* PrimitiveLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimitiveLiterals.swift; sourceTree = "<group>"; };
 		137E5C6C28DC162000592D04 /* CellRegistrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegistrable.swift; sourceTree = "<group>"; };
 		137E5C7028DC255700592D04 /* InfoCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoCellView.xib; sourceTree = "<group>"; };
@@ -293,6 +299,9 @@
 				02B849A8250B1F5900D766C7 /* TopUsersViewContoller.xib */,
 				02B849AD250B215F00D766C7 /* UserCell.swift */,
 				02B849AE250B215F00D766C7 /* UserCell.xib */,
+				136006A628DE98E600BB4732 /* NewTopUsersViewController.xib */,
+				136006A828DE997F00BB4732 /* NewTopUserCell.swift */,
+				136006A928DE997F00BB4732 /* NewTopUserCellView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -397,7 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				02D09E7524DA8F0A00DEF1A9 /* NetworkService.swift */,
-				0245990A24FF6C9500F1099F /* InternetConnection.swift */,
+				0245990A24FF6C9500F1099F /* NetworkConnectionService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -679,7 +688,9 @@
 				02D09E5724D94A8D00DEF1A9 /* UserDetailView.xib in Resources */,
 				02B849AA250B1F5900D766C7 /* TopUsersViewContoller.xib in Resources */,
 				02D09E9424E0F8E900DEF1A9 /* ContestDetailViewController.xib in Resources */,
+				136006A728DE98E600BB4732 /* NewTopUsersViewController.xib in Resources */,
 				02D09E1B24D9333D00DEF1A9 /* Main.storyboard in Resources */,
+				136006AB28DE997F00BB4732 /* NewTopUserCellView.xib in Resources */,
 				1349111028DC349900022229 /* ContestCellView.xib in Resources */,
 				02B849B0250B215F00D766C7 /* UserCell.xib in Resources */,
 			);
@@ -812,7 +823,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02454520251B278400D81096 /* InternetConnection.swift in Sources */,
+				02454520251B278400D81096 /* NetworkConnectionService.swift in Sources */,
 				02D09E7D24DAA3E100DEF1A9 /* String.swift in Sources */,
 				02D09E7624DA8F0A00DEF1A9 /* NetworkService.swift in Sources */,
 				02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */,
@@ -820,6 +831,7 @@
 				02D09E8424DBDD5500DEF1A9 /* UIView.swift in Sources */,
 				137E5C7828DC341D00592D04 /* UserHeaderView.swift in Sources */,
 				02D09E5F24D94C7700DEF1A9 /* SearchUserPresenter.swift in Sources */,
+				136006AA28DE997F00BB4732 /* NewTopUserCell.swift in Sources */,
 				02D09E6424D969B200DEF1A9 /* UIColor.swift in Sources */,
 				02D09E8C24DD313D00DEF1A9 /* UITableView.swift in Sources */,
 				02D09E7124DA792A00DEF1A9 /* ContestCell.swift in Sources */,

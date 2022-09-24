@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewTopUsersViewController" customModule="Code_Forces" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="y6j-MS-QvS" id="XTe-1K-TSK"/>
+                <outlet property="topUsersTableView" destination="If1-EV-ULT" id="X1A-pS-zMB"/>
+                <outlet property="view" destination="iN0-l3-epB" id="B0l-Ca-brS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите имя пользователя" translatesAutoresizingMaskIntoConstraints="NO" id="y6j-MS-QvS">
+                    <rect key="frame" x="0.0" y="47" width="390" height="56"/>
+                    <color key="barTintColor" name="AppTheme"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Mz8-R7-Dby"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="If1-EV-ULT">
+                    <rect key="frame" x="0.0" y="103" width="390" height="707"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="VUe-zz-1gq"/>
+                        <outlet property="delegate" destination="-1" id="7fd-pQ-XgO"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="AppTheme"/>
+            <constraints>
+                <constraint firstItem="If1-EV-ULT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ACo-1T-Q1y"/>
+                <constraint firstItem="y6j-MS-QvS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="DEy-ei-Ux3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="If1-EV-ULT" secondAttribute="bottom" id="L0E-GA-1Eg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="If1-EV-ULT" secondAttribute="trailing" id="bXx-Yj-bUd"/>
+                <constraint firstItem="If1-EV-ULT" firstAttribute="top" secondItem="y6j-MS-QvS" secondAttribute="bottom" id="m0p-io-5Lo"/>
+                <constraint firstItem="y6j-MS-QvS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="maO-qv-BRT"/>
+                <constraint firstAttribute="trailing" secondItem="y6j-MS-QvS" secondAttribute="trailing" id="vQQ-Bw-0Z8"/>
+            </constraints>
+            <point key="canvasLocation" x="51" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AppTheme">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

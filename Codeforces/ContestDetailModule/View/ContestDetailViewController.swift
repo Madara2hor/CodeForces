@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContestDetailViewController: UIViewController {
+final class ContestDetailViewController: UIViewController {
     
     private enum Constants {
         

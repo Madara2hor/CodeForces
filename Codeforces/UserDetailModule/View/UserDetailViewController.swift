@@ -1,6 +1,6 @@
 //
-//  MessagesViewController.swift
-//  Twitter
+//  UserDetailViewController.swift
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserDetailViewController: UIViewController {
+final class UserDetailViewController: UIViewController {
     
     private enum Constants {
         
@@ -24,6 +24,10 @@ class UserDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userDetailTableView.register(InfoCell.self)
+        userDetailTableView.register(UserHeaderView.self)
+        userDetailTableView.tableFooterView = UIView()
         
         containerView.roundCorners([.topLeft, .topRight], radius: Constants.containerViewCornerRadius)
         presenter.requestUser()

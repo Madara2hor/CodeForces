@@ -113,7 +113,7 @@ extension UIView {
         spinner.color = .white
         
         progress.setProgress(.zero, animated: false)
-        progress.tintColor = UIColor.buttonColor
+        progress.tintColor = UIColor.systemBackground
         
         spinnerView.addSubview(spinner)
         self.addSubview(spinnerView)

@@ -1,6 +1,6 @@
 //
 //  ModuleBuilder.swift
-//  Twitter
+//  Codeforces
 //
 //  Created by Madara2hor on 04.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -63,7 +63,7 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func createTopUsersModule(router: RouterProtocol) -> UINavigationController {
-        let view = TopUsersViewContoller()
+        let view = NewTopUsersViewController()
         view.tabBarItem = UITabBarItem(
             title: "Топ",
             image: UIImage(named: "outline_top.png"),
@@ -104,16 +104,16 @@ class ModuleBuilder: ModuleBuilderProtocol {
     func createNavigationController(view: UIViewController, title: String) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: view)
         navigationController.navigationBar.topItem?.title = title
-        navigationController.navigationBar.barTintColor = UIColor(named: "AppTheme")
+        navigationController.navigationBar.barTintColor = .systemBackground
         
         return navigationController
     }
     
-    func setPresenterToConnectionMonitor(presenter: ConnectionMonitorProtocol) {
-        if InternetConnection.shared.presenters != nil {
-            InternetConnection.shared.presenters?.append(presenter)
+    func setPresenterToConnectionMonitor(presenter: ConnectionServiceProtocol) {
+        if NetworkConnectionService.shared.presenters != nil {
+            NetworkConnectionService.shared.presenters?.append(presenter)
         } else {
-            InternetConnection.shared.presenters = [presenter]
+            NetworkConnectionService.shared.presenters = [presenter]
         }
     }
     

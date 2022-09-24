@@ -1,5 +1,5 @@
 //
-//  InternetConnection.swift
+//  NetworkConnectionService.swift
 //  Codeforces
 //
 //  Created by Madara2hor on 02.09.2020.
@@ -9,28 +9,28 @@
 import Foundation
 import Network
 
-protocol ConnectionMonitorProtocol: AnyObject {
+protocol ConnectionServiceProtocol: AnyObject {
     
     func connectionSatisfied()
     func connectionUnsatisfied()
 }
 
-protocol InternetConnectionMonitorProtocol: AnyObject {
+protocol NetworkConnectionServiceProtocol: AnyObject {
     
     func startMonitor()
     func stopMonitor()
 }
 
-class InternetConnection: InternetConnectionMonitorProtocol {
+class NetworkConnectionService: NetworkConnectionServiceProtocol {
     
     private enum Constants {
         
         static let queueLabel = "com.InternetConnection.MonitorQueue"
     }
 
-    static let shared = InternetConnection()
+    static let shared = NetworkConnectionService()
     
-    var presenters: [ConnectionMonitorProtocol]?
+    var presenters: [ConnectionServiceProtocol]?
     
     private let monitorQueue = DispatchQueue(label: Constants.queueLabel)
     private let monitor = NWPathMonitor()
