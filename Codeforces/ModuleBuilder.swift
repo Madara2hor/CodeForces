@@ -55,6 +55,8 @@ class ModuleBuilder: ModuleBuilderProtocol {
         view.presenter = presenter
         loadView(view: view)
         
+        setPresenterToConnectionMonitor(presenter: presenter)
+        
         let navigationController = createNavigationController(view: view, title: "Поиск пользователей")
         
         return navigationController
@@ -116,7 +118,6 @@ class ModuleBuilder: ModuleBuilderProtocol {
     }
     
     func loadView(view: UIViewController) {
-        view.loadView()
-        view.viewDidLoad()
+        view.loadViewIfNeeded()
     }
 }

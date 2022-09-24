@@ -35,18 +35,16 @@ class InternetConnection: InternetConnectionMonitorProtocol {
     private let monitorQueue = DispatchQueue(label: Constants.queueLabel)
     private let monitor = NWPathMonitor()
 
-    init() { }
+    init() {
+        startMonitor()
+    }
     
     func startMonitor() {
         monitor.pathUpdateHandler = { [weak self] path in
             switch path.status {
             case .satisfied:
-                print("Интернет соединение установлено")
-                
                 self?.connectionChanged(on: true)
             case .unsatisfied:
-                print("Интернет соединение отсутствует")
-                
                 self?.connectionChanged(on: false)
             default:
                 break

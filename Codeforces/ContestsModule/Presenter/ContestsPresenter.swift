@@ -65,7 +65,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                 switch result {
                 case .success(let requsetResult):
                     guard let requsetResult = requsetResult else {
-                        self?.handleFailure()
+                        self?.handleFailure(with: "Произошла непредвиденная ошибка.")
                         return
                     }
                     
@@ -73,10 +73,10 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                     case .success:
                         self?.handleSuccess(requsetResult.result)
                     case .failure:
-                        self?.handleFailure()
+                        self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                     }
                 case .failure:
-                    self?.handleFailure()
+                    self?.handleFailure(with: "Произошла непредвиденная ошибка.")
                 }
             }
         } 
@@ -106,6 +106,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func connectionUnsatisfied() {
+        handleFailure(with: "Потеряно интернет соединение.")
         if contests == nil {
             view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
         } else {
@@ -133,11 +134,8 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         view?.success()
     }
     
-    private func handleFailure() {
-        if contests == nil {
-            view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
-        } else {
-            view?.failure(error: "Не удалось получить список соревнований.")
-        }
+    private func handleFailure(with message: String) {
+        contests = nil
+        view?.failure(error: message)
     }
 }

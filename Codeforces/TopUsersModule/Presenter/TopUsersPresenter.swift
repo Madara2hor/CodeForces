@@ -75,6 +75,7 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
                 switch result {
                 case .success(let requestResult):
                     guard let result = requestResult else {
+                        self?.handleFailure(with: "Произошла непредвиденная ошибка.")
                         return
                     }
                     
@@ -84,16 +85,16 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
                             let resultTopUsers = requestResult?.result,
                             resultTopUsers.isEmpty == false
                         else {
-                            self?.handleFailure()
+                            self?.handleFailure(with: "Не удалось получить список топ пользователей.")
                             return
                         }
                             
                         self?.handleSuccess(with: resultTopUsers)
                     case .failure:
-                        self?.handleFailure()
+                        self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                     }
                 case .failure:
-                    self?.handleFailure()
+                    self?.handleFailure(with: "Произошла непредвиденная ошибка.")
                 }
             }
         }
@@ -138,11 +139,8 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         view?.success()
     }
     
-    private func handleFailure() {
-        if topUsers == nil {
-            view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
-        } else {
-            view?.failure(error: "Не удалось получить список топ пользователей.")
-        }
+    private func handleFailure(with message: String) {
+        topUsers = nil
+        view?.failure(error: message)
     }
 }

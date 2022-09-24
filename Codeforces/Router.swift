@@ -33,62 +33,54 @@ class Router: RouterProtocol {
     }
     
     func initialTabBarController() {
-        if let tabBarController = tabBarController {
-            guard
-                let notificationNavigationController = moduleBuilder?.createTopUsersModule(router: self),
-                let contestsNavigationController = moduleBuilder?.createContestsModule(router: self),
-                let searchNavigationController = moduleBuilder?.createSearchModule(router: self)
-            else {
-                return
-            }
-            
-            tabBarController.tabBar.tintColor = UIColor.buttonColor
-            tabBarController.viewControllers = [
-                contestsNavigationController,
-                searchNavigationController,
-                notificationNavigationController
-            ]
-            
-            InternetConnection.shared.startMonitor()
+        guard
+            let tabBarController = tabBarController,
+            let notificationNavigationController = moduleBuilder?.createTopUsersModule(router: self),
+            let contestsNavigationController = moduleBuilder?.createContestsModule(router: self),
+            let searchNavigationController = moduleBuilder?.createSearchModule(router: self)
+        else {
+            return
         }
+        
+        tabBarController.tabBar.tintColor = UIColor.buttonColor
+        tabBarController.viewControllers = [
+            contestsNavigationController,
+            searchNavigationController,
+            notificationNavigationController
+        ]
     }
     
     func showUserDetail(user: User?, selectedIndex: Int?) {
-        guard let selectedIndex = selectedIndex else {
+        guard
+            let navigationController = getNavigationController(for: selectedIndex),
+            let detailViewController = moduleBuilder?.createUserDetailModule(user: user, router: self)
+        else {
             return
         }
         
-        if let tabBarPage = tabBarController?.viewControllers?[selectedIndex] {
-            let viewController = tabBarPage as? UINavigationController
-            
-            guard
-                let navigationController = viewController,
-                let detailViewController = moduleBuilder?.createUserDetailModule(user: user, router: self)
-            else {
-                return
-            }
-            
-            navigationController.present(detailViewController, animated: true)
-        }
+        navigationController.present(detailViewController, animated: true)
     }
     
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
-        guard let selectedIndex = selectedIndex else {
+        guard
+            let navigationController = getNavigationController(for: selectedIndex),
+            let detailViewController = moduleBuilder?.createContestDetailModule(contest: contest, router: self)
+        else {
             return
         }
         
-        if let tabBarPage = tabBarController?.viewControllers?[selectedIndex] {
-            let viewController = tabBarPage as? UINavigationController
-            
-            guard
-                let navigationController = viewController,
-                let detailViewController = moduleBuilder?.createContestDetailModule(contest: contest, router: self)
-            else {
-                return
-            }
-            
-            navigationController.present(detailViewController, animated: true)
-        }
+        navigationController.present(detailViewController, animated: true)
     }
     
+    private func getNavigationController(for selectedIndex: Int?) -> UINavigationController? {
+        guard
+            let selectedIndex = selectedIndex,
+            let tabBarPage = tabBarController?.viewControllers?[selectedIndex],
+            let navigationController = tabBarPage as? UINavigationController
+        else {
+            return nil
+        }
+        
+        return navigationController
+    }
 }

@@ -1,6 +1,6 @@
 //
 //  NetworkLayer.swift
-//  Twitter
+//  Codeforces
 //
 //  Created by Madara2hor on 05.08.2020.
 //  Copyright © 2020 Madara2hor. All rights reserved.
@@ -8,6 +8,13 @@
 
 import Foundation
 import Alamofire
+
+enum ApiEndpoint: String {
+    
+    case contestList = "contest.list"
+    case userInfo = "user.info"
+    case topUsers = "user.ratedList"
+}
 
 protocol NetworkServiceProtocol {
     
@@ -27,18 +34,24 @@ protocol NetworkServiceProtocol {
 
 class NetworkService: NetworkServiceProtocol {
     
-    var apiKey: String = "ad7390d0ad53beb93317a60ec6e51743b53f6eab"
-    var apiURL: String = "http://codeforces.com/api/"
-    var apiSecret: String = "c1d9a1a42cab4419d6f14040eac4701ece37ee5a"
+    private enum Constants {
+        
+        static let gymKey: String = "gym"
+        static let handlesKey: String = "handles"
+        static let activeOnlyKey: String = "activeOnly"
+    }
+    
+    private let apiKey: String = "ad7390d0ad53beb93317a60ec6e51743b53f6eab"
+    private let apiURL: String = "http://codeforces.com/api/"
+    private let apiSecret: String = "c1d9a1a42cab4419d6f14040eac4701ece37ee5a"
     
     func getContests(
         gym: Bool,
         completion: @escaping (Result<RequestResult<Contest>?, Error>) -> Void
     ) {
-        let parameters = ["gym": "\(gym)"]
+        let parameters = [Constants.gymKey: "\(gym)"]
         let urlString = getUrlString(endpoint: ApiEndpoint.contestList.rawValue, parameters: parameters)
         
-        print(urlString)
         fetchData(type: RequestResult<Contest>.self, urlString: urlString) { result in
             DispatchQueue.main.async {
                 completion(result)
@@ -50,10 +63,9 @@ class NetworkService: NetworkServiceProtocol {
         username: String,
         completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
     ) {
-        let parameters = ["handles": "\(username)"]
+        let parameters = [Constants.handlesKey: username]
         let urlString = getUrlString(endpoint: ApiEndpoint.userInfo.rawValue, parameters: parameters)
         
-        print(urlString)
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in
             DispatchQueue.main.async {
                 completion(result)
@@ -65,10 +77,9 @@ class NetworkService: NetworkServiceProtocol {
         activeOnly: Bool,
         completion: @escaping (Result<RequestResult<User>?, Error>) -> Void
     ) {
-        let parameters = ["activeOnly": "\(activeOnly)"]
+        let parameters = [Constants.activeOnlyKey: "\(activeOnly)"]
         let urlString = getUrlString(endpoint: ApiEndpoint.topUsers.rawValue, parameters: parameters)
         
-        print(urlString)
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in
             DispatchQueue.main.async {
                 completion(result)
@@ -119,12 +130,4 @@ class NetworkService: NetworkServiceProtocol {
             }
         }
     }
-
-}
-
-enum ApiEndpoint: String {
-    
-    case contestList = "contest.list"
-    case userInfo = "user.info"
-    case topUsers = "user.ratedList"
 }

@@ -18,7 +18,7 @@ protocol SearchUserViewProtocol: AnyObject {
     func failure(error: String?)
 }
 
-protocol SearchUserViewPresenterProtocol: AnyObject {
+protocol SearchUserViewPresenterProtocol: ConnectionMonitorProtocol {
     
     var userHeaderModel: UserHeaderViewModel? { get }
     var userInfo: [String] { get }
@@ -68,23 +68,23 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
                 switch result {
                     case .success(let requsetResult):
                         guard let result = requsetResult else {
-                            self?.handleFailure()
+                            self?.handleFailure(with: "Произошла непредвиденная ошибка.")
                             return
                         }
                     
                         switch result.status {
                         case .success:
-                            guard let resultUser = requsetResult?.result?[0] else {
-                                self?.handleFailure()
+                            guard let resultUser = requsetResult?.result?[.zero] else {
+                                self?.handleFailure(with: "Не удалось получить информуцию о пользователе.")
                                 return
                             }
                             
                             self?.handleSuccess(resultUser)
                         case .failure:
-                            self?.handleFailure()
+                            self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                     }
                 case .failure:
-                    self?.handleFailure()
+                    self?.handleFailure(with: "Произошла непредвиденная ошибка.")
                 }
             }
         } 
@@ -95,6 +95,16 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         searchedUsername = nil
         userHeaderModel = nil
         userInfo = []
+    }
+    
+    func connectionSatisfied() {
+        if user == nil && searchedUsername != nil {
+            searchUser()
+        }
+    }
+    
+    func connectionUnsatisfied() {
+        handleFailure(with: "Потеряно интернет соединение.")
     }
     
     private func makeUserInfo(for user: User) {
@@ -144,12 +154,8 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         view?.success()
     }
     
-    private func handleFailure() {
-        if user == nil {
-            view?.failure(error: "Что-то не так с Code forces. Мы уже работаем над этим.")
-        } else {
-            user = nil
-            view?.failure(error: "Произошла непредвиденная ошибка. Возможно проблемы с интернет соединением.")
-        }
+    private func handleFailure(with message: String) {
+        user = nil
+        view?.failure(error: message)
     }
 }
