@@ -50,7 +50,7 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
         if let type = contest?.type.rawValue {
             contestInfo.append("Система оценки: \(type)")
         }
-        if let phase = contest?.phase.rawValue {
+        if let phase = contest?.phase.localizedValue {
             contestInfo.append("Этап соревнований: \(phase)")
         }
         if let duration = contest?.durationSeconds {

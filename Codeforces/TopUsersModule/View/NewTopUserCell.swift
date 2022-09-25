@@ -21,11 +21,19 @@ class NewTopUserCell: UITableViewCell, CellRegistrable {
     @IBOutlet private weak var usernameLabel: UILabel!
     @IBOutlet private weak var userRatingLabel: UILabel!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        profileImageView.image = UIImage(systemName: "person")
+        usernameLabel.text = nil
+        userRatingLabel.text = nil
+    }
+    
     func update(with user: User?) {
         if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
             profileImageView.load(url: urlImage)
         } else {
-            profileImageView.image = UIImage(systemName: "Person")
+            profileImageView.image = UIImage(systemName: "person")
         }
         
         usernameLabel.text = user?.handle

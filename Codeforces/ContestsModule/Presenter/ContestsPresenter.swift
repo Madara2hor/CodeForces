@@ -20,6 +20,7 @@ protocol ContestsViewProtocol: AnyObject {
 
 protocol ContestsViewPresenterProtocol: ConnectionServiceProtocol {
     
+    var contestsSections: [SectionViewModel] { get }
     var contests: [Contest]? { get }
     var isFiltredByGym: Bool! { get }
     
@@ -33,6 +34,7 @@ protocol ContestsViewPresenterProtocol: ConnectionServiceProtocol {
 
 class ContestsPresenter: ContestsViewPresenterProtocol {
     
+    var contestsSections: [SectionViewModel] = []
     var contests: [Contest]?
     var isFiltredByGym: Bool!
     
@@ -117,6 +119,51 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         handleFailure(with: "Потеряно интернет соединение.")
     }
     
+    private func getPahseTitle(_ phase: ContestPhase) -> String {
+        switch phase {
+        case .coding:
+            return "Текущие события"
+        case .before:
+            return "Предстоящие события"
+        case .pendingSystemTest:
+            return "Ожидается тестирование"
+        case .systemTest:
+            return "Тестирование"
+        case .finished:
+            return "Завершенные события"
+        }
+    }
+    
+    private func setupSections(for contests: [Contest]) {
+        ContestPhase.allCases.forEach {
+            switch $0 {
+            case .coding:
+                appendSectionIfNeeded(for: contests, phase: .coding)
+            case .before:
+                appendSectionIfNeeded(for: contests,phase: .before)
+            case .systemTest:
+                appendSectionIfNeeded(for: contests,phase: .systemTest)
+            case .pendingSystemTest:
+                appendSectionIfNeeded(for: contests,phase: .pendingSystemTest)
+            case .finished:
+                appendSectionIfNeeded(for: contests,phase: .finished)
+            }
+        }
+    }
+    
+    private func appendSectionIfNeeded(for contests: [Contest], phase: ContestPhase) {
+        let models = contests.filter({ $0.phase == phase })
+        
+        if models.isEmpty == false {
+            contestsSections.append(
+                SectionViewModel(
+                    title: getPahseTitle(phase),
+                    models: models
+                )
+            )
+        }
+    }
+    
     private func handleSuccess(_ contestsData: [Contest]) {
         contests = contestsData
         notFiltredContests = contestsData
@@ -126,6 +173,8 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
             notFiltredContests?.reverse()
         }
         
+        setupSections(for: contestsData)
+        
         view?.success()
     }
     
@@ -133,4 +182,10 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         contests = nil
         view?.failure(error: message)
     }
+}
+
+struct SectionViewModel {
+    
+    let title: String
+    let models: [Contest]
 }

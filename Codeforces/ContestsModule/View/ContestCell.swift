@@ -22,7 +22,7 @@ class ContestCell: UITableViewCell, CellRegistrable {
     
     func update(with contest: Contest?) {
         contestName.text = contest?.name
-        phase.text = contest?.phase.rawValue
+        phase.text = contest?.phase.localizedValue
     }
 }
 

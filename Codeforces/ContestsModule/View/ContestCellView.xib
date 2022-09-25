@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,8 +21,8 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contest name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3J-m9-oBx">
                         <rect key="frame" x="12" y="16" width="296" height="22"/>
                         <accessibility key="accessibilityConfiguration" identifier="ContestName"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <color key="textColor" name="Title"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phase" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftT-8p-Syo">
@@ -30,16 +31,26 @@
                             <constraint firstAttribute="height" constant="18" id="QKP-2L-zqk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="Subtitle"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSw-j8-FuT">
+                        <rect key="frame" x="48" y="79" width="272" height="1"/>
+                        <color key="backgroundColor" name="Separator"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="VCw-yd-Yie"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="hSw-j8-FuT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="48" id="3BK-JG-r21"/>
                     <constraint firstAttribute="trailing" secondItem="y3J-m9-oBx" secondAttribute="trailing" constant="12" id="B5C-jB-xuO"/>
+                    <constraint firstAttribute="trailing" secondItem="hSw-j8-FuT" secondAttribute="trailing" id="GDz-gk-ykp"/>
                     <constraint firstItem="y3J-m9-oBx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="bFi-cz-5zD"/>
                     <constraint firstItem="ftT-8p-Syo" firstAttribute="top" secondItem="y3J-m9-oBx" secondAttribute="bottom" constant="8" id="btD-3K-NyP"/>
                     <constraint firstAttribute="bottom" secondItem="ftT-8p-Syo" secondAttribute="bottom" constant="16" id="gl2-6E-LIP"/>
+                    <constraint firstAttribute="bottom" secondItem="hSw-j8-FuT" secondAttribute="bottom" id="kQL-3m-C1E"/>
                     <constraint firstItem="y3J-m9-oBx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="oHp-7D-RBk"/>
                     <constraint firstAttribute="trailing" secondItem="ftT-8p-Syo" secondAttribute="trailing" constant="12" id="pcV-mC-yhg"/>
                     <constraint firstItem="ftT-8p-Syo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="xIp-iQ-Xrz"/>
@@ -52,7 +63,18 @@
                 <outlet property="contestName" destination="y3J-m9-oBx" id="cAf-pL-GNH"/>
                 <outlet property="phase" destination="ftT-8p-Syo" id="RS9-Hb-Ua8"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="110.15625"/>
+            <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="Separator">
+            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Subtitle">
+            <color red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Title">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

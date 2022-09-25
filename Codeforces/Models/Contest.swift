@@ -31,16 +31,31 @@ struct Contest: Codable {
 
 enum ContestType: String, Codable {
     
-    case CF = "CF"
-    case IOI = "IOI"
-    case ICPC = "ICPC"
+    case cf = "CF"
+    case ioi = "IOI"
+    case icpc = "ICPC"
 }
 
-enum ContestPhase: String, Codable {
+enum ContestPhase: String, Codable, CaseIterable {
     
-    case BEFORE = "BEFORE"
-    case CODING = "CODING"
-    case PENDING_SYSTEM_TEST = "PENDING_SYSTEM_TEST"
-    case SYSTEM_TEST = "SYSTEM_TEST"
-    case FINISHED = "FINISHED"
+    case coding = "CODING"
+    case before = "BEFORE"
+    case pendingSystemTest = "PENDING_SYSTEM_TEST"
+    case systemTest = "SYSTEM_TEST"
+    case finished = "FINISHED"
+    
+    var localizedValue: String {
+        switch self {
+        case .coding:
+            return "Идет"
+        case .before:
+            return "До начала"
+        case .pendingSystemTest:
+            return "Ожидается проверка"
+        case .systemTest:
+            return "Идет проверка"
+        case .finished:
+            return "Завершено"
+        }
+    }
 }

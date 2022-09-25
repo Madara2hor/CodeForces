@@ -281,6 +281,7 @@ final class NewTopUsersViewController: UIViewController {
         super.viewDidLoad()
         
         topUsersTableView.register(NewTopUserCell.self)
+        topUsersTableView.tableFooterView = UIView()
     }
 }
 

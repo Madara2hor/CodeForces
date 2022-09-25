@@ -124,13 +124,21 @@ extension ContestsViewController: UISearchBarDelegate {
 
 extension ContestsViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return presenter?.contestsSections.count ?? .zero
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.contests?.count ?? .zero
+        return presenter?.contestsSections[section].models.count ?? .zero
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return presenter?.contestsSections[section].title
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let contests = presenter?.contests,
+            let contests = presenter?.contestsSections[indexPath.section].models,
             indexPath.row < contests.count
         else {
             return UITableViewCell()
