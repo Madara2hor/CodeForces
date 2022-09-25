@@ -155,7 +155,7 @@ extension ContestsViewController: UITableViewDataSource {
 extension ContestsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contest = presenter?.contests?[indexPath.row]
+        let contest = presenter?.contestsSections[indexPath.section].models[indexPath.row]
         
         presenter?.showContestDetail(
             contest: contest,

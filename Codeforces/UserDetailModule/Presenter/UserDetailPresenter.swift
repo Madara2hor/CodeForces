@@ -57,17 +57,20 @@ class UserDetailPresenter: UserDetailViewPresenterProtocol {
         
         userInfo.removeAll()
         
-        userInfo.append("Друзья: \(user.contribution)")
-        
-        if let rating = user.rating {
-            userInfo.append("Рейтинг: \(rating)")
-        }
         if let firstName = user.firstName {
             userInfo.append("Имя: \(firstName)")
         }
         if let lastName = user.lastName {
             userInfo.append("Фамилия: \(lastName)")
         }
+        
+        if let rating = user.rating {
+            userInfo.append("Рейтинг: \(rating)")
+        }
+        
+        userInfo.append("Вклад: \(user.contribution)")
+        userInfo.append("Друзья: \(user.friendOfCount)")
+        
         if let country = user.country {
             userInfo.append("Страна: \(country)")
         }

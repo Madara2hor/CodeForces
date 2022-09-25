@@ -21,8 +21,7 @@ protocol ContestsViewProtocol: AnyObject {
 protocol ContestsViewPresenterProtocol: ConnectionServiceProtocol {
     
     var contestsSections: [SectionViewModel] { get }
-    var contests: [Contest]? { get }
-    var isFiltredByGym: Bool! { get }
+    var isFiltredByGym: Bool { get }
     
     init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
@@ -35,13 +34,13 @@ protocol ContestsViewPresenterProtocol: ConnectionServiceProtocol {
 class ContestsPresenter: ContestsViewPresenterProtocol {
     
     var contestsSections: [SectionViewModel] = []
-    var contests: [Contest]?
-    var isFiltredByGym: Bool!
+    var isFiltredByGym: Bool
     
     private weak var view: ContestsViewProtocol?
     private var router: RouterProtocol?
     private let networkService: NetworkServiceProtocol!
     
+    private var notFiltredSections: [SectionViewModel] = []
     private var notFiltredContests: [Contest]?
     
     required init(
@@ -95,9 +94,19 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     func searchContest(by text: String) {
         let lowerSearchText = text.lowercased()
         
-        contests = text.isEmpty
-            ? notFiltredContests
-            : notFiltredContests?.filter { $0.name.lowercased().contains(lowerSearchText) }
+        contestsSections = text.isEmpty
+            ? notFiltredSections
+            : notFiltredSections.compactMap {
+                let models = $0.models.filter { contest in
+                    contest.name.lowercased().contains(lowerSearchText)
+                }
+                
+                if models.isEmpty {
+                    return nil
+                }
+                
+                return SectionViewModel(title: $0.title, models: models)
+            }
     }
     
     func filterByGym() {
@@ -110,7 +119,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func connectionSatisfied() {
-        if contests == nil {
+        if contestsSections.isEmpty {
             requestContests()
         }
     }
@@ -165,21 +174,14 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     private func handleSuccess(_ contestsData: [Contest]) {
-        contests = contestsData
-        notFiltredContests = contestsData
-        
-        if isFiltredByGym {
-            contests?.reverse()
-            notFiltredContests?.reverse()
-        }
-        
         setupSections(for: contestsData)
+        notFiltredSections = contestsSections
         
         view?.success()
     }
     
     private func handleFailure(with message: String) {
-        contests = nil
+        contestsSections.removeAll()
         view?.failure(error: message)
     }
 }

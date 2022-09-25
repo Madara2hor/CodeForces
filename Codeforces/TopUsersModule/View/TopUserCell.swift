@@ -1,5 +1,5 @@
 //
-//  NewTopUserCell.swift
+//  TopUserCell.swift
 //  Codeforces
 //
 //  Created by Кирилл on 24.09.2022.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class NewTopUserCell: UITableViewCell, CellRegistrable {
+class TopUserCell: UITableViewCell, CellRegistrable {
 
     private enum Constants {
         
-        static let nibName: String = "NewTopUserCellView"
+        static let nibName: String = "TopUserCellView"
     }
     
     static var nibName: String { Constants.nibName }

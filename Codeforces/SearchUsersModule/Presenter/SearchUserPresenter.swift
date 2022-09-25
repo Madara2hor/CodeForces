@@ -120,17 +120,20 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         
         userInfo.removeAll()
         
-        userInfo.append("Друзья: \(user.contribution)")
-        
-        if let rating = user.rating {
-            userInfo.append("Рейтинг: \(rating)")
-        }
+        userInfo.append("Друзей: \(user.friendOfCount)")
+       
         if let firstName = user.firstName {
             userInfo.append("Имя: \(firstName)")
         }
         if let lastName = user.lastName {
             userInfo.append("Фамилия: \(lastName)")
         }
+        if let rating = user.rating {
+            userInfo.append("Рейтинг: \(rating)")
+        }
+        
+        userInfo.append("Вклад: \(user.contribution)")
+        
         if let country = user.country {
             userInfo.append("Страна: \(country)")
         }
