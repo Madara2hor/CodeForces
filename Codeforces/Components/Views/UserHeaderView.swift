@@ -20,24 +20,23 @@ final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
     private enum Constants {
         
         static let nibName = "UserHeaderView"
+        static let height: CGFloat = 224
     }
     
     static var nibName: String { Constants.nibName }
-    
+    static var height: CGFloat { Constants.height }
     
     @IBOutlet private weak var userImage: UIImageView!
     @IBOutlet private weak var userStatusImage: UIImageView!
-    @IBOutlet private weak var usernameContainer: UIView!
-    @IBOutlet private weak var usernameTitle: UILabel!
-    
-    private var blurView: UIVisualEffectView?
+    @IBOutlet private weak var usernameLabel: UILabel!
+    @IBOutlet private weak var lastOnlineLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         userImage.image = nil
-        usernameTitle.text = nil
-        blurView?.removeFromSuperview()
+        usernameLabel.text = nil
+        lastOnlineLabel.text = nil
         
         userStatusImage.tintColor = .red
     }
@@ -49,8 +48,7 @@ final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
             userImage.image = UIImage(systemName: "person")
         }
         
-        usernameTitle.text = model.username
-        blurView = usernameContainer.configureBlur(alpha: 0.7, effect: .dark)
+        usernameLabel.text = model.username
         
         if model.isOnline {
             userStatusImage.tintColor = .green

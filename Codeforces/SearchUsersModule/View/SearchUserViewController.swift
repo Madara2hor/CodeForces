@@ -10,11 +10,6 @@ import UIKit
 
 final class SearchUserViewController: UIViewController {
     
-    private enum Constants {
-        
-        static let headerHeight: CGFloat = 150
-    }
-    
     var presenter: SearchUserViewPresenterProtocol?
     
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -142,7 +137,7 @@ extension SearchUserViewController: UITableViewDataSource {
 extension SearchUserViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return presenter?.userHeaderModel == nil ? .zero : Constants.headerHeight
+        return presenter?.userHeaderModel == nil ? .zero : UserHeaderView.height
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

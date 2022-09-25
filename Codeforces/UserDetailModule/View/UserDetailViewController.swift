@@ -13,14 +13,11 @@ final class UserDetailViewController: UIViewController {
     private enum Constants {
         
         static let containerViewCornerRadius: CGFloat = 20
-        static let headerHeight: CGFloat = 150
     }
     
     var presenter: UserDetailViewPresenterProtocol!
     
     @IBOutlet private weak var userDetailTableView: UITableView!
-    @IBOutlet private weak var containerView: UIView!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +26,6 @@ final class UserDetailViewController: UIViewController {
         userDetailTableView.register(UserHeaderView.self)
         userDetailTableView.tableFooterView = UIView()
         
-        containerView.roundCorners([.topLeft, .topRight], radius: Constants.containerViewCornerRadius)
         presenter.requestUser()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideUserDetail))
@@ -66,7 +62,7 @@ extension UserDetailViewController: UITableViewDataSource {
 extension UserDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return presenter?.userHeaderModel == nil ? .zero : Constants.headerHeight
+        return presenter?.userHeaderModel == nil ? .zero : UserHeaderView.height
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

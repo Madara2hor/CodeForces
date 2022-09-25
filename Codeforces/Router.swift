@@ -58,7 +58,7 @@ class Router: RouterProtocol {
             return
         }
         
-        navigationController.present(detailViewController, animated: true)
+        navigationController.pushViewController(detailViewController, animated: true)
     }
     
     func showContestDetail(contest: Contest?, selectedIndex: Int?) {
