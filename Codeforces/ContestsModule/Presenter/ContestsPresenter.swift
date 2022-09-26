@@ -12,7 +12,6 @@ protocol ContestsViewProtocol: AnyObject {
     
     func setLoadingView()
     func removeLoadingView()
-    func removeMessageSubview()
     
     func success()
     func failure(error: String?)
@@ -56,7 +55,6 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func requestContests() {
-        view?.removeMessageSubview()
         view?.setLoadingView()
         
         networkService.getContests(gym: isFiltredByGym) { result in

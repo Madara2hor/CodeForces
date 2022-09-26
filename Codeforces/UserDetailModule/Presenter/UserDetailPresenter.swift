@@ -52,7 +52,6 @@ class UserDetailPresenter: UserDetailViewPresenterProtocol {
         userHeaderModel = UserHeaderViewModel(
             image: user.titlePhoto,
             username: user.handle,
-            isOnline: user.lastOnlineTimeSeconds == .zero,
             lastOnline: user.lastOnlineTimeSeconds
         )
         

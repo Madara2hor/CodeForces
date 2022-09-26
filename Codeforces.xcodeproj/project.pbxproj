@@ -16,7 +16,7 @@
 		0203488324FCAD3B008DE39E /* SearchUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203488224FCAD3B008DE39E /* SearchUserPresenterTests.swift */; };
 		02045AA7251897E4003FD1A7 /* ContestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA6251897E4003FD1A7 /* ContestTests.swift */; };
 		02045AA92518A418003FD1A7 /* TopUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02045AA82518A418003FD1A7 /* TopUsersTests.swift */; };
-		0209F6CE251B4D2A0074BC8B /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */; };
+		0209F6CE251B4D2A0074BC8B /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209F6CD251B4D2A0074BC8B /* UICollectionView+Extension.swift */; };
 		02454520251B278400D81096 /* NetworkConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0245990A24FF6C9500F1099F /* NetworkConnectionService.swift */; };
 		0245990924FE32DC00F1099F /* SearchUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */; };
 		02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */; };
@@ -43,11 +43,11 @@
 		02D09E7424DA89F400DEF1A9 /* Contest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7324DA89F400DEF1A9 /* Contest.swift */; };
 		02D09E7624DA8F0A00DEF1A9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7524DA8F0A00DEF1A9 /* NetworkService.swift */; };
 		02D09E7B24DA97C100DEF1A9 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7A24DA97C100DEF1A9 /* RequestResult.swift */; };
-		02D09E7D24DAA3E100DEF1A9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7C24DAA3E100DEF1A9 /* String.swift */; };
-		02D09E7F24DBAC4200DEF1A9 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7E24DBAC4200DEF1A9 /* Date.swift */; };
+		02D09E7D24DAA3E100DEF1A9 /* String+sha512.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7C24DAA3E100DEF1A9 /* String+sha512.swift */; };
+		02D09E7F24DBAC4200DEF1A9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7E24DBAC4200DEF1A9 /* Date+Extension.swift */; };
 		02D09E8224DBB09C00DEF1A9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E8124DBB09C00DEF1A9 /* User.swift */; };
 		02D09E8424DBDD5500DEF1A9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E8324DBDD5500DEF1A9 /* UIView.swift */; };
-		02D09E8C24DD313D00DEF1A9 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E8B24DD313D00DEF1A9 /* UITableView.swift */; };
+		02D09E8C24DD313D00DEF1A9 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E8B24DD313D00DEF1A9 /* UITableView+Extension.swift */; };
 		02D09E8E24E0F8B400DEF1A9 /* ContestDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E8D24E0F8B400DEF1A9 /* ContestDetailPresenter.swift */; };
 		02D09E9324E0F8E900DEF1A9 /* ContestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E9124E0F8E900DEF1A9 /* ContestDetailViewController.swift */; };
 		02D09E9424E0F8E900DEF1A9 /* ContestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9224E0F8E900DEF1A9 /* ContestDetailViewController.xib */; };
@@ -60,6 +60,8 @@
 		136006A728DE98E600BB4732 /* TopUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136006A628DE98E600BB4732 /* TopUsersViewController.xib */; };
 		136006AA28DE997F00BB4732 /* TopUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A828DE997F00BB4732 /* TopUserCell.swift */; };
 		136006AB28DE997F00BB4732 /* TopUserCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136006A928DE997F00BB4732 /* TopUserCellView.xib */; };
+		136006AD28E1505500BB4732 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006AC28E1505500BB4732 /* Double+Extension.swift */; };
+		136006AF28E1507000BB4732 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006AE28E1507000BB4732 /* Int+Extension.swift */; };
 		137E5C6928DC146600592D04 /* PrimitiveLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137E5C6828DC146600592D04 /* PrimitiveLiterals.swift */; };
 		137E5C6D28DC162000592D04 /* CellRegistrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137E5C6C28DC162000592D04 /* CellRegistrable.swift */; };
 		137E5C7128DC255700592D04 /* InfoCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137E5C7028DC255700592D04 /* InfoCellView.xib */; };
@@ -95,7 +97,7 @@
 		0203488E24FCFC8A008DE39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02045AA6251897E4003FD1A7 /* ContestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestTests.swift; sourceTree = "<group>"; };
 		02045AA82518A418003FD1A7 /* TopUsersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersTests.swift; sourceTree = "<group>"; };
-		0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		0209F6CD251B4D2A0074BC8B /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		0245990A24FF6C9500F1099F /* NetworkConnectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionService.swift; sourceTree = "<group>"; };
 		02B849A5250AA8C300D766C7 /* AlertPresentableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentableProtocol.swift; sourceTree = "<group>"; };
 		02B849A7250B1F5900D766C7 /* TopUsersViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUsersViewContoller.swift; sourceTree = "<group>"; };
@@ -123,11 +125,11 @@
 		02D09E7324DA89F400DEF1A9 /* Contest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contest.swift; sourceTree = "<group>"; };
 		02D09E7524DA8F0A00DEF1A9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		02D09E7A24DA97C100DEF1A9 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
-		02D09E7C24DAA3E100DEF1A9 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		02D09E7E24DBAC4200DEF1A9 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		02D09E7C24DAA3E100DEF1A9 /* String+sha512.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+sha512.swift"; sourceTree = "<group>"; };
+		02D09E7E24DBAC4200DEF1A9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		02D09E8124DBB09C00DEF1A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02D09E8324DBDD5500DEF1A9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		02D09E8B24DD313D00DEF1A9 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		02D09E8B24DD313D00DEF1A9 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		02D09E8D24E0F8B400DEF1A9 /* ContestDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestDetailPresenter.swift; sourceTree = "<group>"; };
 		02D09E9124E0F8E900DEF1A9 /* ContestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestDetailViewController.swift; sourceTree = "<group>"; };
 		02D09E9224E0F8E900DEF1A9 /* ContestDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContestDetailViewController.xib; sourceTree = "<group>"; };
@@ -148,6 +150,8 @@
 		136006A628DE98E600BB4732 /* TopUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopUsersViewController.xib; sourceTree = "<group>"; };
 		136006A828DE997F00BB4732 /* TopUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopUserCell.swift; sourceTree = "<group>"; };
 		136006A928DE997F00BB4732 /* TopUserCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopUserCellView.xib; sourceTree = "<group>"; };
+		136006AC28E1505500BB4732 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		136006AE28E1507000BB4732 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		137E5C6828DC146600592D04 /* PrimitiveLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimitiveLiterals.swift; sourceTree = "<group>"; };
 		137E5C6C28DC162000592D04 /* CellRegistrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegistrable.swift; sourceTree = "<group>"; };
 		137E5C7028DC255700592D04 /* InfoCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoCellView.xib; sourceTree = "<group>"; };
@@ -381,13 +385,15 @@
 			isa = PBXGroup;
 			children = (
 				136006A028DDE58D00BB4732 /* UIView+Constraints.swift */,
+				136006AC28E1505500BB4732 /* Double+Extension.swift */,
+				136006AE28E1507000BB4732 /* Int+Extension.swift */,
+				02D09E7E24DBAC4200DEF1A9 /* Date+Extension.swift */,
+				02D09E8B24DD313D00DEF1A9 /* UITableView+Extension.swift */,
+				0209F6CD251B4D2A0074BC8B /* UICollectionView+Extension.swift */,
+				02D09E7C24DAA3E100DEF1A9 /* String+sha512.swift */,
 				02D09E6324D969B200DEF1A9 /* UIColor.swift */,
 				02D09E6D24DA757A00DEF1A9 /* UIImageView.swift */,
-				02D09E7C24DAA3E100DEF1A9 /* String.swift */,
-				02D09E7E24DBAC4200DEF1A9 /* Date.swift */,
 				02D09E8324DBDD5500DEF1A9 /* UIView.swift */,
-				02D09E8B24DD313D00DEF1A9 /* UITableView.swift */,
-				0209F6CD251B4D2A0074BC8B /* UICollectionView.swift */,
 				137E5C6828DC146600592D04 /* PrimitiveLiterals.swift */,
 			);
 			path = Extensions;
@@ -813,25 +819,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				02454520251B278400D81096 /* NetworkConnectionService.swift in Sources */,
-				02D09E7D24DAA3E100DEF1A9 /* String.swift in Sources */,
+				02D09E7D24DAA3E100DEF1A9 /* String+sha512.swift in Sources */,
 				02D09E7624DA8F0A00DEF1A9 /* NetworkService.swift in Sources */,
 				02B849A6250AA8C300D766C7 /* AlertPresentableProtocol.swift in Sources */,
 				137E5C6D28DC162000592D04 /* CellRegistrable.swift in Sources */,
+				136006AD28E1505500BB4732 /* Double+Extension.swift in Sources */,
 				02D09E8424DBDD5500DEF1A9 /* UIView.swift in Sources */,
 				137E5C7828DC341D00592D04 /* UserHeaderView.swift in Sources */,
 				02D09E5F24D94C7700DEF1A9 /* SearchUserPresenter.swift in Sources */,
 				136006AA28DE997F00BB4732 /* TopUserCell.swift in Sources */,
 				02D09E6424D969B200DEF1A9 /* UIColor.swift in Sources */,
-				02D09E8C24DD313D00DEF1A9 /* UITableView.swift in Sources */,
+				02D09E8C24DD313D00DEF1A9 /* UITableView+Extension.swift in Sources */,
 				02D09E7124DA792A00DEF1A9 /* ContestCell.swift in Sources */,
 				02D09E5924D94C4600DEF1A9 /* SearchUserViewController.swift in Sources */,
 				02D09E1424D9333D00DEF1A9 /* AppDelegate.swift in Sources */,
 				02D09E9324E0F8E900DEF1A9 /* ContestDetailViewController.swift in Sources */,
 				02D09E7424DA89F400DEF1A9 /* Contest.swift in Sources */,
 				02D09E3824D9343700DEF1A9 /* Router.swift in Sources */,
-				0209F6CE251B4D2A0074BC8B /* UICollectionView.swift in Sources */,
+				0209F6CE251B4D2A0074BC8B /* UICollectionView+Extension.swift in Sources */,
+				136006AF28E1507000BB4732 /* Int+Extension.swift in Sources */,
 				02D09E6E24DA757A00DEF1A9 /* UIImageView.swift in Sources */,
-				02D09E7F24DBAC4200DEF1A9 /* Date.swift in Sources */,
+				02D09E7F24DBAC4200DEF1A9 /* Date+Extension.swift in Sources */,
 				136006A528DDE64D00BB4732 /* ActivityDisplayableOverlayView.swift in Sources */,
 				02D09E5024D9477000DEF1A9 /* UserDetailViewController.swift in Sources */,
 				02B849A9250B1F5900D766C7 /* TopUsersViewContoller.swift in Sources */,

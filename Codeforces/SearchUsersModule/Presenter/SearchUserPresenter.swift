@@ -12,7 +12,6 @@ protocol SearchUserViewProtocol: AnyObject {
     
     func setLoadingView()
     func removeLoadingView()
-    func removeMessageSubview()
     
     func success()
     func failure(error: String?)
@@ -62,7 +61,6 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
             return
         }
         
-        view?.removeMessageSubview()
         view?.setLoadingView()
         
         networkService.getUser(username: searchedUsername) { result in
@@ -115,13 +113,10 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         userHeaderModel = UserHeaderViewModel(
             image: user.titlePhoto,
             username: user.handle,
-            isOnline: user.lastOnlineTimeSeconds == .zero,
             lastOnline: user.lastOnlineTimeSeconds
         )
         
         userInfo.removeAll()
-        
-        userInfo.append("Друзей: \(user.friendOfCount)")
        
         if let firstName = user.firstName {
             userInfo.append("Имя: \(firstName)")
@@ -134,6 +129,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         }
         
         userInfo.append("Вклад: \(user.contribution)")
+        userInfo.append("Друзей: \(user.friendOfCount)")
         
         if let country = user.country {
             userInfo.append("Страна: \(country)")

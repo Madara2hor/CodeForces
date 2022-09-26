@@ -12,7 +12,6 @@ protocol TopUsersViewProtocol: AnyObject {
     
     func setLoadingView()
     func removeLoadingView()
-    func removeMessageSubview()
     
     func success()
     func failure(error: String?)
@@ -65,7 +64,6 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
             self.isActiveOnly = isActiveOnly
         }
         
-        view?.removeMessageSubview()
         view?.setLoadingView()
         
         networkService.getTopUsers(activeOnly: self.isActiveOnly) { result in

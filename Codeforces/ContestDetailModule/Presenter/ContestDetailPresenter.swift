@@ -48,16 +48,16 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
         contestName = contest?.name
         
         if let startTime = contest?.startTimeSeconds {
-            contestInfo.append("Начало соревнования: \(String(describing: startTime).date)")
+            contestInfo.append("Начало соревнования: \(Double(startTime).date)")
         }
         if let duration = contest?.durationSeconds {
-            contestInfo.append("Длительность: \(String(describing: duration).durationFromSeconds)")
+            contestInfo.append("Длительность: \(duration.durationFromSeconds)")
         }
         if let beforeStart = contest?.relativeTimeSeconds {
             if beforeStart > .zero {
-                contestInfo.append("Идет: \(String(describing: beforeStart).durationFromSeconds)")
+                contestInfo.append("Идет: \(beforeStart.durationFromSeconds)")
             } else {
-                contestInfo.append("До начала: \(String(describing: -beforeStart).durationFromSeconds)")
+                contestInfo.append("До начала: \((-beforeStart).durationFromSeconds)")
             }
         }
         if let prepared = contest?.preparedBy {

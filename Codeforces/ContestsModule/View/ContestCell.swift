@@ -30,9 +30,9 @@ class ContestCell: UITableViewCell, CellRegistrable {
         
         if let time = contest?.relativeTimeSeconds {
             if phase == .before {
-                phaseLabel.text = "\(phase.localizedValue): \(String(describing: -time).durationFromSeconds)"
+                phaseLabel.text = "\(phase.localizedValue): \((-time).durationFromSeconds)"
             } else if phase == .coding {
-                phaseLabel.text = "\(phase.localizedValue): \(String(describing: time).durationFromSeconds)"
+                phaseLabel.text = "\(phase.localizedValue): \(time.durationFromSeconds)"
             } else {
                 phaseLabel.text = phase.localizedValue
             }

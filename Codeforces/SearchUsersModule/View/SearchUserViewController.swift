@@ -167,10 +167,6 @@ extension SearchUserViewController: SearchUserViewProtocol {
         view.removeLoadingSubview()
     }
     
-    func removeMessageSubview() {
-        view.removeMessageSubview()
-    }
-    
     func success() {
         userTableView.reloadData()
     }
@@ -178,7 +174,7 @@ extension SearchUserViewController: SearchUserViewProtocol {
     func failure(error: String?) {
         userTableView.tableHeaderView = UIView()
         
-        view.setMessageSubview(title: "Упс...", message: error ?? .empty)
+        // TODO: handle failure
     }
 }
 
@@ -190,7 +186,6 @@ extension SearchUserViewController: UISearchBarDelegate {
         
         if cleanText == .empty {
             presenter?.clearUser()
-            removeMessageSubview()
             
             userTableView.tableHeaderView = nil
         } else {

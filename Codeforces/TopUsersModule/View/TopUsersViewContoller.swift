@@ -84,7 +84,7 @@ extension TopUsersViewController: TopUsersViewProtocol {
     }
     
     func failure(error: String?) {
-        topUsersTableView.setMessageBackgroundView(title: "Упс...", message: error ?? .empty)
+        // TODO: handle failure
     }
     
     func topUsersSortedByRating() {
@@ -102,11 +102,5 @@ extension TopUsersViewController: TopUsersViewProtocol {
     
     func removeLoadingView() {
         view.removeLoadingSubview()
-    }
-    
-    func removeMessageSubview() {
-        if topUsersTableView != nil {
-            topUsersTableView.restore()
-        }
     }
 }

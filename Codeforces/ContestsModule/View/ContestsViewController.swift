@@ -176,7 +176,7 @@ extension ContestsViewController: ContestsViewProtocol {
     }
     
     func failure(error: String?) {
-        contestTable.setMessageBackgroundView(title: "Упс...", message: error ?? .empty)
+        // TODO: handle failure
     }
     
     func setLoadingView() {
@@ -185,9 +185,5 @@ extension ContestsViewController: ContestsViewProtocol {
     
     func removeLoadingView() {
         view.removeLoadingSubview()
-    }
-    
-    func removeMessageSubview() {
-        contestTable.restore()
     }
 }

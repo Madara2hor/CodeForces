@@ -14,8 +14,8 @@ let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
     
     func load(url: URL) {
-        DispatchQueue.global().async {
-            guard let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) else {
+        guard let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) else {
+            DispatchQueue.global().async {
                 AF.download(url).responseData { response in
                     guard let data = response.value, let image = UIImage(data: data) else {
                         return
@@ -25,12 +25,12 @@ extension UIImageView {
                     
                     self.setImage(image)
                 }
-                
-                return
             }
             
-            self.setImage(cachedImage)
+            return
         }
+        
+        setImage(cachedImage)
     }
     
     private func setImage(_ image: UIImage) {

@@ -1,51 +1,19 @@
 //
-//  String.swift
+//  Int+Extension.swift
 //  Codeforces
 //
-//  Created by Madara2hor on 05.08.2020.
-//  Copyright © 2020 Madara2hor. All rights reserved.
+//  Created by Кирилл on 26.09.2022.
+//  Copyright © 2022 Madara2hor. All rights reserved.
 //
 
 import Foundation
-import CommonCrypto
 
-extension String {
-   
-    var sha512: String {
-        let data = data(using: .utf8) ?? Data()
-        var digest = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
-        
-        data.withUnsafeBytes{
-            _ = CC_SHA512($0.baseAddress, CC_LONG(data.count), &digest)
-        }
-        
-        return digest.map({ String(format: "%02hhx", $0) }).joined(separator: "")
-    }
+extension Int {
     
-    var date: String {
-       guard let doubleDate = Double(self) else {
-           return "Invalid date"
-       }
-       
-       let date = Date(timeIntervalSince1970: doubleDate)
-       let dateFormatter = DateFormatter()
-       dateFormatter.timeStyle = .short
-       dateFormatter.dateStyle = .short
-       dateFormatter.timeZone = .current
-       
-       let localDate = dateFormatter.string(from: date)
-       
-       return localDate
-    }
-       
     var durationFromSeconds: String {
-        guard let intSeconds = Int(self) else {
-            return "Invalid time"
-        }
-        
-        let hours = intSeconds / 3600
-        let minutes = (intSeconds % 3600) / 60
-        let days = intSeconds / 86400
+        let hours = self / 3600
+        let minutes = (self % 3600) / 60
+        let days = self / 86400
         
         if days > .zero {
             return durationFor(days: days)
