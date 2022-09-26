@@ -28,8 +28,8 @@ class UserDetailPresenter: UserDetailViewPresenterProtocol {
     var userHeaderModel: UserHeaderViewModel?
     var userInfo: [String] = []
     
-    private weak var view: UserDetailViewProtocol?
-    private var router: RouterProtocol?
+    private weak var view: UserDetailViewProtocol!
+    private var router: RouterProtocol!
     private var user: User?
     
     required init(view: UserDetailViewProtocol, router: RouterProtocol, user: User?) {
@@ -45,7 +45,7 @@ class UserDetailPresenter: UserDetailViewPresenterProtocol {
     }
     
     func requestUser() {
-        view?.updateUser()
+        view.updateUser()
     }
     
     private func makeUserInfo(for user: User) {

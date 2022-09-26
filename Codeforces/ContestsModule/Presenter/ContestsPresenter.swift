@@ -25,9 +25,9 @@ protocol ContestsViewPresenterProtocol: ConnectionServiceProtocol {
     init(view: ContestsViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
     func requestContests()
-    func searchContest(by text: String)
-    func filterByGym()
-    func showContestDetail(contest: Contest?, selectedIndex: Int?)
+    func searchedContestUpdated(with text: String)
+    func filterByGymTapped()
+    func showContestDetailTapped(contest: Contest?, selectedIndex: Int?)
 }
 
 class ContestsPresenter: ContestsViewPresenterProtocol {
@@ -35,8 +35,8 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     var contestsSections: [SectionViewModel] = []
     var isFiltredByGym: Bool
     
-    private weak var view: ContestsViewProtocol?
-    private var router: RouterProtocol?
+    private weak var view: ContestsViewProtocol!
+    private var router: RouterProtocol!
     private let networkService: NetworkServiceProtocol!
     
     private var notFiltredSections: [SectionViewModel] = []
@@ -55,11 +55,11 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     func requestContests() {
-        view?.setLoadingView()
+        view.setLoadingView()
         
         networkService.getContests(gym: isFiltredByGym) { result in
             DispatchQueue.main.async { [weak self] in
-                self?.view?.removeLoadingView()
+                self?.view.removeLoadingView()
                 
                 switch result {
                 case .success(let requsetResult):
@@ -74,7 +74,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
                             let resultData = requsetResult.result,
                             resultData.isEmpty == false
                         else {
-                            self?.view?.failure(error: "Соревнований нет")
+                            self?.handleFailure(with: "Соревнований нет")
                             return
                         }
                         
@@ -89,7 +89,7 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         } 
     }
     
-    func searchContest(by text: String) {
+    func searchedContestUpdated(with text: String) {
         let lowerSearchText = text.lowercased()
         
         contestsSections = text.isEmpty
@@ -107,12 +107,12 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
             }
     }
     
-    func filterByGym() {
+    func filterByGymTapped() {
         isFiltredByGym = !isFiltredByGym
         requestContests()
     }
     
-    func showContestDetail(contest: Contest?, selectedIndex: Int?) {
+    func showContestDetailTapped(contest: Contest?, selectedIndex: Int?) {
         router?.showContestDetail(contest: contest, selectedIndex: selectedIndex)
     }
     
@@ -179,12 +179,12 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         setupSections(for: sortedContests)
         notFiltredSections = contestsSections
         
-        view?.success()
+        view.success()
     }
     
     private func handleFailure(with message: String) {
         contestsSections.removeAll()
-        view?.failure(error: message)
+        view.failure(error: message)
     }
 }
 

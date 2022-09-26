@@ -24,9 +24,9 @@ protocol SearchUserViewPresenterProtocol: ConnectionServiceProtocol {
     
     init(view: SearchUserViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
-    func searchUser()
-    func updateSearchedUser(_ username: String)
-    func clearUser()
+    func searchUserTapped()
+    func searchedUserUpdated(with username: String)
+    func clearUserTapped()
 }
 
 class SearchUserPresenter: SearchUserViewPresenterProtocol {
@@ -34,10 +34,9 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     var userHeaderModel: UserHeaderViewModel? = nil
     var userInfo: [String] = []
     
-    private weak var view: SearchUserViewProtocol?
-    
+    private weak var view: SearchUserViewProtocol!
     private let networkService: NetworkServiceProtocol!
-    private var router: RouterProtocol?
+    private var router: RouterProtocol!
     
     private var searchedUsername: String?
     private var user: User?
@@ -52,20 +51,20 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         self.networkService = networkService
     }
     
-    func updateSearchedUser(_ username: String) {
+    func searchedUserUpdated(with username: String) {
         searchedUsername = username
     }
     
-    func searchUser() {
+    func searchUserTapped() {
         guard let searchedUsername = searchedUsername else {
             return
         }
         
-        view?.setLoadingView()
+        view.setLoadingView()
         
         networkService.getUser(username: searchedUsername) { result in
             DispatchQueue.main.async { [weak self] in
-                self?.view?.removeLoadingView()
+                self?.view.removeLoadingView()
                 
                 switch result {
                     case .success(let requsetResult):
@@ -92,7 +91,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         } 
     }
     
-    func clearUser() {
+    func clearUserTapped() {
         user = nil
         searchedUsername = nil
         userHeaderModel = nil
@@ -101,7 +100,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
     
     func connectionSatisfied() {
         if user == nil && searchedUsername != nil {
-            searchUser()
+            searchUserTapped()
         }
     }
     
@@ -155,11 +154,11 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         user = resultUser
         makeUserInfo(for: resultUser)
         
-        view?.success()
+        view.success()
     }
     
     private func handleFailure(with message: String) {
         user = nil
-        view?.failure(error: message)
+        view.failure(error: message)
     }
 }

@@ -50,7 +50,7 @@ extension TopUsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = presenter?.topUsers?[indexPath.row]
         
-        presenter?.showUserDetail(
+        presenter?.showUserDetailTapped(
             user: user,
             selectedIndex: tabBarController?.selectedIndex
         )
@@ -60,7 +60,7 @@ extension TopUsersViewController: UITableViewDelegate {
 extension TopUsersViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter?.searchTopUser(searchText)
+        presenter?.searchedTopUserUpdated(with: searchText)
         
         topUsersTableView.reloadData()
     }

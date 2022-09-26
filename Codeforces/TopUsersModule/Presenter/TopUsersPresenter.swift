@@ -27,11 +27,11 @@ protocol TopUsersViewPresenterProtocol: ConnectionServiceProtocol {
     
     init(view: TopUsersViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
-    func requestTopUsers(isActiveOnly: Bool?)
-    func searchTopUser(_ username: String)
-    func sortTopUsersByRating()
+    func requestTopUsersTapped(isActiveOnly: Bool?)
+    func searchedTopUserUpdated(with username: String)
+    func sortTopUsersByRatingTapped()
     
-    func showUserDetail(user: User?, selectedIndex: Int?)
+    func showUserDetailTapped(user: User?, selectedIndex: Int?)
 }
 
 class TopUsersPresenter: TopUsersViewPresenterProtocol {
@@ -40,8 +40,8 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
     var isActiveOnly: Bool!
     var isHighToLow: Bool!
     
-    private weak var view: TopUsersViewProtocol?
-    private var router: RouterProtocol?
+    private weak var view: TopUsersViewProtocol!
+    private var router: RouterProtocol!
     private var networkService: NetworkServiceProtocol!
     
     private var notFiltredTopUsers: [User]?
@@ -59,16 +59,16 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         isHighToLow = true
     }
     
-    func requestTopUsers(isActiveOnly: Bool? = nil) {
+    func requestTopUsersTapped(isActiveOnly: Bool? = nil) {
         if let isActiveOnly = isActiveOnly {
             self.isActiveOnly = isActiveOnly
         }
         
-        view?.setLoadingView()
+        view.setLoadingView()
         
         networkService.getTopUsers(activeOnly: self.isActiveOnly) { result in
             DispatchQueue.main.async { [weak self] in
-                self?.view?.removeLoadingView()
+                self?.view.removeLoadingView()
                 
                 switch result {
                 case .success(let requestResult):
@@ -98,11 +98,11 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         }
     }
     
-    func showUserDetail(user: User?, selectedIndex: Int?) {
+    func showUserDetailTapped(user: User?, selectedIndex: Int?) {
         router?.showUserDetail(user: user, selectedIndex: selectedIndex)
     }
     
-    func searchTopUser(_ username: String) {
+    func searchedTopUserUpdated(with username: String) {
         let lowerSearchText = username.lowercased()
         
         topUsers = username.isEmpty
@@ -110,17 +110,17 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
             : notFiltredTopUsers?.filter { $0.handle.lowercased().contains(lowerSearchText) }
     }
     
-    func sortTopUsersByRating() {
+    func sortTopUsersByRatingTapped() {
         isHighToLow = !isHighToLow
         
         topUsers = topUsers?.reversed()
         
-        view?.topUsersSortedByRating()
+        view.topUsersSortedByRating()
     }
     
     func connectionSatisfied() {
         if topUsers == nil {
-            requestTopUsers()
+            requestTopUsersTapped()
         }
     }
     
@@ -132,11 +132,11 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         topUsers = isHighToLow ? users : users.reversed()
         notFiltredTopUsers = isHighToLow ? users : users.reversed()
         
-        view?.success()
+        view.success()
     }
     
     private func handleFailure(with message: String) {
         topUsers = nil
-        view?.failure(error: message)
+        view.failure(error: message)
     }
 }

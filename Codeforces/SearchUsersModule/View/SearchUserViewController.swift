@@ -45,7 +45,7 @@ final class SearchUserViewController: UIViewController {
     
     @IBAction private func clearPageDidTapped(_ sender: UIButton) {
         searchBar.text = .empty
-        presenter?.clearUser()
+        presenter?.clearUserTapped()
         
         view.removeMessageSubview()
         
@@ -54,7 +54,7 @@ final class SearchUserViewController: UIViewController {
     }
     
     @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
-        presenter?.searchUser()
+        presenter?.searchUserTapped()
     }
     
     @IBAction private func menuDidTpped(_ sender: Any) {
@@ -185,16 +185,16 @@ extension SearchUserViewController: UISearchBarDelegate {
         searchBar.text = cleanText
         
         if cleanText == .empty {
-            presenter?.clearUser()
+            presenter?.clearUserTapped()
             
             userTableView.tableHeaderView = nil
         } else {
-            presenter?.updateSearchedUser(cleanText.lowercased())
+            presenter?.searchedUserUpdated(with: cleanText.lowercased())
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter?.searchUser()
+        presenter?.searchUserTapped()
         
         view.endEditing(true)
     }

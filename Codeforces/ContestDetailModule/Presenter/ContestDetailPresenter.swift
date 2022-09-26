@@ -28,8 +28,8 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
     var contestName: String?
     var contestInfo: [String] = []
     
-    private weak var view: ContestDetailViewProtocol?
-    private var router: RouterProtocol?
+    private weak var view: ContestDetailViewProtocol!
+    private var router: RouterProtocol!
     private var contest: Contest?
     
     required init(view: ContestDetailViewProtocol, router: RouterProtocol, contest: Contest?) {
@@ -41,7 +41,7 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
     }
     
     func requestContest() {
-        view?.updateContest()
+        view.updateContest()
     }
     
     private func makeContestInfo() {

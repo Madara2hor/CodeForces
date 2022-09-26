@@ -51,7 +51,7 @@ final class ContestsViewController: UIViewController {
             gymFilter.setImage(UIImage(named: "outline_gym"), for: .normal)
         }
         
-        presenter.filterByGym()
+        presenter.filterByGymTapped()
     }
     
     @IBAction private func reloadDataDidTapped(_ sender: UIButton) {
@@ -112,7 +112,7 @@ final class ContestsViewController: UIViewController {
 extension ContestsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter?.searchContest(by: searchText)
+        presenter?.searchedContestUpdated(with: searchText)
         
         contestTable.reloadData()
     }
@@ -157,7 +157,7 @@ extension ContestsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contest = presenter?.contestsSections[indexPath.section].models[indexPath.row]
         
-        presenter?.showContestDetail(
+        presenter?.showContestDetailTapped(
             contest: contest,
             selectedIndex: tabBarController?.selectedIndex
         )
