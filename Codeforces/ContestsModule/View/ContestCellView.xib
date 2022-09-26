@@ -60,8 +60,8 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <accessibility key="accessibilityConfiguration" identifier="ContestCell"/>
             <connections>
-                <outlet property="contestName" destination="y3J-m9-oBx" id="cAf-pL-GNH"/>
-                <outlet property="phase" destination="ftT-8p-Syo" id="RS9-Hb-Ua8"/>
+                <outlet property="contestNameLabel" destination="y3J-m9-oBx" id="Yp5-au-EGY"/>
+                <outlet property="phaseLabel" destination="ftT-8p-Syo" id="wBo-o9-k9p"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>
         </tableViewCell>

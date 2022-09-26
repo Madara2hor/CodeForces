@@ -13,6 +13,7 @@ struct UserHeaderViewModel {
     let image: String
     let username: String
     let isOnline: Bool
+    let lastOnline: Int
 }
 
 final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
@@ -55,5 +56,19 @@ final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
         } else {
             userStatusImage.tintColor = .red
         }
+        
+        
+        
+        lastOnlineLabel.text = "Был(-а) в сети \(getLastOnline(for: model.lastOnline))"
+    }
+    
+    private func getLastOnline(for lastOnline: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(lastOnline))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeZone = .current
+        
+        return dateFormatter.string(from: date)
     }
 }

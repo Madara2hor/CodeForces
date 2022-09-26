@@ -17,12 +17,28 @@ class ContestCell: UITableViewCell, CellRegistrable {
     
     static var nibName: String { Constants.nibName }
 
-    @IBOutlet private weak var contestName: UILabel!
-    @IBOutlet private weak var phase: UILabel!
+    @IBOutlet private weak var contestNameLabel: UILabel!
+    @IBOutlet private weak var phaseLabel: UILabel!
     
     func update(with contest: Contest?) {
-        contestName.text = contest?.name
-        phase.text = contest?.phase.localizedValue
+        contestNameLabel.text = contest?.name
+        
+        guard let phase = contest?.phase else {
+            phaseLabel.text = nil
+            return
+        }
+        
+        if let time = contest?.relativeTimeSeconds {
+            if phase == .before {
+                phaseLabel.text = "\(phase.localizedValue): \(String(describing: -time).durationFromSeconds)"
+            } else if phase == .coding {
+                phaseLabel.text = "\(phase.localizedValue): \(String(describing: time).durationFromSeconds)"
+            } else {
+                phaseLabel.text = phase.localizedValue
+            }
+        } else {
+            phaseLabel.text = phase.localizedValue
+        }
     }
 }
 

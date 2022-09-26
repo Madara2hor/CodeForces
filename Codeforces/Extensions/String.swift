@@ -43,29 +43,15 @@ extension String {
             return "Invalid time"
         }
         
-        var hours = intSeconds / 3600
+        let hours = intSeconds / 3600
         let minutes = (intSeconds % 3600) / 60
         let days = intSeconds / 86400
         
         if days > .zero {
-            hours %= 24
+            return durationFor(days: days)
         }
         
-        var duration = ""
-        
-        if days > .zero {
-            let firstDaysNumber = days / 10
-            let lastDaysNumber = days % 10
-            if firstDaysNumber == .zero {
-                duration = "\(days)\(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
-            } else {
-                duration = "\(days)\(dayPostfix(firstDaysNumber: firstDaysNumber, lastDaysNumber: lastDaysNumber))"
-            }
-        }
-        
-        if hours == .zero {
-            return duration
-        }
+        var duration: String = .empty
         
         if hours < 10 {
             duration += "0\(hours):"
@@ -82,27 +68,40 @@ extension String {
         return duration
     }
     
-    private func dayPostfix(firstDaysNumber: Int, lastDaysNumber: Int) -> String {
-        if firstDaysNumber == 1 && lastDaysNumber == 1 {
-            return " дней "
-        }
+    private func durationFor(days: Int) -> String {
+        let appedDays = days + 1
+        let weeks = appedDays / 7
+        let months = appedDays / 30
         
-        if firstDaysNumber == .zero {
-            switch lastDaysNumber {
+        if months > .zero {
+            switch months {
             case 1:
-                return " день "
+                return "\(months) месяц "
             case 2...4:
-                return " дня "
+                return "\(months) месяца "
             default:
-                return " дней "
+                return "\(months) месяцев "
             }
         }
         
-        return " дней "
+        if weeks > .zero && appedDays != 7 {
+            switch weeks {
+            case 1:
+                return "\(weeks) неделя "
+            case 2...4:
+                return "\(weeks) недели "
+            default:
+                return "\(weeks) недель "
+            }
+        }
+        
+        switch appedDays {
+        case 1:
+            return "\(appedDays) день "
+        case 2...4:
+            return "\(appedDays) дня "
+        default:
+            return "\(appedDays) дней "
+        }
     }
-}
-
-extension String: LocalizedError {
-    
-    public var errorDescription: String? { self }
 }

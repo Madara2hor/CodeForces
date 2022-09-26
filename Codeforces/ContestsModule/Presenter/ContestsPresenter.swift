@@ -174,7 +174,11 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
     }
     
     private func handleSuccess(_ contestsData: [Contest]) {
-        setupSections(for: contestsData)
+        let sortedContests = contestsData.sorted(by: {
+            ($0.relativeTimeSeconds ?? .zero) > ($1.relativeTimeSeconds ?? .zero)
+        })
+        
+        setupSections(for: sortedContests)
         notFiltredSections = contestsSections
         
         view?.success()

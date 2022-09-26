@@ -47,17 +47,18 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
     private func makeContestInfo() {
         contestName = contest?.name
         
-        if let type = contest?.type.rawValue {
-            contestInfo.append("Система оценки: \(type)")
-        }
-        if let phase = contest?.phase.localizedValue {
-            contestInfo.append("Этап соревнований: \(phase)")
-        }
-        if let duration = contest?.durationSeconds {
-            contestInfo.append("Продолжительность: \(String(describing: duration).durationFromSeconds)")
-        }
         if let startTime = contest?.startTimeSeconds {
             contestInfo.append("Начало соревнования: \(String(describing: startTime).date)")
+        }
+        if let duration = contest?.durationSeconds {
+            contestInfo.append("Длительность: \(String(describing: duration).durationFromSeconds)")
+        }
+        if let beforeStart = contest?.relativeTimeSeconds {
+            if beforeStart > .zero {
+                contestInfo.append("Идет: \(String(describing: beforeStart).durationFromSeconds)")
+            } else {
+                contestInfo.append("До начала: \(String(describing: -beforeStart).durationFromSeconds)")
+            }
         }
         if let prepared = contest?.preparedBy {
             contestInfo.append("Содатель: \(prepared)")
@@ -73,6 +74,9 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
         }
         if let kind = contest?.kind {
             contestInfo.append("Тип соревнования: \(kind)")
+        }
+        if let type = contest?.type.rawValue {
+            contestInfo.append("Система оценки: \(type)")
         }
         if let region = contest?.icpcRegion {
             contestInfo.append("Регион: \(region)")
