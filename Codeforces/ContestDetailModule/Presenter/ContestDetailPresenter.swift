@@ -16,7 +16,7 @@ protocol ContestDetailViewProtocol: AnyObject {
 protocol ContestDetailViewPresenterProtocol: AnyObject {
     
     var contestName: String? { get }
-    var contestInfo: [String] { get }
+    var contestInfo: [InfoViewModel] { get }
     
     init(view: ContestDetailViewProtocol, router: RouterProtocol, contest: Contest?)
     
@@ -26,7 +26,7 @@ protocol ContestDetailViewPresenterProtocol: AnyObject {
 class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
     
     var contestName: String?
-    var contestInfo: [String] = []
+    var contestInfo: [InfoViewModel] = []
     
     private weak var view: ContestDetailViewProtocol!
     private var router: RouterProtocol!
@@ -48,47 +48,89 @@ class ContestDetailPresenter: ContestDetailViewPresenterProtocol {
         contestName = contest?.name
         
         if let startTime = contest?.startTimeSeconds {
-            contestInfo.append("Начало соревнования: \(Double(startTime).date)")
+            contestInfo.append(InfoViewModel(
+                title: "Начало соревнования",
+                info: Double(startTime).date
+            ))
         }
         if let duration = contest?.durationSeconds {
-            contestInfo.append("Длительность: \(duration.durationFromSeconds)")
+            contestInfo.append(InfoViewModel(
+                title: "Длительность",
+                info: duration.durationFromSeconds
+            ))
         }
         if let beforeStart = contest?.relativeTimeSeconds {
             if beforeStart > .zero {
-                contestInfo.append("Идет: \(beforeStart.durationFromSeconds)")
+                contestInfo.append(InfoViewModel(
+                    title: "Идет",
+                    info: beforeStart.durationFromSeconds
+                ))
             } else {
-                contestInfo.append("До начала: \((-beforeStart).durationFromSeconds)")
+                contestInfo.append(InfoViewModel(
+                    title: "До начала",
+                    info: (-beforeStart).durationFromSeconds
+                ))
             }
         }
         if let prepared = contest?.preparedBy {
-            contestInfo.append("Содатель: \(prepared)")
+            contestInfo.append(InfoViewModel(
+                title: "Содатель",
+                info: prepared
+            ))
         }
         if let website = contest?.websiteUrl {
-            contestInfo.append("Сайт: \(website)")
+            contestInfo.append(InfoViewModel(
+                title: "Сайт",
+                info: website
+            ))
         }
         if let description = contest?.description {
-            contestInfo.append("Описание: \(description)")
+            contestInfo.append(InfoViewModel(
+                title: "Описание",
+                info: description
+            ))
         }
         if let difficulty = contest?.difficulty {
-            contestInfo.append("Сложность: \(difficulty)")
+            contestInfo.append(InfoViewModel(
+                title: "Сложность",
+                info: "\(difficulty)"
+            ))
         }
         if let kind = contest?.kind {
-            contestInfo.append("Тип соревнования: \(kind)")
+            contestInfo.append(InfoViewModel(
+                title: "Тип соревнования",
+                info: kind
+            ))
         }
         if let type = contest?.type.rawValue {
-            contestInfo.append("Система оценки: \(type)")
+            contestInfo.append(InfoViewModel(
+                title: "Система оценки",
+                info: type
+            ))
         }
         if let region = contest?.icpcRegion {
-            contestInfo.append("Регион: \(region)")
+            contestInfo.append(InfoViewModel(
+                title: "Регион",
+                info: region
+            ))
         }
         if let country = contest?.country {
-            contestInfo.append("Страна: \(country)")
+            contestInfo.append(InfoViewModel(
+                title: "Страна",
+                info: country
+            ))
         }
         if let city = contest?.city {
-            contestInfo.append("Город: \(city)")
+            contestInfo.append(InfoViewModel(
+                title: "Город",
+                info: city
+            ))
         }
         if let season = contest?.season {
-            contestInfo.append("Сезон: \(season)")
+            contestInfo.append(InfoViewModel(
+                title: "Сезон",
+                info: season
+            ))
         }
     }
 }

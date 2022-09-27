@@ -38,7 +38,7 @@
 		02D09E5D24D94C6700DEF1A9 /* SearchUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E5C24D94C6700DEF1A9 /* SearchUserView.xib */; };
 		02D09E5F24D94C7700DEF1A9 /* SearchUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E5E24D94C7700DEF1A9 /* SearchUserPresenter.swift */; };
 		02D09E6424D969B200DEF1A9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E6324D969B200DEF1A9 /* UIColor.swift */; };
-		02D09E6E24DA757A00DEF1A9 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E6D24DA757A00DEF1A9 /* UIImageView.swift */; };
+		02D09E6E24DA757A00DEF1A9 /* ImageChaceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E6D24DA757A00DEF1A9 /* ImageChaceUtil.swift */; };
 		02D09E7124DA792A00DEF1A9 /* ContestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E6F24DA792A00DEF1A9 /* ContestCell.swift */; };
 		02D09E7424DA89F400DEF1A9 /* Contest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7324DA89F400DEF1A9 /* Contest.swift */; };
 		02D09E7624DA8F0A00DEF1A9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D09E7524DA8F0A00DEF1A9 /* NetworkService.swift */; };
@@ -53,6 +53,8 @@
 		02D09E9424E0F8E900DEF1A9 /* ContestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9224E0F8E900DEF1A9 /* ContestDetailViewController.xib */; };
 		02D09E9724E1175200DEF1A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02D09E9624E1175200DEF1A9 /* Assets.xcassets */; };
 		02F92D0124F50A890095A82E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02F92D0024F50A890095A82E /* .gitignore */; };
+		130E619828E2B401006C266B /* RoundCornersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130E619728E2B401006C266B /* RoundCornersService.swift */; };
+		130E619A28E2B42F006C266B /* UIRectCorner+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130E619928E2B42F006C266B /* UIRectCorner+Extension.swift */; };
 		1349111028DC349900022229 /* ContestCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1349110F28DC349900022229 /* ContestCellView.xib */; };
 		136006A128DDE58D00BB4732 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A028DDE58D00BB4732 /* UIView+Constraints.swift */; };
 		136006A328DDE59500BB4732 /* ActivityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136006A228DDE59500BB4732 /* ActivityDisplayable.swift */; };
@@ -120,7 +122,7 @@
 		02D09E5C24D94C6700DEF1A9 /* SearchUserView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUserView.xib; sourceTree = "<group>"; };
 		02D09E5E24D94C7700DEF1A9 /* SearchUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserPresenter.swift; sourceTree = "<group>"; };
 		02D09E6324D969B200DEF1A9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		02D09E6D24DA757A00DEF1A9 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		02D09E6D24DA757A00DEF1A9 /* ImageChaceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChaceUtil.swift; sourceTree = "<group>"; };
 		02D09E6F24DA792A00DEF1A9 /* ContestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestCell.swift; sourceTree = "<group>"; };
 		02D09E7324DA89F400DEF1A9 /* Contest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contest.swift; sourceTree = "<group>"; };
 		02D09E7524DA8F0A00DEF1A9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -143,6 +145,8 @@
 		02D4177524F8D6FB00F1A33B /* MockTopUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTopUsersView.swift; sourceTree = "<group>"; };
 		02F05D8D24FE10D000F08B26 /* SearchUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTests.swift; sourceTree = "<group>"; };
 		02F92D0024F50A890095A82E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		130E619728E2B401006C266B /* RoundCornersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCornersService.swift; sourceTree = "<group>"; };
+		130E619928E2B42F006C266B /* UIRectCorner+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRectCorner+Extension.swift"; sourceTree = "<group>"; };
 		1349110F28DC349900022229 /* ContestCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContestCellView.xib; sourceTree = "<group>"; };
 		136006A028DDE58D00BB4732 /* UIView+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		136006A228DDE59500BB4732 /* ActivityDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDisplayable.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				02D09E3524D933CE00DEF1A9 /* ModuleBuilder.swift */,
 				02D09E3724D9343700DEF1A9 /* Router.swift */,
 				137E5C7428DC325900592D04 /* Models */,
+				130E619B28E2D2FF006C266B /* Utils */,
+				02D09E7724DA8F2100DEF1A9 /* Services */,
 				02B849A4250AA8A200D766C7 /* Protocols */,
 				02D09E6524D969F700DEF1A9 /* Extensions */,
 				137E5C7928DC346400592D04 /* Components */,
@@ -268,7 +274,6 @@
 				02D09E5B24D94C5200DEF1A9 /* SearchUsersModule */,
 				02D09E3D24D937F400DEF1A9 /* TopUsersModule */,
 				02D09E5124D9477800DEF1A9 /* UserDetailModule */,
-				02D09E7724DA8F2100DEF1A9 /* ServiceLayer */,
 			);
 			path = Codeforces;
 			sourceTree = "<group>";
@@ -392,20 +397,21 @@
 				0209F6CD251B4D2A0074BC8B /* UICollectionView+Extension.swift */,
 				02D09E7C24DAA3E100DEF1A9 /* String+sha512.swift */,
 				02D09E6324D969B200DEF1A9 /* UIColor.swift */,
-				02D09E6D24DA757A00DEF1A9 /* UIImageView.swift */,
 				02D09E8324DBDD5500DEF1A9 /* UIView.swift */,
 				137E5C6828DC146600592D04 /* PrimitiveLiterals.swift */,
+				130E619928E2B42F006C266B /* UIRectCorner+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		02D09E7724DA8F2100DEF1A9 /* ServiceLayer */ = {
+		02D09E7724DA8F2100DEF1A9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				02D09E7524DA8F0A00DEF1A9 /* NetworkService.swift */,
 				0245990A24FF6C9500F1099F /* NetworkConnectionService.swift */,
+				130E619728E2B401006C266B /* RoundCornersService.swift */,
 			);
-			path = ServiceLayer;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		02D09E8F24E0F8BE00DEF1A9 /* ContestDetailModule */ = {
@@ -489,6 +495,14 @@
 				E96D942D8122EDF3DC76FBC8 /* Pods-CodeforcesUnitTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		130E619B28E2D2FF006C266B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				02D09E6D24DA757A00DEF1A9 /* ImageChaceUtil.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		1349111128DC3B1A00022229 /* Views */ = {
@@ -830,6 +844,7 @@
 				136006AA28DE997F00BB4732 /* TopUserCell.swift in Sources */,
 				02D09E6424D969B200DEF1A9 /* UIColor.swift in Sources */,
 				02D09E8C24DD313D00DEF1A9 /* UITableView+Extension.swift in Sources */,
+				130E619A28E2B42F006C266B /* UIRectCorner+Extension.swift in Sources */,
 				02D09E7124DA792A00DEF1A9 /* ContestCell.swift in Sources */,
 				02D09E5924D94C4600DEF1A9 /* SearchUserViewController.swift in Sources */,
 				02D09E1424D9333D00DEF1A9 /* AppDelegate.swift in Sources */,
@@ -838,7 +853,7 @@
 				02D09E3824D9343700DEF1A9 /* Router.swift in Sources */,
 				0209F6CE251B4D2A0074BC8B /* UICollectionView+Extension.swift in Sources */,
 				136006AF28E1507000BB4732 /* Int+Extension.swift in Sources */,
-				02D09E6E24DA757A00DEF1A9 /* UIImageView.swift in Sources */,
+				02D09E6E24DA757A00DEF1A9 /* ImageChaceUtil.swift in Sources */,
 				02D09E7F24DBAC4200DEF1A9 /* Date+Extension.swift in Sources */,
 				136006A528DDE64D00BB4732 /* ActivityDisplayableOverlayView.swift in Sources */,
 				02D09E5024D9477000DEF1A9 /* UserDetailViewController.swift in Sources */,
@@ -849,6 +864,7 @@
 				137E5C7328DC258D00592D04 /* InfoCell.swift in Sources */,
 				02D09E7B24DA97C100DEF1A9 /* RequestResult.swift in Sources */,
 				02D09E3624D933CE00DEF1A9 /* ModuleBuilder.swift in Sources */,
+				130E619828E2B401006C266B /* RoundCornersService.swift in Sources */,
 				02D09E5424D9479600DEF1A9 /* UserDetailPresenter.swift in Sources */,
 				136006A328DDE59500BB4732 /* ActivityDisplayable.swift in Sources */,
 				02D09E4A24D938D600DEF1A9 /* ContestsPresenter.swift in Sources */,

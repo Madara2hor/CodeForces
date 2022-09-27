@@ -10,6 +10,7 @@ import UIKit
 
 extension UIColor {
     
-    class var appTheme: UIColor? { get { UIColor(named: "AppTheme") } }
-    class var pin: UIColor? { get { UIColor(named: "Pin") } }
+    class var appTheme: UIColor? { UIColor(named: "AppTheme") }
+    class var detailBackground: UIColor? { UIColor(named: "DetailBackground") }
+    class var pin: UIColor? { UIColor(named: "Pin") }
 }

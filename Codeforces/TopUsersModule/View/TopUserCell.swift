@@ -31,7 +31,9 @@ class TopUserCell: UITableViewCell, CellRegistrable {
     
     func update(with user: User?) {
         if let url = user?.titlePhoto, let urlImage = URL(string: "http:\(url)" ) {
-            profileImageView.load(url: urlImage)
+            ImageChaceUtil.shared.image(for: urlImage) { [weak self] image in
+                self?.profileImageView.image = image
+            }
         } else {
             profileImageView.image = UIImage(systemName: "person")
         }

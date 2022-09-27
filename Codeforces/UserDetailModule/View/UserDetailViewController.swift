@@ -53,7 +53,17 @@ extension UserDetailViewController: UITableViewDataSource {
         
         let cell: InfoCell = userDetailTableView.dequeueReusableCell(for: indexPath)
         
-        cell.update(with: userInfo[indexPath.row])
+        let infoModel = userInfo[indexPath.row]
+        let reoundDelimeterInfo = RoundCornersService.getRoundDelimeterInfo(
+            for: infoModel,
+            allItems: userInfo
+        )
+        let cellModel = InfoCellViewModel(
+            info: infoModel,
+            roundDelimeterInfo: reoundDelimeterInfo
+        )
+        
+        cell.update(with: cellModel)
         
         return cell
     }
@@ -76,7 +86,7 @@ extension UserDetailViewController: UITableViewDelegate {
         
         let containerView: UIView = UIView()
         containerView.layoutSubview(headerView)
-        containerView.backgroundColor = .systemBackground
+        containerView.backgroundColor = .detailBackground
         
         return containerView
     }

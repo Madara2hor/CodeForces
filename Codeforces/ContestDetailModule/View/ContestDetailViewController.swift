@@ -54,7 +54,17 @@ extension ContestDetailViewController: UITableViewDataSource {
         
         let cell: InfoCell = contestDetailTableView.dequeueReusableCell(for: indexPath)
         
-        cell.update(with: contestInfo[indexPath.row])
+        let infoModel = contestInfo[indexPath.row]
+        let reoundDelimeterInfo = RoundCornersService.getRoundDelimeterInfo(
+            for: infoModel,
+            allItems: contestInfo
+        )
+        let cellModel = InfoCellViewModel(
+            info: infoModel,
+            roundDelimeterInfo: reoundDelimeterInfo
+        )
+        
+        cell.update(with: cellModel)
         
         return cell
     }

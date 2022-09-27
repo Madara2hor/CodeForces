@@ -20,7 +20,7 @@ protocol SearchUserViewProtocol: AnyObject {
 protocol SearchUserViewPresenterProtocol: ConnectionServiceProtocol {
     
     var userHeaderModel: UserHeaderViewModel? { get }
-    var userInfo: [String] { get }
+    var userInfo: [InfoViewModel] { get }
     
     init(view: SearchUserViewProtocol, networkService: NetworkServiceProtocol, router: RouterProtocol)
     
@@ -32,7 +32,7 @@ protocol SearchUserViewPresenterProtocol: ConnectionServiceProtocol {
 class SearchUserPresenter: SearchUserViewPresenterProtocol {
     
     var userHeaderModel: UserHeaderViewModel? = nil
-    var userInfo: [String] = []
+    var userInfo: [InfoViewModel] = []
     
     private weak var view: SearchUserViewProtocol!
     private let networkService: NetworkServiceProtocol!
@@ -118,35 +118,35 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         userInfo.removeAll()
        
         if let firstName = user.firstName {
-            userInfo.append("Имя: \(firstName)")
+            userInfo.append(InfoViewModel(title: "Имя", info: firstName))
         }
         if let lastName = user.lastName {
-            userInfo.append("Фамилия: \(lastName)")
+            userInfo.append(InfoViewModel(title: "Фамилия", info: lastName))
         }
         if let rating = user.rating {
-            userInfo.append("Рейтинг: \(rating)")
+            userInfo.append(InfoViewModel(title: "Рейтинг", info: "\(rating)"))
         }
         
-        userInfo.append("Вклад: \(user.contribution)")
-        userInfo.append("Друзей: \(user.friendOfCount)")
+        userInfo.append(InfoViewModel(title: "Вклад", info: "\(user.contribution)"))
+        userInfo.append(InfoViewModel(title: "Друзей", info: "\(user.friendOfCount)"))
         
         if let country = user.country {
-            userInfo.append("Страна: \(country)")
+            userInfo.append(InfoViewModel(title: "Страна", info: country))
         }
         if let city = user.city {
-            userInfo.append("Город: \(city)")
+            userInfo.append(InfoViewModel(title: "Город", info: city))
         }
         if let organization = user.organization {
-            userInfo.append("Организация: \(organization)")
+            userInfo.append(InfoViewModel(title: "Организация", info: organization))
         }
         if let rank = user.rank {
-            userInfo.append("Ранг: \(rank)")
+            userInfo.append(InfoViewModel(title: "Ранг", info: "\(rank)"))
         }
         if let email = user.email {
-            userInfo.append("E-mail: \(email)")
+            userInfo.append(InfoViewModel(title: "E-mail", info: email))
         }
         if let vkId = user.vkId {
-            userInfo.append("ВКонтакте: \(vkId)")
+            userInfo.append(InfoViewModel(title: "ВКонтакте", info: vkId))
         }
     }
     

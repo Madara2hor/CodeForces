@@ -43,7 +43,9 @@ final class UserHeaderView: UITableViewHeaderFooterView, CellRegistrable {
     
     func setup(with model: UserHeaderViewModel) {
         if let urlImage = URL(string: "http:\(model.image)" ) {
-            userImage.load(url: urlImage)
+            ImageChaceUtil.shared.image(for: urlImage) { [weak self] image in
+                self?.userImage.image = image
+            }
         } else {
             userImage.image = UIImage(systemName: "person")
         }

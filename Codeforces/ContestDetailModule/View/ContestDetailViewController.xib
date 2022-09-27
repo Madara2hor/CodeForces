@@ -24,9 +24,10 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0m-dF-0ow" userLabel="Content view">
                     <rect key="frame" x="0.0" y="324.5" width="414" height="537.5"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-eL-Itq">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uuR-eL-Itq">
                             <rect key="frame" x="0.0" y="20" width="414" height="509.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="DoM-xb-6CZ"/>
                                 <outlet property="delegate" destination="-1" id="h2B-75-GGZ"/>
@@ -46,7 +47,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" name="AppTheme"/>
+                    <color key="backgroundColor" name="DetailBackground"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="uuR-eL-Itq" secondAttribute="bottom" constant="8" id="0vD-dX-OoA"/>
                         <constraint firstAttribute="trailing" secondItem="uuR-eL-Itq" secondAttribute="trailing" id="91W-dn-9oE"/>
@@ -69,8 +70,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="AppTheme">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="DetailBackground">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Pin">
             <color red="0.52156862745098043" green="0.52156862745098043" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

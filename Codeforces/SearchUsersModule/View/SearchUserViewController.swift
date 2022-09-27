@@ -128,7 +128,17 @@ extension SearchUserViewController: UITableViewDataSource {
         
         let cell: InfoCell = userTableView.dequeueReusableCell(for: indexPath)
         
-        cell.update(with: userInfo[indexPath.row])
+        let infoModel = userInfo[indexPath.row]
+        let reoundDelimeterInfo = RoundCornersService.getRoundDelimeterInfo(
+            for: infoModel,
+            allItems: userInfo
+        )
+        let cellModel = InfoCellViewModel(
+            info: infoModel,
+            roundDelimeterInfo: reoundDelimeterInfo
+        )
+        
+        cell.update(with: cellModel)
         
         return cell
     }
@@ -151,7 +161,7 @@ extension SearchUserViewController: UITableViewDelegate {
         
         let containerView: UIView = UIView()
         containerView.layoutSubview(headerView)
-        containerView.backgroundColor = .appTheme
+        containerView.backgroundColor = .detailBackground
         
         return containerView
     }
