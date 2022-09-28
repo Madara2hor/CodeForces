@@ -61,9 +61,7 @@ class NetworkService: NetworkServiceProtocol {
         let urlString = getUrlString(endpoint: ApiEndpoint.contestList.rawValue, parameters: parameters)
         
         fetchData(type: RequestResult<Contest>.self, urlString: urlString) { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
     
@@ -75,9 +73,7 @@ class NetworkService: NetworkServiceProtocol {
         let urlString = getUrlString(endpoint: ApiEndpoint.userInfo.rawValue, parameters: parameters)
         
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
     
@@ -89,9 +85,7 @@ class NetworkService: NetworkServiceProtocol {
         let urlString = getUrlString(endpoint: ApiEndpoint.topUsers.rawValue, parameters: parameters)
         
         fetchData(type: RequestResult<User>.self, urlString: urlString) { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
     
@@ -127,9 +121,7 @@ class NetworkService: NetworkServiceProtocol {
         urlString: String,
         completion: @escaping (Result<T?, Error>) -> Void
     ) {
-        AF.request(urlString).downloadProgress { progress in
-            print(progress.fractionCompleted)
-        }.responseDecodable(of: T.self) { response in
+        AF.request(urlString).responseDecodable(of: T.self) { response in
             do {
                 guard let data = response.data else {
                     completion(.failure(AppError.noDataError))

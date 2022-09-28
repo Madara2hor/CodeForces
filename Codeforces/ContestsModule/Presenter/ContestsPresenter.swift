@@ -8,6 +8,12 @@
 
 import Foundation
 
+struct SectionViewModel {
+    
+    let title: String
+    let models: [Contest]
+}
+
 protocol ContestsViewProtocol: AnyObject {
     
     func setLoadingView()
@@ -58,33 +64,31 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         view.setLoadingView()
         
         networkService.getContests(gym: isFiltredByGym) { result in
-            DispatchQueue.main.async { [weak self] in
-                self?.view.removeLoadingView()
+            self.view.removeLoadingView()
+            
+            switch result {
+            case .success(let requsetResult):
+                guard let requsetResult = requsetResult else {
+                    self.handleFailure(with: "Произошла непредвиденная ошибка.")
+                    return
+                }
                 
-                switch result {
-                case .success(let requsetResult):
-                    guard let requsetResult = requsetResult else {
-                        self?.handleFailure(with: "Произошла непредвиденная ошибка.")
+                switch requsetResult.status {
+                case .success:
+                    guard
+                        let resultData = requsetResult.result,
+                        resultData.isEmpty == false
+                    else {
+                        self.handleFailure(with: "Соревнований нет")
                         return
                     }
                     
-                    switch requsetResult.status {
-                    case .success:
-                        guard
-                            let resultData = requsetResult.result,
-                            resultData.isEmpty == false
-                        else {
-                            self?.handleFailure(with: "Соревнований нет")
-                            return
-                        }
-                        
-                        self?.handleSuccess(resultData)
-                    case .failure:
-                        self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
-                    }
+                    self.handleSuccess(resultData)
                 case .failure:
-                    self?.handleFailure(with: "Произошла непредвиденная ошибка.")
+                    self.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                 }
+            case .failure:
+                self.handleFailure(with: "Произошла непредвиденная ошибка.")
             }
         } 
     }
@@ -186,10 +190,4 @@ class ContestsPresenter: ContestsViewPresenterProtocol {
         contestsSections.removeAll()
         view.failure(error: message)
     }
-}
-
-struct SectionViewModel {
-    
-    let title: String
-    let models: [Contest]
 }

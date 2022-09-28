@@ -63,30 +63,28 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
         view.setLoadingView()
         
         networkService.getUser(username: searchedUsername) { result in
-            DispatchQueue.main.async { [weak self] in
-                self?.view.removeLoadingView()
+            self.view.removeLoadingView()
+            
+            switch result {
+                case .success(let requsetResult):
+                    guard let result = requsetResult else {
+                        self.handleFailure(with: "Произошла непредвиденная ошибка.")
+                        return
+                    }
                 
-                switch result {
-                    case .success(let requsetResult):
-                        guard let result = requsetResult else {
-                            self?.handleFailure(with: "Произошла непредвиденная ошибка.")
+                    switch result.status {
+                    case .success:
+                        guard let resultUser = result.result?[.zero] else {
+                            self.handleFailure(with: "Не удалось получить информуцию о пользователе.")
                             return
                         }
-                    
-                        switch result.status {
-                        case .success:
-                            guard let resultUser = requsetResult?.result?[.zero] else {
-                                self?.handleFailure(with: "Не удалось получить информуцию о пользователе.")
-                                return
-                            }
-                            
-                            self?.handleSuccess(resultUser)
-                        case .failure:
-                            self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
-                    }
-                case .failure:
-                    self?.handleFailure(with: "Произошла непредвиденная ошибка.")
+                        
+                        self.handleSuccess(resultUser)
+                    case .failure:
+                        self.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                 }
+            case .failure:
+                self.handleFailure(with: "Произошла непредвиденная ошибка.")
             }
         } 
     }

@@ -67,33 +67,31 @@ class TopUsersPresenter: TopUsersViewPresenterProtocol {
         view.setLoadingView()
         
         networkService.getTopUsers(activeOnly: self.isActiveOnly) { result in
-            DispatchQueue.main.async { [weak self] in
-                self?.view.removeLoadingView()
+            self.view.removeLoadingView()
+            
+            switch result {
+            case .success(let requestResult):
+                guard let result = requestResult else {
+                    self.handleFailure(with: "Произошла непредвиденная ошибка.")
+                    return
+                }
                 
-                switch result {
-                case .success(let requestResult):
-                    guard let result = requestResult else {
-                        self?.handleFailure(with: "Произошла непредвиденная ошибка.")
+                switch result.status {
+                case .success:
+                    guard
+                        let resultTopUsers = result.result,
+                        resultTopUsers.isEmpty == false
+                    else {
+                        self.handleFailure(with: "Не удалось получить список топ пользователей.")
                         return
                     }
-                    
-                    switch result.status {
-                    case .success:
-                        guard
-                            let resultTopUsers = requestResult?.result,
-                            resultTopUsers.isEmpty == false
-                        else {
-                            self?.handleFailure(with: "Не удалось получить список топ пользователей.")
-                            return
-                        }
-                            
-                        self?.handleSuccess(with: resultTopUsers)
-                    case .failure:
-                        self?.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
-                    }
+                        
+                    self.handleSuccess(with: resultTopUsers)
                 case .failure:
-                    self?.handleFailure(with: "Произошла непредвиденная ошибка.")
+                    self.handleFailure(with: "Что-то не так с Code forces. Мы уже работаем над этим.")
                 }
+            case .failure:
+                self.handleFailure(with: "Произошла непредвиденная ошибка.")
             }
         }
     }
