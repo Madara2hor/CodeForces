@@ -29,6 +29,97 @@ struct Contest: Codable {
     var season: String?
 }
 
+extension Contest {
+    
+    func getInfoModel() -> [InfoViewModel] {
+        var contestInfo: [InfoViewModel] = []
+        
+        if let startTime = startTimeSeconds {
+            contestInfo.append(InfoViewModel(
+                title: "Начало соревнования",
+                info: Double(startTime).date
+            ))
+        }
+        contestInfo.append(InfoViewModel(
+            title: "Длительность",
+            info: durationSeconds.durationFromSeconds
+        ))
+        if let beforeStart = relativeTimeSeconds {
+            if beforeStart > .zero {
+                contestInfo.append(InfoViewModel(
+                    title: "Идет",
+                    info: beforeStart.durationFromSeconds
+                ))
+            } else {
+                contestInfo.append(InfoViewModel(
+                    title: "До начала",
+                    info: (-beforeStart).durationFromSeconds
+                ))
+            }
+        }
+        if let prepared = preparedBy {
+            contestInfo.append(InfoViewModel(
+                title: "Содатель",
+                info: prepared
+            ))
+        }
+        if let website = websiteUrl {
+            contestInfo.append(InfoViewModel(
+                title: "Сайт",
+                info: website
+            ))
+        }
+        if let description = description {
+            contestInfo.append(InfoViewModel(
+                title: "Описание",
+                info: description
+            ))
+        }
+        if let difficulty = difficulty {
+            contestInfo.append(InfoViewModel(
+                title: "Сложность",
+                info: "\(difficulty)"
+            ))
+        }
+        if let kind = kind {
+            contestInfo.append(InfoViewModel(
+                title: "Тип соревнования",
+                info: kind
+            ))
+        }
+        contestInfo.append(InfoViewModel(
+            title: "Система оценки",
+            info: type.rawValue
+        ))
+        if let region = icpcRegion {
+            contestInfo.append(InfoViewModel(
+                title: "Регион",
+                info: region
+            ))
+        }
+        if let country = country {
+            contestInfo.append(InfoViewModel(
+                title: "Страна",
+                info: country
+            ))
+        }
+        if let city = city {
+            contestInfo.append(InfoViewModel(
+                title: "Город",
+                info: city
+            ))
+        }
+        if let season = season {
+            contestInfo.append(InfoViewModel(
+                title: "Сезон",
+                info: season
+            ))
+        }
+        
+        return contestInfo
+    }
+}
+
 enum ContestType: String, Codable {
     
     case cf = "CF"

@@ -113,39 +113,7 @@ class SearchUserPresenter: SearchUserViewPresenterProtocol {
             lastOnline: user.lastOnlineTimeSeconds
         )
         
-        userInfo.removeAll()
-       
-        if let firstName = user.firstName {
-            userInfo.append(InfoViewModel(title: "Имя", info: firstName))
-        }
-        if let lastName = user.lastName {
-            userInfo.append(InfoViewModel(title: "Фамилия", info: lastName))
-        }
-        if let rating = user.rating {
-            userInfo.append(InfoViewModel(title: "Рейтинг", info: "\(rating)"))
-        }
-        
-        userInfo.append(InfoViewModel(title: "Вклад", info: "\(user.contribution)"))
-        userInfo.append(InfoViewModel(title: "Друзей", info: "\(user.friendOfCount)"))
-        
-        if let country = user.country {
-            userInfo.append(InfoViewModel(title: "Страна", info: country))
-        }
-        if let city = user.city {
-            userInfo.append(InfoViewModel(title: "Город", info: city))
-        }
-        if let organization = user.organization {
-            userInfo.append(InfoViewModel(title: "Организация", info: organization))
-        }
-        if let rank = user.rank {
-            userInfo.append(InfoViewModel(title: "Ранг", info: "\(rank)"))
-        }
-        if let email = user.email {
-            userInfo.append(InfoViewModel(title: "E-mail", info: email))
-        }
-        if let vkId = user.vkId {
-            userInfo.append(InfoViewModel(title: "ВКонтакте", info: vkId))
-        }
+        userInfo = user.getInfoModel()
     }
     
     private func handleSuccess(_ resultUser: User) {
